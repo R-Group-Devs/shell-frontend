@@ -24,9 +24,6 @@ export const Placeholder: FunctionComponent = () => {
           <li>Play-oriented design</li>
           <li>Protocol prototyping</li>
         </ul>
-        <p>
-          see y'all in the <Shell /> cluster soon 👋
-        </p>
       </Content>
     </PageSection>
   );
