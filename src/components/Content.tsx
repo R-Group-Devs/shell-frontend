@@ -33,7 +33,6 @@ const useStyles = makeStyles<ThemeConfig>((theme) => {
       '& ul': {
         fontStyle: 'italic',
         lineHeight: '2',
-        color: theme.palette.accent.tertiary,
       },
     },
   };
