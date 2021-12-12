@@ -22,8 +22,11 @@ export const Placeholder: FunctionComponent = () => {
           <li>NFT mechanism discoverability</li>
           <li>Meta-interoperability</li>
           <li>Play-oriented design</li>
-          <li>Tokenization prototyping</li>
+          <li>Protocol prototyping</li>
         </ul>
+        <p>
+          see y'all in the <Shell /> cluster soon 👋
+        </p>
       </Content>
     </PageSection>
   );
