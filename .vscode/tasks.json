@@ -1,0 +1,12 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🐚 run heyshell.xyz locally",
+      "type": "shell",
+      "command": "yarn dev",
+      "problemMatcher": [],
+    },
+  ],
+  "inputs": [ ]
+}
