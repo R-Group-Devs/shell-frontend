@@ -18,11 +18,12 @@ export const Placeholder: FunctionComponent = () => {
           <Shell /> is being built for:
         </p>
         <ul>
-          <li>Bottom-up experimentation</li>
-          <li>NFT mechanism discoverability</li>
+          <li>Iterative experimentation</li>
+          <li>NFT mechanism research</li>
+          <li>Symbolic composition</li>
+          <li>Product prototyping</li>
           <li>Meta-interoperability</li>
           <li>Play-oriented design</li>
-          <li>Protocol prototyping</li>
         </ul>
       </Content>
     </PageSection>
