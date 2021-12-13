@@ -3,6 +3,8 @@ import { Content } from '../components/Content';
 import { PageSection } from '../components/PageSection';
 import { Shell } from '../components/Shell';
 
+import { Bangers } from './Bangers';
+
 export const Placeholder: FunctionComponent = () => {
   return (
     <PageSection>
@@ -17,15 +19,18 @@ export const Placeholder: FunctionComponent = () => {
         <p>
           <Shell /> is being built for:
         </p>
-        <ul>
-          <li>Iterative experimentation</li>
-          <li>NFT mechanism research</li>
-          <li>Symbolic composition</li>
-          <li>Product prototyping</li>
-          <li>Meta-interoperability</li>
-          <li>Network debugging</li>
-          <li>Play-oriented design</li>
-        </ul>
+        <Bangers
+          bangers={[
+            'Iterative experimentation',
+            'NFT mechanism research',
+            'Symbolic composition',
+            'Product prototyping',
+            'Emergent interaction',
+            'Meta-interoperability',
+            'Network debugging',
+            'Play-oriented design',
+          ]}
+        />
       </Content>
     </PageSection>
   );
