@@ -23,6 +23,7 @@ export const Placeholder: FunctionComponent = () => {
           <li>Symbolic composition</li>
           <li>Product prototyping</li>
           <li>Meta-interoperability</li>
+          <li>Network debugging</li>
           <li>Play-oriented design</li>
         </ul>
       </Content>
