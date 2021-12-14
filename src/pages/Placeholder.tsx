@@ -25,6 +25,7 @@ export const Placeholder: FunctionComponent = () => {
             'NFT mechanism research',
             'Symbolic composition',
             'Product prototyping',
+            'Dynamic NFTs',
             'Emergent interaction',
             'Meta-interoperability',
             'Network debugging',
