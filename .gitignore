@@ -1,2 +1,4 @@
 dist
 node_modules
+src/shell/graph-generated.ts
+.env

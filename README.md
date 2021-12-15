@@ -10,7 +10,13 @@ Install dependencies:
 yarn
 ```
 
-Run the site locally:
+Generate TypeScript bindings for the shell subgraph (this currently points at the Rinkeby subgraph):
+
+```
+yarn codegen
+```
+
+Run the site locally (will start bound to `localhost:8080` if the port is available):
 
 ```
 yarn start
