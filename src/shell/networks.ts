@@ -3,7 +3,7 @@ const SUPPORTED_NETWORKS = {
 };
 
 const CONTRACT_ADDRESSES: Record<string, string | undefined> = {
-  [SUPPORTED_NETWORKS.rinkeby]: '0xafb96b99a0A4eF348115C6BbD99A71d3d4F52Ff1',
+  [SUPPORTED_NETWORKS.rinkeby]: '0xA7ae98712F56f1C6CC894340555acE8F80D18326',
 };
 
 const SUBGRAPH_ENDPOINTS: Record<string, string | undefined> = {
