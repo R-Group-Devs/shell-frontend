@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Shell } from '../components/Shell';
+import { Shell } from './Shell';
 import { getBangers, saveBangers } from '../lib/bangers';
 
 interface Props {

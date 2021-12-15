@@ -3,7 +3,7 @@ import { Content } from '../components/Content';
 import { PageSection } from '../components/PageSection';
 import { Shell } from '../components/Shell';
 
-import { Bangers } from './Bangers';
+import { Bangers } from '../components/Bangers';
 
 export const Placeholder: FunctionComponent = () => {
   return (
