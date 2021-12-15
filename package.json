@@ -7,8 +7,8 @@
   },
   "scripts": {
     "codegen": "graphql-codegen --config codegen.yml",
-    "start": "webpack serve --config=./webpack.dev.js",
-    "build": "webpack build --config=./webpack.build.js",
+    "start": "yarn codegen && webpack serve --config=./webpack.dev.js",
+    "build": "yarn codegen && webpack build --config=./webpack.build.js",
     "clean": "rm -rf ./dist ./.cache"
   },
   "prettier": {
