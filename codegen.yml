@@ -1,0 +1,15 @@
+overwrite: true
+schema: https://api.thegraph.com/subgraphs/name/r-group-devs/shell-rinkeby
+documents:
+  - ./graphql/**/*.graphql
+generates:
+  './src/shell/graph-generated.ts':
+    plugins:
+    - typescript
+    - typescript-operations
+    - typescript-graphql-request
+    config:
+      rawRequest: true
+      scalars:
+        BigInt: string
+        BigDecimal: string
