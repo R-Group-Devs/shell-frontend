@@ -4,12 +4,15 @@ import { PageSection } from '../components/PageSection';
 import { Shell } from '../components/Shell';
 
 import { Bangers } from '../components/Bangers';
+import { Whomst } from '../components/Whomst';
 
 export const HomePage: FunctionComponent = () => {
   return (
     <PageSection>
       <Content>
-        <h1>NFT application framework</h1>
+        <h1 style={{ maxWidth: '640px' }}>
+          On-chain NFT application framework for <Whomst />
+        </h1>
         <p>
           Upcoming public NFT infrastructure from <strong>R Group</strong> @{' '}
           <a href="https://t.co/k8lIDvcPT9">Rarible DAO</a>.
@@ -17,21 +20,7 @@ export const HomePage: FunctionComponent = () => {
         <p>
           What excites you about <Shell /> ?
         </p>
-        <Bangers
-          bangers={[
-            'Iterative experimentation',
-            'NFT mechanism research',
-            'Symbolic composition',
-            'Product prototyping',
-            'Artistic exploration',
-            'Dynamic NFTs',
-            'Emergent interaction',
-            'Meta-interoperability',
-            'Network debugging',
-            'Play-oriented design',
-          ]}
-          hype={['Nice choice', 'Great choices', 'Excellent selections', 'Killer picks', 'Absolutely insane choices']}
-        />
+        <Bangers />
       </Content>
     </PageSection>
   );

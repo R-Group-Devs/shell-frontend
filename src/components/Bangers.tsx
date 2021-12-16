@@ -6,10 +6,20 @@ import { ThemeConfig } from '../Theme';
 import chunk from 'lodash/chunk';
 import { TwoPanel } from './TwoPanel';
 
-interface Props {
-  bangers: string[];
-  hype: string[];
-}
+const bangers = [
+  'Iterative experimentation',
+  'NFT mechanism research',
+  'Symbolic composition',
+  'Product prototyping',
+  'Artistic exploration',
+  'Dynamic NFTs',
+  'Emergent interaction',
+  'Meta-interoperability',
+  'Network debugging',
+  'Play-oriented design',
+];
+
+const hype = ['Nice choice', 'Great choices', 'Excellent selections', 'Killer picks', 'Absolutely insane choices'];
 
 const useStyles = makeStyles<ThemeConfig>((theme: ThemeConfig) => {
   return {
@@ -23,7 +33,7 @@ const useStyles = makeStyles<ThemeConfig>((theme: ThemeConfig) => {
   };
 });
 
-export const Bangers: FunctionComponent<Props> = ({ bangers, hype }) => {
+export const Bangers: FunctionComponent = () => {
   const [saved, setSaved] = useState<string[]>(getBangers());
   const classes = useStyles();
 
