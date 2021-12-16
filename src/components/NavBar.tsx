@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import { ThemeConfig } from '../Theme';
 import { Link } from 'react-router-dom';
 import { getTaps, incrementTaps } from '../lib/storage';
+import { WalletButton } from './WalletButton';
 
 const useStyles = makeStyles((theme: ThemeConfig) => {
   return {
@@ -57,7 +58,9 @@ export const NavBar: FunctionComponent = () => {
             <div>{navItem('NFTs', '/nfts')}</div>
             <div>{navItem('Protocol', '/protocol')}</div>
             <div style={{ flexGrow: 1 }}></div>
-            <div>CONNECT</div>
+            <div>
+              <WalletButton />
+            </div>
           </>
         )}
       </div>

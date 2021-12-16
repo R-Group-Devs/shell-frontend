@@ -48,7 +48,7 @@ export const Bangers: FunctionComponent<Props> = ({ bangers }) => {
               {chunk.map((b) => (
                 <li className={classes.banger} key={b} onClick={() => toggleBanger(b)}>
                   [<span style={{ visibility: saved.includes(b) ? 'visible' : 'hidden' }}>🐚</span>]{' '}
-                  <span style={{ fontStyle: 'italic' }}>{b}</span>
+                  <span style={{ fontStyle: 'italic', fontWeight: 'bold' }}>{b}</span>
                 </li>
               ))}
             </ul>
@@ -61,7 +61,7 @@ export const Bangers: FunctionComponent<Props> = ({ bangers }) => {
           <p>
             Nice choice. Welcome to <Shell />.
           </p>
-          <p>The journey will begin very soon.</p>
+          <p>Your journey begins very soon.</p>
         </>
       )}
     </>

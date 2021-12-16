@@ -1,15 +1,15 @@
 import React, { FunctionComponent } from 'react';
+import { Link } from 'react-router-dom';
 import { Content } from '../components/Content';
 import { PageSection } from '../components/PageSection';
-import { Shell } from '../components/Shell';
 
-export const CollectionsPage: FunctionComponent = () => {
+export const EnginesPage: FunctionComponent = () => {
   return (
     <PageSection>
       <Content>
-        <h2>Collections</h2>
+        <h2>Engines</h2>
         <p>
-          Browse the ERC-721 NFT collections launched on <Shell />.
+          <Link to="/collections">Collections</Link> are powered by their installed engine.
         </p>
       </Content>
     </PageSection>

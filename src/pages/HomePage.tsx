@@ -15,7 +15,7 @@ export const HomePage: FunctionComponent = () => {
           <a href="https://t.co/k8lIDvcPT9">Rarible DAO</a>.
         </p>
         <p>
-          How do you plan on using <Shell /> ?
+          What excites you about <Shell /> ?
         </p>
         <Bangers
           bangers={[
@@ -23,6 +23,7 @@ export const HomePage: FunctionComponent = () => {
             'NFT mechanism research',
             'Symbolic composition',
             'Product prototyping',
+            'Artistic exploration',
             'Dynamic NFTs',
             'Emergent interaction',
             'Meta-interoperability',

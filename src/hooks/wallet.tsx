@@ -2,6 +2,7 @@ import React, { createContext, FunctionComponent, useContext, useEffect, useRef,
 import { useWeb3React } from '@web3-react/core';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { ContractTransaction } from 'ethers';
+import { isWalletPresent } from '../lib/web3';
 
 const connector = new InjectedConnector({});
 
@@ -73,6 +74,7 @@ export const useWalletImplementation = () => {
     error,
     connect,
     accountView,
+    walletPresent: isWalletPresent(),
     registerTransactions,
     transactions,
     onTransactions,

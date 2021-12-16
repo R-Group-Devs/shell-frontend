@@ -9,6 +9,7 @@ export const createTheme = () => {
       },
       foreground: {
         main: '#FDFFFC',
+        dark: '#84828F',
       },
       accent: {
         main: '#73fbd3',
