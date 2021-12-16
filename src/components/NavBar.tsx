@@ -5,6 +5,8 @@ import { ThemeConfig } from '../Theme';
 import { Link } from 'react-router-dom';
 import { getTaps, incrementTaps } from '../lib/storage';
 import { WalletButton } from './WalletButton';
+import { useWallet } from '../hooks/wallet';
+import { Content } from './Content';
 
 const useStyles = makeStyles((theme: ThemeConfig) => {
   return {
@@ -38,6 +40,7 @@ const navItem = (label: string, to: string) => {
 export const NavBar: FunctionComponent = () => {
   const classes = useStyles();
   const [taps, setTaps] = useState(getTaps());
+  const { browseChainInfo } = useWallet();
 
   const tap = () => {
     incrementTaps();
@@ -58,6 +61,11 @@ export const NavBar: FunctionComponent = () => {
             <div>{navItem('NFTs', '/nfts')}</div>
             <div>{navItem('Protocol', '/protocol')}</div>
             <div style={{ flexGrow: 1 }}></div>
+            <div>
+              <Content>
+                <Link to="/network">{browseChainInfo.name}</Link>
+              </Content>
+            </div>
             <div>
               <WalletButton />
             </div>

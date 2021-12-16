@@ -5,7 +5,7 @@ import { Address } from './Address';
 import { Button } from './Button';
 
 export const WalletButton: FunctionComponent = () => {
-  const { state, connect, accountView, walletPresent } = useWallet();
+  const { state, connect, account, walletPresent, browseChainInfo, chainId } = useWallet();
   const history = useHistory();
 
   if (!walletPresent) {
@@ -16,13 +16,16 @@ export const WalletButton: FunctionComponent = () => {
     return <Button>⌛️</Button>;
   } else if (state === 'disconnected') {
     return <Button onClick={() => connect()}>CONNECT</Button>;
-  } else if (accountView === null) {
+  } else if (account === null) {
     return <Button>⌛️</Button>;
   }
 
+  const mismatch = browseChainInfo.chainId !== chainId;
+
   return (
     <Button onClick={() => history.push('/wallet')}>
-      <Address address={accountView.address} />
+      {mismatch && <>⚠️ </>}
+      <Address address={account} />
     </Button>
   );
 };

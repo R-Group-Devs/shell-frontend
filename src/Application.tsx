@@ -4,6 +4,7 @@ import { Page } from './components/Page';
 import { CollectionsPage } from './pages/CollectionsPage';
 import { EnginesPage } from './pages/EnginesPage';
 import { HomePage } from './pages/HomePage';
+import { NetworkPage } from './pages/NetworkPage';
 import { NftsPage } from './pages/NftsPage';
 import { ProtocolPage } from './pages/ProtocolPage';
 import { WalletPage } from './pages/WalletPage';
@@ -40,6 +41,9 @@ export const Application: FunctionComponent = () => {
           </Route>
           <Route exact path="/wallet">
             <WalletPage />
+          </Route>
+          <Route exact path="/network">
+            <NetworkPage />
           </Route>
         </Switch>
       </Page>

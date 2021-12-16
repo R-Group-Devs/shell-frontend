@@ -2,16 +2,14 @@ import React, { FunctionComponent } from 'react';
 import { Content } from '../components/Content';
 import { PageSection } from '../components/PageSection';
 import { Shell } from '../components/Shell';
-import { useWallet } from '../hooks/wallet';
 
-export const CollectionsPage: FunctionComponent = () => {
-  const { browseChainInfo } = useWallet();
+export const NetworkPage: FunctionComponent = () => {
   return (
     <PageSection>
       <Content>
-        <h2>Collections on {browseChainInfo.name}</h2>
+        <h2>Network</h2>
         <p>
-          Browse the ERC-721 NFT collections launched on <Shell />.
+          <Shell /> is deployed on multiple blockchains.
         </p>
       </Content>
     </PageSection>

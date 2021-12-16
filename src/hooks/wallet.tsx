@@ -3,21 +3,20 @@ import { useWeb3React } from '@web3-react/core';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { ContractTransaction } from 'ethers';
 import { isWalletPresent } from '../lib/web3';
+import { getChainInfo } from '../shell/networks';
 
 const connector = new InjectedConnector({});
 
-type WalletState = 'init' | 'disconnected' | 'connected' | 'ready';
+const defaultNetwork = 4;
 
-interface AccountView {
-  address: string;
-}
+type WalletState = 'init' | 'disconnected' | 'connected' | 'ready';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useWalletImplementation = () => {
   const { activate, active, error, chainId, account, library } = useWeb3React();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [browseChainId] = useState(defaultNetwork);
   const [transactions, setTransactions] = useState<ContractTransaction[]>([]);
-  const [accountView, setAccountView] = useState<AccountView | null>(null);
   const callbacks = useRef<Array<() => unknown>>([]);
 
   const connect = async () => {
@@ -58,22 +57,14 @@ export const useWalletImplementation = () => {
     state = 'disconnected';
   }
 
-  useEffect(() => {
-    if (state === 'ready' && library && account) {
-      setAccountView({ address: account });
-    } else {
-      setAccountView(null);
-    }
-  }, [account, state]);
-
   return {
     chainId,
     state,
     library,
     account,
+    browseChainInfo: getChainInfo(browseChainId),
     error,
     connect,
-    accountView,
     walletPresent: isWalletPresent(),
     registerTransactions,
     transactions,
