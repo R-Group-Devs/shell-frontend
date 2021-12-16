@@ -25,10 +25,10 @@ export const CollectionList: FunctionComponent = () => {
         <tr>
           <td>Collection</td>
           <td>Engine</td>
-          <td>Address</td>
           <td>Creator</td>
-          <td>Updated</td>
           <td>Created</td>
+          <td>Updated</td>
+          <td>Last Activity</td>
         </tr>
       </thead>
       <tbody style={{ fontSize: theme.spacing(3.5), fontWeight: '100' }}>
@@ -38,16 +38,14 @@ export const CollectionList: FunctionComponent = () => {
               {c.name} ({c.symbol})
             </td>
             <td>
-              <Address address={c.engine.address} />
-            </td>
-            <td>
-              <Address address={c.address} />
-            </td>
-            <td>
               <Address address={c.creator.address} />
             </td>
-            <td>{timestampRelative(c.lastUpdatedTimestamp)}</td>
+            <td>
+              <Address address={c.engine.address} />
+            </td>
             <td>{timestampRelative(c.createdAtTimestamp)}</td>
+            <td>{timestampRelative(c.lastUpdatedAtTimestamp)}</td>
+            <td>{timestampRelative(c.lastActivityAtTimestamp)}</td>
           </tr>
         ))}
       </tbody>

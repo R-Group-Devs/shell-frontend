@@ -7,6 +7,7 @@ const whomstAmongUs = [
   'builders',
   'artists',
   'squads',
+  'pods',
   'explorers',
   'DAOs',
   'curators',

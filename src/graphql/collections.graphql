@@ -5,9 +5,10 @@ query collections($orderBy: Collection_orderBy) {
     symbol
     address
     createdAtTimestamp
-    lastUpdatedTimestamp
+    lastUpdatedAtTimestamp
+    lastActivityAtTimestamp
     factory { id address collectionCount }
-    creator { id address }
     engine { id address }
+    creator { id address }
   }
 }

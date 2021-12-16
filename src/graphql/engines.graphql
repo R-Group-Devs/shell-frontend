@@ -3,6 +3,8 @@ query engines {
     id
     address
     collectionCount
-    lastUpdatedTimestamp
+    releasedAtTimestamp
+    lastUpdatedAtTimestamp
+    lastInstalledAtTimestamp
   }
 }

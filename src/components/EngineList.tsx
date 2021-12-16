@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
 import { useWallet } from '../hooks/wallet';
 import { timestampRelative } from '../lib/string';
-import { getCollections, getGraphClient } from '../shell/graph';
+import { getGraphClient } from '../shell/graph';
 import { ThemeConfig } from '../Theme';
 import { Address } from './Address';
 import { Loading } from './Loading';
@@ -26,18 +26,22 @@ export const EngineList: FunctionComponent = () => {
       <thead>
         <tr>
           <td>Address</td>
-          <td>Collections</td>
+          <td>Installs</td>
+          <td>Released</td>
           <td>Updated</td>
+          <td>Last Install</td>
         </tr>
       </thead>
       <tbody style={{ fontSize: theme.spacing(3.5), fontWeight: '100' }}>
-        {data.engines.map((c) => (
-          <tr key={c.id}>
+        {data.engines.map((engine) => (
+          <tr key={engine.id}>
             <td>
-              <Address address={c.address} />
+              <Address address={engine.address} />
             </td>
-            <td>{c.collectionCount}</td>
-            <td>{timestampRelative(c.lastUpdatedTimestamp)}</td>
+            <td>{engine.collectionCount}</td>
+            <td>{timestampRelative(engine.releasedAtTimestamp)}</td>
+            <td>{timestampRelative(engine.lastUpdatedAtTimestamp)}</td>
+            <td>{timestampRelative(engine.lastInstalledAtTimestamp)}</td>
           </tr>
         ))}
       </tbody>
