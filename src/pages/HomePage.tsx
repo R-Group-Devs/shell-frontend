@@ -10,8 +10,8 @@ export const HomePage: FunctionComponent = () => {
   return (
     <PageSection>
       <Content>
-        <h1 style={{ maxWidth: '640px' }}>
-          On-chain NFT application framework for <Whomst />
+        <h1 style={{ maxWidth: '800px' }}>
+          On-chain NFT application development framework for <Whomst />
         </h1>
         <p>
           Upcoming public NFT infrastructure from <strong>R Group</strong> @{' '}
