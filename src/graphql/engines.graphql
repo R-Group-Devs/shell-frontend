@@ -6,6 +6,7 @@ query engines(
     id
     address
     collectionCount
+    mintedNftsCount
     releasedAtTimestamp
     lastUpdatedAtTimestamp
     lastInstalledAtTimestamp
