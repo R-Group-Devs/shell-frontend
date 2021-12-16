@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { Page } from './components/Page';
-import { Placeholder } from './pages/Placeholder';
+import { CollectionsPage } from './pages/CollectionsPage';
+import { HomePage } from './pages/HomePage';
 import { splash } from './splash';
 
 splash();
@@ -19,7 +20,10 @@ export const Application: FunctionComponent = () => {
       <Page>
         <Switch>
           <Route exact path="/">
-            <Placeholder />
+            <HomePage />
+          </Route>
+          <Route exact path="/collections">
+            <CollectionsPage />
           </Route>
         </Switch>
       </Page>

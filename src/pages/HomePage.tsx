@@ -5,19 +5,17 @@ import { Shell } from '../components/Shell';
 
 import { Bangers } from '../components/Bangers';
 
-export const Placeholder: FunctionComponent = () => {
+export const HomePage: FunctionComponent = () => {
   return (
     <PageSection>
       <Content>
-        <h1>
-          🐚 <Shell />
-        </h1>
+        <h1>NFT application framework</h1>
         <p>
           Upcoming public NFT infrastructure from <strong>R Group</strong> @{' '}
           <a href="https://t.co/k8lIDvcPT9">Rarible DAO</a>.
         </p>
         <p>
-          <Shell /> is being built for:
+          How do you plan on using <Shell /> ?
         </p>
         <Bangers
           bangers={[

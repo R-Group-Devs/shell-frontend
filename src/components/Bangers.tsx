@@ -1,13 +1,14 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Shell } from './Shell';
-import { getBangers, saveBangers } from '../lib/bangers';
+import { getBangers, saveBangers } from '../lib/storage';
+import { makeStyles } from '@material-ui/styles';
+import { ThemeConfig } from '../Theme';
+import chunk from 'lodash/chunk';
+import { TwoPanel } from './TwoPanel';
 
 interface Props {
   bangers: string[];
 }
-
-import { makeStyles } from '@material-ui/styles';
-import { ThemeConfig } from '../Theme';
 
 const useStyles = makeStyles<ThemeConfig>((theme: ThemeConfig) => {
   return {
@@ -36,19 +37,32 @@ export const Bangers: FunctionComponent<Props> = ({ bangers }) => {
     setSaved(getBangers());
   };
 
+  const chunks = chunk(bangers, Math.ceil(bangers.length / 2));
+
   return (
     <>
-      <ul>
-        {bangers.map((b) => (
-          <li className={classes.banger} key={b} onClick={() => toggleBanger(b)}>
-            [<span style={{ visibility: saved.includes(b) ? 'visible' : 'hidden' }}>🐚</span>] {b}
-          </li>
+      <TwoPanel>
+        {chunks.map((chunk, idx) => (
+          <div key={idx}>
+            <ul>
+              {chunk.map((b) => (
+                <li className={classes.banger} key={b} onClick={() => toggleBanger(b)}>
+                  [<span style={{ visibility: saved.includes(b) ? 'visible' : 'hidden' }}>🐚</span>]{' '}
+                  <span style={{ fontStyle: 'italic' }}>{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </ul>
+      </TwoPanel>
+
       {getBangers().length > 0 && (
-        <p>
-          Nice. Welcome to <Shell /> 🐚
-        </p>
+        <>
+          <p>
+            Nice choice. Welcome to <Shell />.
+          </p>
+          <p>The journey will begin very soon.</p>
+        </>
       )}
     </>
   );
