@@ -73,7 +73,7 @@ export const Bangers: FunctionComponent = () => {
           <p>
             {pick}. Welcome to <Shell />.
           </p>
-          <p>Your journey begins very soon.</p>
+          <p>The journey begins very soon.</p>
         </>
       )}
     </>
