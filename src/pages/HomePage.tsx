@@ -30,6 +30,13 @@ export const HomePage: FunctionComponent = () => {
             'Network debugging',
             'Play-oriented design',
           ]}
+          hype={[
+            'Nice choice',
+            'Great choices',
+            'Excellent selections',
+            'Killer picks',
+            'Absolutely insane choices. Nice work',
+          ]}
         />
       </Content>
     </PageSection>

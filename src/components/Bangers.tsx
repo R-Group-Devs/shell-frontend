@@ -8,6 +8,7 @@ import { TwoPanel } from './TwoPanel';
 
 interface Props {
   bangers: string[];
+  hype: string[];
 }
 
 const useStyles = makeStyles<ThemeConfig>((theme: ThemeConfig) => {
@@ -22,7 +23,7 @@ const useStyles = makeStyles<ThemeConfig>((theme: ThemeConfig) => {
   };
 });
 
-export const Bangers: FunctionComponent<Props> = ({ bangers }) => {
+export const Bangers: FunctionComponent<Props> = ({ bangers, hype }) => {
   const [saved, setSaved] = useState<string[]>(getBangers());
   const classes = useStyles();
 
@@ -38,6 +39,7 @@ export const Bangers: FunctionComponent<Props> = ({ bangers }) => {
   };
 
   const chunks = chunk(bangers, Math.ceil(bangers.length / 2));
+  const pick = hype[Math.min(hype.length - 1, Math.max(0, getBangers().length - 1))];
 
   return (
     <>
@@ -59,7 +61,7 @@ export const Bangers: FunctionComponent<Props> = ({ bangers }) => {
       {getBangers().length > 0 && (
         <>
           <p>
-            Nice choice. Welcome to <Shell />.
+            {pick}. Welcome to <Shell />.
           </p>
           <p>Your journey begins very soon.</p>
         </>
