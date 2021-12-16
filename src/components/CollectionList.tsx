@@ -24,6 +24,7 @@ export const CollectionList: FunctionComponent = () => {
       <thead>
         <tr>
           <td>Collection</td>
+          <td>NFTs</td>
           <td>Engine</td>
           <td>Creator</td>
           <td>Created</td>
@@ -37,12 +38,14 @@ export const CollectionList: FunctionComponent = () => {
             <td>
               {c.name} ({c.symbol})
             </td>
-            <td>
-              <Address address={c.creator.address} />
-            </td>
+            <td>{c.nftCount}</td>
             <td>
               <Address address={c.engine.address} />
             </td>
+            <td>
+              <Address address={c.creator.address} />
+            </td>
+
             <td>{timestampRelative(c.createdAtTimestamp)}</td>
             <td>{timestampRelative(c.lastUpdatedAtTimestamp)}</td>
             <td>{timestampRelative(c.lastActivityAtTimestamp)}</td>
