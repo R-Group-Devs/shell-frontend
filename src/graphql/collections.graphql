@@ -1,5 +1,5 @@
-query recentCollections {
-  collections {
+query collections($orderBy: Collection_orderBy) {
+  collections(orderBy: $orderBy) {
     id
     name
     symbol

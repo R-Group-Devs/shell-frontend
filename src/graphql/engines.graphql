@@ -1,0 +1,8 @@
+query engines {
+  engines {
+    id
+    address
+    collectionCount
+    lastUpdatedTimestamp
+  }
+}

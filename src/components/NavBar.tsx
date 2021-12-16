@@ -61,7 +61,6 @@ export const NavBar: FunctionComponent = () => {
             <div>{navItem('Collections', '/collections')}</div>
             <div>{navItem('Engines', '/engines')}</div>
             <div>{navItem('NFTs', '/nfts')}</div>
-            <div>{navItem('Protocol', '/protocol')}</div>
             <div style={{ flexGrow: 1 }}></div>
             <div>
               <Content>

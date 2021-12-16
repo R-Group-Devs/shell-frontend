@@ -1,6 +1,6 @@
 import memoize from 'lodash/memoize';
 import { GraphQLClient } from 'graphql-request';
-import { getSdk } from './graph-generated';
+import { Collection_OrderBy, getSdk } from './graph-generated';
 import { getChainInfo } from './networks';
 
 export const getGraphClient = memoize((chainId: number) => {
@@ -12,10 +12,12 @@ export const getGraphClient = memoize((chainId: number) => {
 
 interface GetCollections {
   chainId: number;
+  orderBy: Collection_OrderBy;
 }
 
 export const getCollections = async (options: GetCollections) => {
   const client = getGraphClient(options.chainId);
-  const resp = await client.recentCollections();
+  const { orderBy } = options;
+  const resp = await client.collections({ orderBy });
   return resp.data;
 };
