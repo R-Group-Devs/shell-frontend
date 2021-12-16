@@ -7,6 +7,7 @@ import { getTaps, incrementTaps } from '../lib/storage';
 import { WalletButton } from './WalletButton';
 import { useWallet } from '../hooks/wallet';
 import { Content } from './Content';
+import { useIsFetching } from 'react-query';
 
 const useStyles = makeStyles((theme: ThemeConfig) => {
   return {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme: ThemeConfig) => {
     },
     shell: {
       fontSize: theme.spacing(6),
-      paddingRight: theme.spacing(4),
+      paddingRight: theme.spacing(2),
     },
   };
 });
@@ -41,6 +42,7 @@ export const NavBar: FunctionComponent = () => {
   const classes = useStyles();
   const [taps, setTaps] = useState(getTaps());
   const { browseChainInfo } = useWallet();
+  const isFetching = useIsFetching();
 
   const tap = () => {
     incrementTaps();
@@ -51,7 +53,7 @@ export const NavBar: FunctionComponent = () => {
     <div className={classes.section}>
       <div className={classes.container}>
         <div style={{ cursor: 'help', userSelect: 'none' }} className={classes.shell} onClick={tap}>
-          🐚
+          🐚 <span style={{ opacity: isFetching ? 0.5 : 0.1 }}>*</span>
         </div>
         {taps >= 5 && (
           <>

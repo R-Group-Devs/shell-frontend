@@ -1,10 +1,12 @@
 query recentCollections {
   collections {
     id
-    factory { id address collectionCount }
-    creator { id address }
     name
     symbol
     address
+    createdAtTimestamp
+    factory { id address collectionCount }
+    creator { id address }
+    engine { id address }
   }
 }

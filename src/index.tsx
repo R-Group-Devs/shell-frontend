@@ -7,18 +7,23 @@ import { BrowserRouter } from 'react-router-dom';
 import { createTheme } from './Theme';
 import { Application } from './Application';
 import { WalletProvider } from './hooks/wallet';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getLibrary = (provider: any) => new Web3Provider(provider);
 
+const queryClient = new QueryClient();
+
 const Root: FunctionComponent = () => (
   <ThemeProvider theme={createTheme()}>
     <Web3ReactProvider getLibrary={getLibrary}>
-      <WalletProvider>
-        <BrowserRouter>
-          <Application />
-        </BrowserRouter>
-      </WalletProvider>
+      <QueryClientProvider client={queryClient}>
+        <WalletProvider>
+          <BrowserRouter>
+            <Application />
+          </BrowserRouter>
+        </WalletProvider>
+      </QueryClientProvider>
     </Web3ReactProvider>
   </ThemeProvider>
 );
