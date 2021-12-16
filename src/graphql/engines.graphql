@@ -1,5 +1,8 @@
-query engines {
-  engines {
+query engines(
+  $orderBy: Engine_orderBy = lastUpdatedAtTimestamp,
+  $orderDirection: OrderDirection = desc)
+{
+  engines(orderBy: $orderBy, orderDirection: $orderDirection) {
     id
     address
     collectionCount

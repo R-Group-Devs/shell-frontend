@@ -1,5 +1,8 @@
-query collections($orderBy: Collection_orderBy) {
-  collections(orderBy: $orderBy) {
+query collections(
+  $orderBy: Collection_orderBy = lastActivityAtTimestamp,
+  $orderDirection: OrderDirection = desc)
+{
+  collections(orderBy: $orderBy, orderDirection: $orderDirection) {
     id
     name
     symbol
