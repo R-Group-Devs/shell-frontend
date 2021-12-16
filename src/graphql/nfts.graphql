@@ -1,0 +1,16 @@
+query nfts(
+  $orderBy: NFT_orderBy = lastActivityAtTimestamp,
+  $orderDirection: OrderDirection = desc)
+{
+  nfts(orderBy: $orderBy, orderDirection: $orderDirection) {
+    id
+    tokenId
+    createdAtTimestamp
+    lastActivityAtTimestamp
+
+    collection { id address name symbol nftCount }
+    owner { id address }
+    mintedBy { id address }
+    mintedTo { id address }
+  }
+}
