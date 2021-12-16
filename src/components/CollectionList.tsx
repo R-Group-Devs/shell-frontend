@@ -24,6 +24,7 @@ export const CollectionList: FunctionComponent = () => {
           <td>Engine</td>
           <td>Address</td>
           <td>Creator</td>
+          <td>Updated</td>
           <td>Created</td>
         </tr>
       </thead>
@@ -42,6 +43,7 @@ export const CollectionList: FunctionComponent = () => {
             <td>
               <Address address={c.creator.address} />
             </td>
+            <td>{timestampRelative(c.lastUpdatedTimestamp)}</td>
             <td>{timestampRelative(c.createdAtTimestamp)}</td>
           </tr>
         ))}

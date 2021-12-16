@@ -7,6 +7,12 @@
       "command": "yarn dev",
       "problemMatcher": [],
     },
+    {
+      "label": "♻️ re-generate client graph bindings",
+      "type": "shell",
+      "command": "yarn codegen",
+      "problemMatcher": [],
+    },
   ],
   "inputs": [ ]
 }

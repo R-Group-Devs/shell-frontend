@@ -5,6 +5,7 @@ query recentCollections {
     symbol
     address
     createdAtTimestamp
+    lastUpdatedTimestamp
     factory { id address collectionCount }
     creator { id address }
     engine { id address }
