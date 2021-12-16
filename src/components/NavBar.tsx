@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 
-import { makeStyles, useTheme } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 import { ThemeConfig } from '../Theme';
 import { Link } from 'react-router-dom';
 import { getTaps, incrementTaps } from '../lib/storage';
