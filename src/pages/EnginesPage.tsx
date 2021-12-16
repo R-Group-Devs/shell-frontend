@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { Content } from '../components/Content';
 import { PageSection } from '../components/PageSection';
+import { Shell } from '../components/Shell';
 import { useWallet } from '../hooks/wallet';
 
 export const EnginesPage: FunctionComponent = () => {
@@ -9,9 +10,9 @@ export const EnginesPage: FunctionComponent = () => {
   return (
     <PageSection>
       <Content>
-        <h2>Engines on {browseChainInfo.name}</h2>
+        <h2>Engines [{browseChainInfo.name}]</h2>
         <p>
-          <Link to="/collections">Collections</Link> are powered by their installed engine.
+          NFT applications released on <Shell />.
         </p>
       </Content>
     </PageSection>

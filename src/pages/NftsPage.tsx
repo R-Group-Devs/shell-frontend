@@ -10,9 +10,9 @@ export const NftsPage: FunctionComponent = () => {
   return (
     <PageSection>
       <Content>
-        <h2>NFTs on {browseChainInfo.name}</h2>
+        <h2>NFTs [{browseChainInfo.name}]</h2>
         <p>
-          Browse NFTs across all <Link to="/collections">collections</Link> launched on <Shell />
+          NFTs minted on <Shell />.
         </p>
       </Content>
     </PageSection>

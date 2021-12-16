@@ -12,7 +12,7 @@ export const getGraphClient = memoize((chainId: number) => {
 
 interface GetCollections {
   chainId: number;
-  orderBy: Collection_OrderBy;
+  orderBy?: Collection_OrderBy;
 }
 
 export const getCollections = async (options: GetCollections) => {

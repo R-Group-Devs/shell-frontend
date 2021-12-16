@@ -9,7 +9,7 @@ interface ChainInfo {
 const networks: ChainInfo[] = [
   {
     chainId: 4,
-    name: 'Rinkeby',
+    name: 'Rinkeby Testnet',
     factoryAddress: '0xA7ae98712F56f1C6CC894340555acE8F80D18326',
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-rinkeby',
     rpcEndpoint: process.env['RINKEBY_URL'] ?? '',

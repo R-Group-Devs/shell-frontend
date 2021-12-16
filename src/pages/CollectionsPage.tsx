@@ -11,9 +11,9 @@ export const CollectionsPage: FunctionComponent = () => {
     <>
       <PageSection>
         <Content>
-          <h2>Collections on {browseChainInfo.name}</h2>
+          <h2>Collections [{browseChainInfo.name}]</h2>
           <p>
-            Browse the ERC-721 NFT collections launched on <Shell />.
+            ERC-721 contracts launched on <Shell />.
           </p>
         </Content>
       </PageSection>
