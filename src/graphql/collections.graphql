@@ -12,7 +12,7 @@ query collections(
     lastUpdatedAtTimestamp
     lastActivityAtTimestamp
     factory { id address collectionCount }
-    engine { id address }
+    engine { id address name }
     creator { id address }
   }
 }

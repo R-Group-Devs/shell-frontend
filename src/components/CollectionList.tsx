@@ -24,30 +24,26 @@ export const CollectionList: FunctionComponent = () => {
       <thead>
         <tr>
           <td>Collection</td>
-          <td>NFTs</td>
           <td>Engine</td>
+          <td>NFTs</td>
           <td>Creator</td>
-          <td>Created</td>
-          <td>Updated</td>
           <td>Last Activity</td>
         </tr>
       </thead>
-      <tbody style={{ fontSize: theme.spacing(3.5), fontWeight: '100' }}>
+      <tbody style={{ fontSize: theme.spacing(3.5), fontWeight: '100', lineHeight: '1.5' }}>
         {data.collections.map((c) => (
           <tr key={c.id}>
             <td>
               {c.name} ({c.symbol})
             </td>
-            <td>{c.nftCount}</td>
             <td>
-              <Address address={c.engine.address} />
+              <Address address={c.engine.address} /> {c.engine.name}
             </td>
+            <td>{c.nftCount}</td>
             <td>
               <Address address={c.creator.address} />
             </td>
 
-            <td>{timestampRelative(c.createdAtTimestamp)}</td>
-            <td>{timestampRelative(c.lastUpdatedAtTimestamp)}</td>
             <td>{timestampRelative(c.lastActivityAtTimestamp)}</td>
           </tr>
         ))}
