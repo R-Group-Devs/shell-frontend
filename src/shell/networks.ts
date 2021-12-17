@@ -10,7 +10,7 @@ const networks: ChainInfo[] = [
   {
     chainId: 4,
     name: 'Rinkeby Testnet',
-    factoryAddress: '0xA7ae98712F56f1C6CC894340555acE8F80D18326',
+    factoryAddress: '0xED3C0D236070e735497Cf9A2258e741e881c0F04',
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-rinkeby',
     rpcEndpoint: process.env['RINKEBY_URL'] ?? '',
   },

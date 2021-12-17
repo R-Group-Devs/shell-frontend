@@ -4,6 +4,7 @@ query engines(
 {
   engines(orderBy: $orderBy, orderDirection: $orderDirection) {
     id
+    name
     address
     collectionCount
     mintedNftsCount

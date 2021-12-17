@@ -25,7 +25,7 @@ export const EngineList: FunctionComponent = () => {
     <table>
       <thead>
         <tr>
-          <td>Address</td>
+          <td>Engine</td>
           <td>Installs</td>
           <td>Minted</td>
           <td>Released</td>
@@ -37,7 +37,7 @@ export const EngineList: FunctionComponent = () => {
         {data.engines.map((engine) => (
           <tr key={engine.id}>
             <td>
-              <Address address={engine.address} />
+              <Address address={engine.address} /> {engine.name}
             </td>
             <td>{engine.collectionCount}</td>
             <td>{engine.mintedNftsCount}</td>
