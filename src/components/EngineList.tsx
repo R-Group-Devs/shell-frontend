@@ -6,6 +6,7 @@ import { timestampRelative } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
 import { ThemeConfig } from '../Theme';
 import { Address } from './Address';
+import { AddressPrefix } from './AddressPrefix';
 import { Loading } from './Loading';
 
 export const EngineList: FunctionComponent = () => {
@@ -37,7 +38,7 @@ export const EngineList: FunctionComponent = () => {
         {data.engines.map((engine) => (
           <tr key={engine.id}>
             <td>
-              <Address address={engine.address} /> {engine.name}
+              <AddressPrefix address={engine.address}>{engine.name}</AddressPrefix>
             </td>
             <td>{engine.collectionCount}</td>
             <td>{engine.mintedNftsCount}</td>

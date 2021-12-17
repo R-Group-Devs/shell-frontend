@@ -6,6 +6,7 @@ import { timestampRelative } from '../lib/string';
 import { getCollections } from '../shell/graph';
 import { ThemeConfig } from '../Theme';
 import { Address } from './Address';
+import { AddressPrefix } from './AddressPrefix';
 import { Loading } from './Loading';
 
 export const CollectionList: FunctionComponent = () => {
@@ -34,10 +35,12 @@ export const CollectionList: FunctionComponent = () => {
         {data.collections.map((c) => (
           <tr key={c.id}>
             <td>
-              {c.name} ({c.symbol})
+              <AddressPrefix address={c.address}>
+                {c.name} ({c.symbol})
+              </AddressPrefix>
             </td>
             <td>
-              <Address address={c.engine.address} /> {c.engine.name}
+              <AddressPrefix address={c.engine.address}>{c.engine.name}</AddressPrefix>
             </td>
             <td>{c.nftCount}</td>
             <td>

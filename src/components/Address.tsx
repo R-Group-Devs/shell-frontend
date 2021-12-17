@@ -10,5 +10,5 @@ export const Address: FunctionComponent<Props> = ({ address }) => {
     return null;
   }
 
-  return <>{truncateHex(address)}</>;
+  return <>{truncateHex(address).replace('0x', '')}</>;
 };
