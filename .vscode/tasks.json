@@ -8,7 +8,7 @@
       "problemMatcher": [],
     },
     {
-      "label": "♻️ re-generate client graph bindings",
+      "label": "♻️ build client graph bindings",
       "type": "shell",
       "command": "yarn codegen",
       "problemMatcher": [],
