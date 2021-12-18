@@ -35,7 +35,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new Dotenv(),
+    new Dotenv({ systemvars: true }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({ template: './index.html' }),
   ],
