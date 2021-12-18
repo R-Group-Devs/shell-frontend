@@ -1,15 +1,19 @@
+fragment EngineInfo on Engine {
+  id
+  name
+  address
+  collectionCount
+  mintedNftsCount
+  releasedAtTimestamp
+  lastUpdatedAtTimestamp
+  lastInstalledAtTimestamp
+}
+
 query engines(
   $orderBy: Engine_orderBy = lastUpdatedAtTimestamp,
   $orderDirection: OrderDirection = desc)
 {
   engines(orderBy: $orderBy, orderDirection: $orderDirection) {
-    id
-    name
-    address
-    collectionCount
-    mintedNftsCount
-    releasedAtTimestamp
-    lastUpdatedAtTimestamp
-    lastInstalledAtTimestamp
+    ... EngineInfo
   }
 }

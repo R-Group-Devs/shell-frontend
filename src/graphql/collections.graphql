@@ -1,8 +1,4 @@
-query collections(
-  $orderBy: Collection_orderBy = lastActivityAtTimestamp,
-  $orderDirection: OrderDirection = desc)
-{
-  collections(orderBy: $orderBy, orderDirection: $orderDirection) {
+fragment CollectionInfo on Collection {
     id
     name
     symbol
@@ -14,5 +10,39 @@ query collections(
     factory { id address collectionCount }
     engine { id address name }
     creator { id address }
+}
+
+query collections(
+  $orderBy: Collection_orderBy = lastActivityAtTimestamp,
+  $orderDirection: OrderDirection = desc)
+{
+  collections(orderBy: $orderBy, orderDirection: $orderDirection) {
+    ... CollectionInfo
+  }
+}
+
+query collectionDetail($address: ID!) {
+  collection(id: $address) {
+    ... CollectionInfo
+
+    creator {
+      id
+      address
+      createdCollections(orderBy: createdAtTimestamp orderDirection: desc first: 5) {
+        ... CollectionInfo
+      }
+    }
+
+    engine {
+      ... EngineInfo
+      collections(orderBy: createdAtTimestamp orderDirection: desc first: 5) {
+        ... CollectionInfo
+      }
+    }
+
+    nfts(orderBy: createdAtTimestamp orderDirection: desc) {
+      ... NFTInfo
+    }
+
   }
 }
