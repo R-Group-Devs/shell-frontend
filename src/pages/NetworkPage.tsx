@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Address } from '../components/Address';
+import { AddressViewable } from '../components/AddressViewable';
 import { Content } from '../components/Content';
 import { KeyValueEntry, KeyValueList } from '../components/KeyValueList';
 import { MultiSelect } from '../components/MultiSelect';
@@ -60,14 +61,7 @@ export const NetworkPage: FunctionComponent = () => {
             />
             <KeyValueEntry
               label="CollectionFactory address:"
-              value={
-                <>
-                  {browseChainInfo.factoryAddress}{' '}
-                  <a href={exploreAddressLink(chainId, browseChainInfo.factoryAddress)} target="_blank">
-                    view
-                  </a>
-                </>
-              }
+              value={<AddressViewable address={browseChainInfo.factoryAddress} chainId={chainId} />}
             />
           </KeyValueList>
         </Content>

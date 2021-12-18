@@ -23,16 +23,19 @@ export const KeyValueList: FunctionComponent = ({ children }) => {
 
 interface EntryProps {
   label: ReactChild;
-  value: ReactChild;
+  value?: ReactChild;
 }
 
-export const KeyValueEntry: FunctionComponent<EntryProps> = ({ label, value }) => {
+export const KeyValueEntry: FunctionComponent<EntryProps> = ({ label, value, children }) => {
   return (
     <tr>
       <td>
         <strong>{label}</strong>
       </td>
-      <td style={{ textAlign: 'right' }}>{value}</td>
+      <td style={{ textAlign: 'right' }}>
+        {value}
+        {children}
+      </td>
     </tr>
   );
 };

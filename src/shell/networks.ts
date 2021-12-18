@@ -1,6 +1,7 @@
 interface ChainInfo {
   chainId: number;
   name: string;
+  slug: string;
   factoryAddress: string;
   subgraphEndpoint: string;
   rpcEndpoint: string;
@@ -11,10 +12,11 @@ export const networks: ChainInfo[] = [
   {
     chainId: 4,
     name: 'Rinkeby Testnet',
+    slug: 'rinkeby',
     factoryAddress: '0xED3C0D236070e735497Cf9A2258e741e881c0F04',
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-rinkeby',
     rpcEndpoint: process.env['RINKEBY_URL'] ?? '',
-    blockchainExplorer: 'https://rinkeby.etherscan.io/',
+    blockchainExplorer: 'https://rinkeby.etherscan.io',
   },
 ];
 
@@ -36,8 +38,18 @@ export const getChainInfoOrNull = (chainId: number): ChainInfo | null => {
 export const getChainInfo = (chainId: number): ChainInfo => {
   const info = getChainInfoOrNull(chainId);
 
-  if (info === null) {
+  if (info == null) {
     throw new Error(`unsupported network ${chainId}`);
+  }
+
+  return info;
+};
+
+export const getChainInfoBySlug = (slug: string): ChainInfo => {
+  const info = networks.find((n) => n.slug === slug);
+
+  if (info == null) {
+    throw new Error(`invalid network slug: ${slug}`);
   }
 
   return info;

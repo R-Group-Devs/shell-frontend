@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
+import { useHistory } from 'react-router-dom';
 import { useWallet } from '../hooks/wallet';
 import { timestampRelative } from '../lib/string';
 import { getCollections } from '../shell/graph';
@@ -10,6 +11,7 @@ import { Table } from './Table';
 
 export const CollectionList: FunctionComponent = () => {
   const { browseChainInfo } = useWallet();
+  const history = useHistory();
   const { data, isLoading } = useQuery(['CollectionList', browseChainInfo.chainId], () =>
     getCollections({ chainId: browseChainInfo.chainId })
   );
@@ -31,7 +33,7 @@ export const CollectionList: FunctionComponent = () => {
       </thead>
       <tbody>
         {data.collections.map((c) => (
-          <tr key={c.id}>
+          <tr key={c.id} onClick={() => history.push(`/collections/${browseChainInfo.slug}/${c.address}`)}>
             <td>
               <AddressPrefix address={c.address}>
                 {c.name} ({c.symbol})
