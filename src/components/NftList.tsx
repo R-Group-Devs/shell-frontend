@@ -25,9 +25,9 @@ export const NftList: FunctionComponent = () => {
       <thead>
         <tr>
           <td>Token</td>
+          <td>Engine</td>
           <td>Owner</td>
           <td>Minted</td>
-          <td>Last Activity</td>
         </tr>
       </thead>
       <tbody>
@@ -37,10 +37,12 @@ export const NftList: FunctionComponent = () => {
               <AddressPrefix address={nft.collection.address}>{nft.collection.name}</AddressPrefix> #{nft.tokenId}
             </td>
             <td>
+              <AddressPrefix address={nft.mintedByEngine.address}>{nft.mintedByEngine.name}</AddressPrefix>
+            </td>
+            <td>
               <Address address={nft.owner.address} />
             </td>
             <td>{timestampRelative(nft.createdAtTimestamp)}</td>
-            <td>{timestampRelative(nft.lastActivityAtTimestamp)}</td>
           </tr>
         ))}
       </tbody>

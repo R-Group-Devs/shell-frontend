@@ -1,5 +1,5 @@
 query nfts(
-  $orderBy: NFT_orderBy = lastActivityAtTimestamp,
+  $orderBy: NFT_orderBy = createdAtTimestamp,
   $orderDirection: OrderDirection = desc)
 {
   nfts(orderBy: $orderBy, orderDirection: $orderDirection) {
@@ -12,6 +12,6 @@ query nfts(
     owner { id address }
     mintedBy { id address }
     mintedTo { id address }
-    mintedByEngine { id address }
+    mintedByEngine { id name address }
   }
 }

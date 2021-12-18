@@ -24,7 +24,7 @@ export const CollectionList: FunctionComponent = () => {
         <tr>
           <td>Collection</td>
           <td>Engine</td>
-          <td>NFTs</td>
+          <td style={{ textAlign: 'center' }}>NFTs</td>
           <td>Creator</td>
           <td>Last Activity</td>
         </tr>
@@ -40,7 +40,7 @@ export const CollectionList: FunctionComponent = () => {
             <td>
               <AddressPrefix address={c.engine.address}>{c.engine.name}</AddressPrefix>
             </td>
-            <td style={{ textAlign: 'right' }}>{c.nftCount}</td>
+            <td style={{ textAlign: 'center' }}>{c.nftCount}</td>
             <td>
               <Address address={c.creator.address} />
             </td>
