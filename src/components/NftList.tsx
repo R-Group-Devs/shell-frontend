@@ -1,15 +1,14 @@
-import { useTheme } from '@material-ui/styles';
 import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
 import { useWallet } from '../hooks/wallet';
 import { timestampRelative } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
-import { ThemeConfig } from '../Theme';
 import { Address } from './Address';
+import { AddressPrefix } from './AddressPrefix';
 import { Loading } from './Loading';
+import { Table } from './Table';
 
 export const NftList: FunctionComponent = () => {
-  const theme = useTheme<ThemeConfig>();
   const { browseChainInfo } = useWallet();
   const { data, isLoading } = useQuery(['NftList', browseChainInfo.chainId], async () => {
     const client = getGraphClient(browseChainInfo.chainId);
@@ -22,21 +21,21 @@ export const NftList: FunctionComponent = () => {
   }
 
   return (
-    <table>
+    <Table>
       <thead>
         <tr>
-          <td>Collection</td>
-          <td>Token ID</td>
+          <td>Token</td>
           <td>Owner</td>
           <td>Minted</td>
           <td>Last Activity</td>
         </tr>
       </thead>
-      <tbody style={{ fontSize: theme.spacing(3.5), fontWeight: '100' }}>
+      <tbody>
         {data.nfts.map((nft) => (
           <tr key={nft.id}>
-            <td>{nft.collection.name}</td>
-            <td>{nft.tokenId}</td>
+            <td>
+              <AddressPrefix address={nft.collection.address}>{nft.collection.name}</AddressPrefix> #{nft.tokenId}
+            </td>
             <td>
               <Address address={nft.owner.address} />
             </td>
@@ -45,6 +44,6 @@ export const NftList: FunctionComponent = () => {
           </tr>
         ))}
       </tbody>
-    </table>
+    </Table>
   );
 };

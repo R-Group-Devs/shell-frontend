@@ -8,6 +8,7 @@ import { WalletButton } from './WalletButton';
 import { useWallet } from '../hooks/wallet';
 import { Content } from './Content';
 import { useIsFetching } from 'react-query';
+import { useLatestBlockNumber } from '../hooks/blocknumber';
 
 const useStyles = makeStyles((theme: ThemeConfig) => {
   return {
@@ -43,6 +44,12 @@ export const NavBar: FunctionComponent = () => {
   const [taps, setTaps] = useState(getTaps());
   const { browseChainInfo } = useWallet();
   const isFetching = useIsFetching();
+  const latest = useLatestBlockNumber();
+
+  let behind = 0;
+  if (latest.blockchain.data && latest.indexer.data) {
+    behind = (latest.blockchain.data ?? 0) - (latest.indexer.data ?? 0);
+  }
 
   const tap = () => {
     incrementTaps();
@@ -59,9 +66,10 @@ export const NavBar: FunctionComponent = () => {
           <>
             <div>{navItem('Home', '/')}</div>
             <div>{navItem('Collections', '/collections')}</div>
-            <div>{navItem('Engines', '/engines')}</div>
             <div>{navItem('NFTs', '/nfts')}</div>
+            <div>{navItem('Engines', '/engines')}</div>
             <div style={{ flexGrow: 1 }}></div>
+            {behind > 0 && <div>🐢 {behind}</div>}
             <div>
               <Content>
                 <Link to="/network">{browseChainInfo.name}</Link>

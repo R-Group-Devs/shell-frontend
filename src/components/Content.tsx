@@ -24,7 +24,7 @@ const useStyles = makeStyles<ThemeConfig>((theme) => {
       },
       '& a': {
         color: theme.palette.accent.secondary,
-        paddingBottom: theme.spacing(1),
+        paddingBottom: theme.spacing(0.25),
         borderBottom: `solid 1px ${theme.palette.accent.main}`,
       },
       '& em': {

@@ -15,6 +15,9 @@ const whomstAmongUs = [
   'guilds',
   'homies',
   'storytellers',
+  'protocols',
+  'marketplaces',
+  'platforms',
 ];
 
 export const Whomst: FunctionComponent = () => {
@@ -38,14 +41,14 @@ export const Whomst: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    const h = setInterval(rotate, 2500);
+    const h = setInterval(rotate, 2000);
     return () => clearInterval(h);
   }, [whomst]);
 
   useEffect(() => {
     const h = setInterval(update, 50);
     return () => clearInterval(h);
-  });
+  }, [whomst, buffer]);
 
   return (
     <span style={{ color: buffer === whomst ? theme.palette.accent.secondary : theme.palette.foreground.main }}>

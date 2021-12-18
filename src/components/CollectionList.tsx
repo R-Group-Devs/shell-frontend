@@ -1,16 +1,14 @@
-import { useTheme } from '@material-ui/styles';
 import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
 import { useWallet } from '../hooks/wallet';
 import { timestampRelative } from '../lib/string';
 import { getCollections } from '../shell/graph';
-import { ThemeConfig } from '../Theme';
 import { Address } from './Address';
 import { AddressPrefix } from './AddressPrefix';
 import { Loading } from './Loading';
+import { Table } from './Table';
 
 export const CollectionList: FunctionComponent = () => {
-  const theme = useTheme<ThemeConfig>();
   const { browseChainInfo } = useWallet();
   const { data, isLoading } = useQuery(['CollectionList', browseChainInfo.chainId], () =>
     getCollections({ chainId: browseChainInfo.chainId })
@@ -21,7 +19,7 @@ export const CollectionList: FunctionComponent = () => {
   }
 
   return (
-    <table>
+    <Table>
       <thead>
         <tr>
           <td>Collection</td>
@@ -31,7 +29,7 @@ export const CollectionList: FunctionComponent = () => {
           <td>Last Activity</td>
         </tr>
       </thead>
-      <tbody style={{ fontSize: theme.spacing(3.5), fontWeight: '100', lineHeight: '1.5' }}>
+      <tbody>
         {data.collections.map((c) => (
           <tr key={c.id}>
             <td>
@@ -42,15 +40,14 @@ export const CollectionList: FunctionComponent = () => {
             <td>
               <AddressPrefix address={c.engine.address}>{c.engine.name}</AddressPrefix>
             </td>
-            <td>{c.nftCount}</td>
+            <td style={{ textAlign: 'right' }}>{c.nftCount}</td>
             <td>
               <Address address={c.creator.address} />
             </td>
-
             <td>{timestampRelative(c.lastActivityAtTimestamp)}</td>
           </tr>
         ))}
       </tbody>
-    </table>
+    </Table>
   );
 };

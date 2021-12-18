@@ -21,10 +21,10 @@ const useStyles = makeStyles<ThemeConfig, Props>((theme) => {
       cursor: (props) => (!props.disabled ? 'pointer' : 'not-allowed'),
       opacity: (props) => (!props.disabled ? 1 : 0.5),
       border: `solid 1px ${theme.palette.foreground.dark}`,
-      padding: theme.spacing(2),
+      padding: theme.spacing(1.5),
       '&:hover': {
-        color: (props) => (props.disabled ? 'inherit' : theme.palette.accent.tertiary),
-        borderColor: (props) => (props.disabled ? theme.palette.foreground.dark : theme.palette.accent.tertiary),
+        color: (props) => (props.disabled ? 'inherit' : theme.palette.accent.main),
+        borderColor: (props) => (props.disabled ? theme.palette.foreground.dark : theme.palette.accent.main),
       },
     },
   };

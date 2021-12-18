@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { ThemeConfig } from '../Theme';
 import chunk from 'lodash/chunk';
 import { TwoPanel } from './TwoPanel';
+import { MultiSelect, SelectItem } from './MultiSelect';
 
 const bangers = [
   'Iterative experimentation',
@@ -21,52 +22,30 @@ const bangers = [
 
 const hype = ['Nice choice', 'Great choices', 'Excellent selections', 'Killer picks', 'Absolutely insane choices'];
 
-const useStyles = makeStyles<ThemeConfig>((theme: ThemeConfig) => {
-  return {
-    banger: {
-      cursor: 'pointer',
-      '&:hover': {
-        backgroundColor: theme.palette.accent.secondary,
-        color: theme.palette.background.main,
-      },
-    },
-  };
-});
-
 export const Bangers: FunctionComponent = () => {
-  const [saved, setSaved] = useState<string[]>(getBangers());
-  const classes = useStyles();
+  const [items, setItems] = useState<SelectItem[]>(
+    bangers.map((b) => {
+      const saved = getBangers();
+      return { display: b, value: b, selected: saved.includes(b) };
+    })
+  );
 
-  const toggleBanger = (banger: string) => {
-    const saved = getBangers();
-    if (saved.includes(banger)) {
-      saveBangers(saved.filter((b) => b !== banger));
-    } else {
-      saveBangers([...new Set([...saved, banger])]);
-    }
-
-    setSaved(getBangers());
+  const onSelect = (item: SelectItem) => {
+    const next = items.map((i) => {
+      if (i === item) {
+        return { ...i, selected: !i.selected };
+      }
+      return i;
+    });
+    saveBangers(next.filter((b) => b.selected).map((b) => b.value));
+    setItems(next);
   };
 
-  const chunks = chunk(bangers, Math.ceil(bangers.length / 2));
   const pick = hype[Math.min(hype.length - 1, Math.max(0, getBangers().length - 1))];
 
   return (
     <>
-      <TwoPanel>
-        {chunks.map((chunk, idx) => (
-          <div key={idx}>
-            <ul>
-              {chunk.map((b) => (
-                <li className={classes.banger} key={b} onClick={() => toggleBanger(b)}>
-                  [<span style={{ visibility: saved.includes(b) ? 'visible' : 'hidden' }}>🐚</span>]{' '}
-                  <span style={{ fontStyle: 'italic', fontWeight: 'bold' }}>{b}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </TwoPanel>
+      <MultiSelect items={items} onSelect={onSelect} />
 
       {getBangers().length > 0 && (
         <>
