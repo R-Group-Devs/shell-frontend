@@ -4,15 +4,17 @@ interface ChainInfo {
   factoryAddress: string;
   subgraphEndpoint: string;
   rpcEndpoint: string;
+  blockchainExplorer: string;
 }
 
-const networks: ChainInfo[] = [
+export const networks: ChainInfo[] = [
   {
     chainId: 4,
     name: 'Rinkeby Testnet',
     factoryAddress: '0xED3C0D236070e735497Cf9A2258e741e881c0F04',
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-rinkeby',
     rpcEndpoint: process.env['RINKEBY_URL'] ?? '',
+    blockchainExplorer: 'https://rinkeby.etherscan.io/',
   },
 ];
 
