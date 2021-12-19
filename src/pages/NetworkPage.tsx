@@ -59,15 +59,15 @@ export const NetworkPage: FunctionComponent = () => {
               />
               <KeyValueEntry label="Launched collections:" value={factoryQuery.data?.factory?.collectionCount} />
               <KeyValueEntry label="Latest block:" value={latest.blockchain.data} />
+              <KeyValueEntry label="Latest indexed block:" value={latest.indexer.data} />
               <KeyValueEntry
-                label="Subgraph playground:"
+                label="Subgraph"
                 value={
                   <a target="_blank" href={hostedPlayground}>
                     {subgraphName}
                   </a>
                 }
               />
-              <KeyValueEntry label="Latest indexed block:" value={latest.indexer.data} />
               <KeyValueEntry label="Indexer lag:" value={formatDistanceStrict(0, behind * 1000)} />
             </KeyValueList>
           </TwoPanel>

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Address } from '../components/Address';
 import { AddressPrefix } from '../components/AddressPrefix';
 import { AddressViewable } from '../components/AddressViewable';
@@ -50,13 +50,15 @@ export const CollectionDetailPage: FunctionComponent = () => {
             <div>
               <KeyValueList>
                 <KeyValueEntry label="Network:" value={chainInfo.name} />
+                <KeyValueEntry label="Engine:">
+                  <AddressPrefix address={collection.engine.address}>
+                    <Link to={`/engines/${chainInfo.slug}/${collection.engine.address}`}>{collection.engine.name}</Link>
+                  </AddressPrefix>
+                </KeyValueEntry>
                 <KeyValueEntry
                   label="Address:"
                   value={<AddressViewable address={collection.address} chainId={chainInfo.chainId} isToken />}
                 />
-                <KeyValueEntry label="Engine:">
-                  <AddressPrefix address={collection.engine.address}>{collection.engine.name}</AddressPrefix>
-                </KeyValueEntry>
                 <KeyValueEntry
                   label="Owner:"
                   value={<AddressViewable address={collection.owner.address} chainId={chainInfo.chainId} />}
