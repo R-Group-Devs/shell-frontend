@@ -1,15 +1,15 @@
 [[redirects]]
-  from = "/collections"
+  from = "/collections*"
   to = "/index.html"
   status = 200
 
 [[redirects]]
-  from = "/engines"
+  from = "/engines*"
   to = "/index.html"
   status = 200
 
 [[redirects]]
-  from = "/nfts"
+  from = "/nfts*"
   to = "/index.html"
   status = 200
 
