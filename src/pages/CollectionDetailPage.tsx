@@ -57,6 +57,10 @@ export const CollectionDetailPage: FunctionComponent = () => {
                 <KeyValueEntry label="Engine:">
                   <AddressPrefix address={collection.engine.address}>{collection.engine.name}</AddressPrefix>
                 </KeyValueEntry>
+                <KeyValueEntry
+                  label="Owner:"
+                  value={<AddressViewable address={collection.owner.address} chainId={chainInfo.chainId} />}
+                />
               </KeyValueList>
             </div>
             <div>

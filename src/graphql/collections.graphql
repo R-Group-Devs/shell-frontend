@@ -10,6 +10,7 @@ fragment CollectionInfo on Collection {
     factory { id address collectionCount }
     engine { id address name }
     creator { id address }
+    owner { id address }
 }
 
 query collections(

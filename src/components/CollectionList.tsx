@@ -27,7 +27,7 @@ export const CollectionList: FunctionComponent = () => {
           <td>Collection</td>
           <td>Engine</td>
           <td style={{ textAlign: 'center' }}>NFTs</td>
-          <td>Creator</td>
+          <td>Owner</td>
           <td>Last Activity</td>
         </tr>
       </thead>
@@ -44,7 +44,7 @@ export const CollectionList: FunctionComponent = () => {
             </td>
             <td style={{ textAlign: 'center' }}>{c.nftCount}</td>
             <td>
-              <Address address={c.creator.address} />
+              <Address address={c.owner.address} />
             </td>
             <td>{timestampRelative(c.lastActivityAtTimestamp)}</td>
           </tr>
