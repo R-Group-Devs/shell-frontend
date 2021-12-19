@@ -9,7 +9,7 @@ import { LaunchCollectionPage } from './pages/LaunchCollectionPage';
 import { NetworkPage } from './pages/NetworkPage';
 import { NftsPage } from './pages/NftsPage';
 import { ProtocolPage } from './pages/ProtocolPage';
-import { WalletPage } from './pages/WalletPage';
+import { ConnectionPage } from './pages/ConnectionPage';
 import { splash } from './splash';
 
 splash();
@@ -44,8 +44,8 @@ export const Application: FunctionComponent = () => {
           <Route exact path="/protocol">
             <ProtocolPage />
           </Route>
-          <Route exact path="/wallet">
-            <WalletPage />
+          <Route exact path="/connection">
+            <ConnectionPage />
           </Route>
           <Route exact path="/network">
             <NetworkPage />

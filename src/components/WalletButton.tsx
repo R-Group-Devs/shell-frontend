@@ -9,7 +9,7 @@ export const WalletButton: FunctionComponent = () => {
   const history = useHistory();
 
   if (!walletPresent) {
-    return <Button disabled>💀 off-chain</Button>;
+    return <Button onClick={() => history.push('/connection')}>💀 off-chain</Button>;
   }
 
   if (state === 'init') {
@@ -23,7 +23,7 @@ export const WalletButton: FunctionComponent = () => {
   const mismatch = browseChainInfo.chainId !== chainId;
 
   return (
-    <Button onClick={() => history.push('/wallet')}>
+    <Button onClick={() => history.push('/connection')}>
       {mismatch && <>⚠️ </>}
       <Address address={account} />
     </Button>

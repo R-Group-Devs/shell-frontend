@@ -19,7 +19,12 @@
   status = 200
 
 [[redirects]]
-  from = "/wallet"
+  from = "/connection"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/launch"
   to = "/index.html"
   status = 200
 

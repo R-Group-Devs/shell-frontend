@@ -3,7 +3,7 @@ import { useWeb3React } from '@web3-react/core';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { ContractTransaction } from 'ethers';
 import { isWalletPresent } from '../lib/web3';
-import { getChainInfo } from '../shell/networks';
+import { getChainInfo, getChainInfoOrNull } from '../shell/networks';
 
 const connector = new InjectedConnector({});
 
@@ -49,7 +49,7 @@ export const useWalletImplementation = () => {
   }, []);
 
   let state: WalletState = 'init';
-  if (active) {
+  if (active && chainId) {
     state = 'ready';
   } else if (active) {
     state = 'connected';
@@ -63,6 +63,7 @@ export const useWalletImplementation = () => {
     library,
     account,
     browseChainInfo: getChainInfo(browseChainId),
+    connectedChainInfo: getChainInfoOrNull(chainId),
     error,
     connect,
     walletPresent: isWalletPresent(),

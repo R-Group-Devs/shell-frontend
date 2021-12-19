@@ -1,6 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { Button } from '../components/Button';
 import { ButtonGroup } from '../components/ButtonGroup';
+import { ConnectionWarning } from '../components/ConnectionWarning';
 import { Content } from '../components/Content';
 import { Dimmed } from '../components/Dimmed';
 import { Input } from '../components/Input';
@@ -10,7 +11,12 @@ import { TwoPanel } from '../components/TwoPanel';
 import { useWallet } from '../hooks/wallet';
 
 export const LaunchCollectionPage: FunctionComponent = () => {
-  const { browseChainInfo } = useWallet();
+  const { browseChainInfo, account } = useWallet();
+  const [collectionName, setCollectionName] = useState('');
+  const [collectionSymbol, setCollectionSymbol] = useState('');
+  const [engineAddress, setEngineAddress] = useState('');
+  const [ownerAddress, setOwnerAddress] = useState('');
+
   return (
     <PageSection>
       <Content>
@@ -22,6 +28,7 @@ export const LaunchCollectionPage: FunctionComponent = () => {
             Deploy a new NFT contract with <Shell />.
           </p>
         </div>
+        <ConnectionWarning />
         <h3>Information</h3>
         <TwoPanel>
           <Content>
@@ -64,10 +71,17 @@ export const LaunchCollectionPage: FunctionComponent = () => {
           <Content>
             <div>
               <strong>Owner address</strong>
-              <Input placeholder="0x1234...1234" />
+              <Input
+                placeholder="0x1234...1234"
+                onTextChange={(val) => setOwnerAddress(val)}
+                value={ownerAddress}
+                spellCheck={false}
+              />
             </div>
             <div>
-              <Button>Set self as owner</Button>
+              <Button requireConnection onClick={() => setOwnerAddress(account)} disabled={ownerAddress === account}>
+                Set self as owner
+              </Button>
             </div>
           </Content>
           <Content>
@@ -78,7 +92,7 @@ export const LaunchCollectionPage: FunctionComponent = () => {
         <div>
           <h3>Deploy</h3>
           <ButtonGroup>
-            <Button>Launch collection</Button>
+            <Button requireConnectedChainId={browseChainInfo.chainId}>Launch collection</Button>
           </ButtonGroup>
         </div>
       </Content>

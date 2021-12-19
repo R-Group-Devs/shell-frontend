@@ -3,6 +3,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { useQuery } from 'react-query';
 import { AddressViewable } from '../components/AddressViewable';
 import { Content } from '../components/Content';
+import { Dimmed } from '../components/Dimmed';
 import { KeyValueEntry, KeyValueList } from '../components/KeyValueList';
 import { MultiSelect } from '../components/MultiSelect';
 import { PageSection } from '../components/PageSection';
@@ -42,7 +43,9 @@ export const NetworkPage: FunctionComponent = () => {
     <>
       <PageSection>
         <Content>
-          <h2>Network [{browseChainInfo.name}]</h2>
+          <h2>
+            Network <Dimmed>[{browseChainInfo.name}]</Dimmed>
+          </h2>
           <TwoPanel>
             <Content>
               <p>
