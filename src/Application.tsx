@@ -5,6 +5,7 @@ import { CollectionDetailPage } from './pages/CollectionDetailPage';
 import { CollectionsPage } from './pages/CollectionsPage';
 import { EnginesPage } from './pages/EnginesPage';
 import { HomePage } from './pages/HomePage';
+import { LaunchCollectionPage } from './pages/LaunchCollectionPage';
 import { NetworkPage } from './pages/NetworkPage';
 import { NftsPage } from './pages/NftsPage';
 import { ProtocolPage } from './pages/ProtocolPage';
@@ -48,6 +49,9 @@ export const Application: FunctionComponent = () => {
           </Route>
           <Route exact path="/network">
             <NetworkPage />
+          </Route>
+          <Route exact path="/launch">
+            <LaunchCollectionPage />
           </Route>
         </Switch>
       </Page>

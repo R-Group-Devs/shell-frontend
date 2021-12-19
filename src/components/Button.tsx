@@ -18,6 +18,7 @@ const useStyles = makeStyles<ThemeConfig, Props>((theme) => {
     },
     inner: {},
     button: {
+      fontSize: theme.spacing(3.5),
       cursor: (props) => (!props.disabled ? 'pointer' : 'not-allowed'),
       opacity: (props) => (!props.disabled ? 1 : 0.5),
       border: `solid 1px ${theme.palette.foreground.dark}`,

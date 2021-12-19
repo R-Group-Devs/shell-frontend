@@ -57,7 +57,7 @@ export const NetworkPage: FunctionComponent = () => {
                 label="Factory deployed:"
                 value={formatDate(factoryQuery.data?.factory?.createdAtTimestamp)}
               />
-              <KeyValueEntry label="Launched collections:" value={factoryQuery.data?.factory?.collectionCount} />
+              <KeyValueEntry label="Total collections:" value={factoryQuery.data?.factory?.collectionCount} />
               <KeyValueEntry label="Latest block:" value={latest.blockchain.data} />
               <KeyValueEntry label="Latest indexed block:" value={latest.indexer.data} />
               <KeyValueEntry

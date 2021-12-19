@@ -10,17 +10,7 @@ export const CollectionsPage: FunctionComponent = () => {
   return (
     <>
       <PageSection>
-        <Content>
-          <h2>Collections [{browseChainInfo.name}]</h2>
-          <p>
-            ERC-721 contracts launched on <Shell />.
-          </p>
-        </Content>
-      </PageSection>
-      <PageSection>
-        <Content>
-          <CollectionList />
-        </Content>
+        <CollectionList />
       </PageSection>
     </>
   );

@@ -10,6 +10,7 @@ import { Content } from './Content';
 import { useIsFetching } from 'react-query';
 import { useLatestBlockNumber } from '../hooks/blocknumber';
 import { formatDistanceStrict } from 'date-fns';
+import { Shell } from './Shell';
 
 const useStyles = makeStyles((theme: ThemeConfig) => {
   return {
