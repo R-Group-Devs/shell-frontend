@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import { Address } from '../components/Address';
 import { AddressPrefix } from '../components/AddressPrefix';
 import { AddressViewable } from '../components/AddressViewable';
-import { Button } from '../components/Button';
 import { Content } from '../components/Content';
 import { KeyValueEntry, KeyValueList } from '../components/KeyValueList';
 import { Loading } from '../components/Loading';
@@ -40,20 +39,22 @@ export const CollectionDetailPage: FunctionComponent = () => {
     <>
       <PageSection>
         <Content>
-          <h2>{collection.name}</h2>
+          <h2>
+            <AddressPrefix address={collection.address}>{collection.name}</AddressPrefix>
+          </h2>
         </Content>
       </PageSection>
       <PageSection>
         <Content>
-          <TwoPanel template="2fr 1fr">
+          <TwoPanel template="1fr 1fr">
             <div>
               <KeyValueList>
                 <KeyValueEntry label="Network:" value={chainInfo.name} />
                 <KeyValueEntry
-                  label="ERC-721 Address:"
+                  label="Address:"
                   value={<AddressViewable address={collection.address} chainId={chainInfo.chainId} isToken />}
                 />
-                <KeyValueEntry label="Installed Engine:">
+                <KeyValueEntry label="Engine:">
                   <AddressPrefix address={collection.engine.address}>{collection.engine.name}</AddressPrefix>
                 </KeyValueEntry>
               </KeyValueList>

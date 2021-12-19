@@ -18,6 +18,9 @@ export const timestampRelative = (timestampInSeconds: BigNumberish): string => {
   return `${distance} ago`;
 };
 
-export const formatDate = (timestampInSeconds: BigNumberish): string => {
+export const formatDate = (timestampInSeconds: BigNumberish | null | undefined): string => {
+  if (!timestampInSeconds) {
+    return '';
+  }
   return format(BigNumber.from(timestampInSeconds).toNumber() * 1000, 'PP');
 };

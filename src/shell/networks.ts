@@ -6,6 +6,7 @@ interface ChainInfo {
   subgraphEndpoint: string;
   rpcEndpoint: string;
   blockchainExplorer: string;
+  blockTime: number;
 }
 
 export const networks: ChainInfo[] = [
@@ -17,6 +18,7 @@ export const networks: ChainInfo[] = [
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-rinkeby',
     rpcEndpoint: process.env['RINKEBY_URL'] ?? '',
     blockchainExplorer: 'https://rinkeby.etherscan.io',
+    blockTime: 15,
   },
 ];
 
