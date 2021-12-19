@@ -7,10 +7,10 @@ import { Dimmed } from '../components/Dimmed';
 import { PageSection } from '../components/PageSection';
 import { Shell } from '../components/Shell';
 import { useWallet } from '../hooks/wallet';
-import { isWalletPresent } from '../lib/web3';
+import { exploreAddressLink, isWalletPresent } from '../lib/web3';
 
 export const ConnectionPage: FunctionComponent = () => {
-  const { state, browseChainInfo, connectedChainInfo, connect, chainId } = useWallet();
+  const { state, browseChainInfo, connectedChainInfo, connect, chainId, account } = useWallet();
 
   if (state === 'init') {
     return null;
@@ -70,6 +70,15 @@ export const ConnectionPage: FunctionComponent = () => {
         <h2>
           Connection <Dimmed>[{connectedChainInfo.name}]</Dimmed>
         </h2>
+        <p>
+          You are connected to <Shell />.
+        </p>
+        <p>Your address: {account}</p>
+        <ButtonGroup>
+          <Button externalNavTo={exploreAddressLink(connectedChainInfo.chainId, account)}>
+            View on block explorer
+          </Button>
+        </ButtonGroup>
       </Content>
     </PageSection>
   );

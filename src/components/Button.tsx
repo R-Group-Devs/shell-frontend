@@ -35,16 +35,17 @@ const useStyles = makeStyles<ThemeConfig, { isDisabled: boolean }>((theme) => {
 });
 
 export const Button: FunctionComponent<Props> = (props) => {
+  const { navTo, externalNavTo, requireConnectedChainId, requireConnection, ...attr } = props;
+
   const history = useHistory();
   const { chainId, account } = useWallet();
 
-  const requiredChainMismatch = props.requireConnectedChainId && props.requireConnectedChainId !== chainId;
-  const requiredConnectionMissing = props.requireConnection && !account;
+  const requiredChainMismatch = requireConnectedChainId && requireConnectedChainId !== chainId;
+  const requiredConnectionMissing = requireConnection && !account;
   const isDisabled = props.disabled || requiredChainMismatch || requiredConnectionMissing;
 
   const classes = useStyles({ isDisabled });
 
-  const { navTo, externalNavTo, ...attr } = props;
   const onClickFromProps = attr.onClick;
   const className = `${props.className ?? ''} ${classes.button}`;
 
