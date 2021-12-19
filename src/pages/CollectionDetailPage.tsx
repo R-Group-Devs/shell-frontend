@@ -35,6 +35,10 @@ export const CollectionDetailPage: FunctionComponent = () => {
 
   const collection = detailsQuery.data.collection;
 
+  if (detailsQuery.isError || !collection) {
+    return <p style={{ textAlign: 'center' }}>Unable to load collection</p>;
+  }
+
   return (
     <>
       <PageSection>
