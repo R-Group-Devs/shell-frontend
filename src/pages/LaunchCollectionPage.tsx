@@ -84,7 +84,7 @@ export const LaunchCollectionPage: FunctionComponent = () => {
               <p>This information will be shown on marketplaces and tools like etherscan.</p>
             </Content>
           </TwoPanel>
-          <h3>Engine</h3>
+          <h3>Configuration</h3>
           <TwoPanel>
             <Content gap={4}>
               <div>
@@ -104,17 +104,6 @@ export const LaunchCollectionPage: FunctionComponent = () => {
                 />
                 <InputError error={formState.errors.engine} />
               </div>
-            </Content>
-            <Content>
-              <p>
-                A collection's engine is responsible for rendering NFT metadata, resolving royalties, and handling
-                minting.
-              </p>
-            </Content>
-          </TwoPanel>
-          <h3>Owner</h3>
-          <TwoPanel>
-            <Content gap={4}>
               <div>
                 <strong>Owner address</strong>
                 <Input
@@ -154,6 +143,10 @@ export const LaunchCollectionPage: FunctionComponent = () => {
               </div>
             </Content>
             <Content>
+              <p>
+                A collection's engine is responsible for rendering NFT metadata, resolving royalties, and handling
+                minting.
+              </p>
               <p>The owner of a collection can hot-swap the installed engine at any time.</p>
               <p>Depending on the installed engine, the collection owner may have additional permissions.</p>
             </Content>
