@@ -1,3 +1,4 @@
+import { constants } from 'ethers';
 import React, { FunctionComponent } from 'react';
 import { exploreAddressLink, exploreTokenLink } from '../lib/web3';
 import { Address } from './Address';
@@ -19,9 +20,11 @@ export const AddressViewable: FunctionComponent<Props> = ({ chainId, address, is
   return (
     <>
       <Address address={address} />{' '}
-      <a href={url} target="_blank">
-        view
-      </a>
+      {address !== constants.AddressZero && (
+        <a href={url} target="_blank">
+          view
+        </a>
+      )}
     </>
   );
 };

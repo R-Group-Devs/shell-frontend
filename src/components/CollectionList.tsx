@@ -59,9 +59,7 @@ export const CollectionList: FunctionComponent = () => {
           {data.collections.map((c) => (
             <tr key={c.id} onClick={() => history.push(`/collections/${browseChainInfo.slug}/${c.address}`)}>
               <td>
-                <AddressPrefix address={c.address}>
-                  {c.name} ({c.symbol})
-                </AddressPrefix>
+                <AddressPrefix address={c.address}>{c.name}</AddressPrefix>
               </td>
               <td>
                 <AddressPrefix address={c.engine.address}>{c.engine.name}</AddressPrefix>

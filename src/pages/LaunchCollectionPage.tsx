@@ -15,6 +15,8 @@ import { randomNameAndSymbol } from '../lib/string';
 import { useTheme } from '@material-ui/styles';
 import { ThemeConfig } from '../Theme';
 import { InputError } from '../components/InputError';
+import { isValidEngine } from '../shell/engine';
+import { createCollection } from '../shell/factory';
 
 interface FormData {
   name: string;
@@ -24,12 +26,15 @@ interface FormData {
 }
 
 export const LaunchCollectionPage: FunctionComponent = () => {
-  const { browseChainInfo, account } = useWallet();
+  const { browseChainInfo, account, library, registerTransactions } = useWallet();
   const theme = useTheme<ThemeConfig>();
   const { register, setValue, watch, handleSubmit, formState, trigger, getValues } = useForm<FormData>();
 
-  const submit = handleSubmit(() => {
-    console.log(getValues());
+  const submit = handleSubmit(async () => {
+    const trx = await createCollection(library.getSigner(), {
+      ...getValues(),
+    });
+    registerTransactions(trx);
   });
 
   return (
@@ -92,6 +97,8 @@ export const LaunchCollectionPage: FunctionComponent = () => {
                       if (!utils.isAddress(value)) {
                         return 'Invalid address';
                       }
+                      const isValid = await isValidEngine(browseChainInfo.chainId, value);
+                      return isValid || 'Invalid engine';
                     },
                   })}
                 />
