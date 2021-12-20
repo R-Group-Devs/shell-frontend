@@ -21,3 +21,8 @@ export const exploreTokenLink = (chainId: number, address: string): string => {
   const info = getChainInfo(chainId);
   return `${info.blockchainExplorer}/token/${address}`;
 };
+
+export const exploreTransactionLink = (chainId: number, hash: string): string => {
+  const info = getChainInfo(chainId);
+  return `${info.blockchainExplorer}/tx/${hash}`;
+};

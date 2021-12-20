@@ -10,7 +10,6 @@ import { Content } from './Content';
 import { useIsFetching } from 'react-query';
 import { useLatestBlockNumber } from '../hooks/blocknumber';
 import { formatDistanceStrict } from 'date-fns';
-import { Shell } from './Shell';
 
 const useStyles = makeStyles((theme: ThemeConfig) => {
   return {
@@ -49,7 +48,7 @@ const navItem = (label: string, to: string) => {
 export const NavBar: FunctionComponent = () => {
   const classes = useStyles();
   const [taps, setTaps] = useState(getTaps());
-  const { browseChainInfo } = useWallet();
+  const { browseChainInfo, transactions } = useWallet();
   const isFetching = useIsFetching();
   const latest = useLatestBlockNumber();
 
@@ -76,7 +75,14 @@ export const NavBar: FunctionComponent = () => {
             <div>{navItem('NFTs', '/nfts')}</div>
             <div>{navItem('Engines', '/engines')}</div>
             <div style={{ flexGrow: 1 }}></div>
-            {behind > 0 && <div className={classes.small}>🐢 {formatDistanceStrict(0, behind * 1000)}</div>}
+            <div className={classes.small}>
+              {transactions.length > 0 && (
+                <>
+                  ⚡️ {transactions.length} pending <br />
+                </>
+              )}
+              {behind > 0 && <>🐢 {formatDistanceStrict(0, behind * 1000)}</>}
+            </div>
             <div>
               <Content>
                 <Link to="/network">{browseChainInfo.name}</Link>

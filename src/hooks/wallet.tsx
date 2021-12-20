@@ -37,7 +37,7 @@ export const useWalletImplementation = () => {
     };
   };
 
-  const registerTransactions = async (trx: ContractTransaction) => {
+  const registerTransaction = async (trx: ContractTransaction) => {
     setTransactions((trxs) => [...trxs, trx]);
     await trx.wait();
     setTransactions((trxs) => trxs.filter((t) => t !== trx));
@@ -67,7 +67,7 @@ export const useWalletImplementation = () => {
     error,
     connect,
     walletPresent: isWalletPresent(),
-    registerTransactions,
+    registerTransaction,
     transactions,
     onTransactions,
   };

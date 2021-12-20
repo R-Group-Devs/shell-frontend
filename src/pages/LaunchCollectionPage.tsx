@@ -26,7 +26,7 @@ interface FormData {
 }
 
 export const LaunchCollectionPage: FunctionComponent = () => {
-  const { browseChainInfo, account, library, registerTransactions } = useWallet();
+  const { browseChainInfo, account, library, registerTransaction } = useWallet();
   const theme = useTheme<ThemeConfig>();
   const { register, setValue, watch, handleSubmit, formState, trigger, getValues } = useForm<FormData>();
 
@@ -34,7 +34,7 @@ export const LaunchCollectionPage: FunctionComponent = () => {
     const trx = await createCollection(library.getSigner(), {
       ...getValues(),
     });
-    registerTransactions(trx);
+    registerTransaction(trx);
   });
 
   return (
