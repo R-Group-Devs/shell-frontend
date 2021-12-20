@@ -2,13 +2,17 @@ import { makeStyles } from '@material-ui/styles';
 import React, { FunctionComponent } from 'react';
 import { ThemeConfig } from '../Theme';
 
-const useStyles = makeStyles<ThemeConfig>((theme) => {
+interface Props {
+  gap?: number;
+}
+
+const useStyles = makeStyles<ThemeConfig, Props>((theme) => {
   return {
     content: {
       fontSize: theme.spacing(4),
       fontWeight: 400,
       lineHeight: '1.5',
-      gap: theme.spacing(8),
+      gap: (props) => theme.spacing(props.gap ?? 8),
       '& h1': {
         color: theme.palette.accent.main,
         fontSize: theme.spacing(9),
@@ -37,7 +41,7 @@ const useStyles = makeStyles<ThemeConfig>((theme) => {
   };
 });
 
-export const Content: FunctionComponent = (props) => {
-  const classes = useStyles();
+export const Content: FunctionComponent<Props> = (props) => {
+  const classes = useStyles(props);
   return <div className={classes.content}>{props.children}</div>;
 };

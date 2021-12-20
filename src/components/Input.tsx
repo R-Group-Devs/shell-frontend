@@ -13,7 +13,9 @@ const useStyles = makeStyles<ThemeConfig>((theme) => {
     input: {
       background: theme.palette.background.light,
       color: theme.palette.foreground.main,
-      padding: theme.spacing(2),
+      padding: `${theme.spacing(1.5)} ${theme.spacing(1.5)}`,
+      fontSize: theme.spacing(4),
+      margin: `${theme.spacing(1)} 0`,
       border: 'none',
       width: '100%',
       '&:focus': {
@@ -24,7 +26,7 @@ const useStyles = makeStyles<ThemeConfig>((theme) => {
   };
 });
 
-export const Input: FunctionComponent<Props> = (props) => {
+export const Input: FunctionComponent<Props> = React.forwardRef((props, ref) => {
   const classes = useStyles();
 
   const { onTextChange, ...attrs } = props;
@@ -47,8 +49,8 @@ export const Input: FunctionComponent<Props> = (props) => {
   }
 
   return (
-    <input {...attrs} className={className}>
+    <input autocomplete="new-password" {...attrs} className={className} ref={ref}>
       {props.children}
     </input>
   );
-};
+});

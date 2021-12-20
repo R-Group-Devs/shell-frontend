@@ -38,7 +38,7 @@ export const Button: FunctionComponent<Props> = (props) => {
   const { navTo, externalNavTo, requireConnectedChainId, requireConnection, ...attr } = props;
 
   const history = useHistory();
-  const { chainId, account } = useWallet();
+  const { chainId, account, state } = useWallet();
 
   const requiredChainMismatch = requireConnectedChainId && requireConnectedChainId !== chainId;
   const requiredConnectionMissing = requireConnection && !account;
@@ -69,7 +69,7 @@ export const Button: FunctionComponent<Props> = (props) => {
 
   return (
     <span {...attr} className={className}>
-      {(requiredChainMismatch || requiredConnectionMissing) && <>⚠️ </>}
+      {(requiredChainMismatch || requiredConnectionMissing) && state !== 'init' && <>⚠️ </>}
       <span className={innerClassName}>{props.children}</span>
     </span>
   );

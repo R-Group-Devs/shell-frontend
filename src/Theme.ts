@@ -15,6 +15,7 @@ export const createTheme = () => {
         main: '#73fbd3',
         secondary: '#44e5e7',
         tertiary: '#85DEFE',
+        error: '#DB2955',
       },
     },
     font: '"DM Mono", monospace',

@@ -4,8 +4,9 @@ import { useWallet } from '../hooks/wallet';
 import { Shell } from './Shell';
 
 export const ConnectionWarning: FunctionComponent = () => {
-  const { browseChainInfo, connectedChainInfo } = useWallet();
-  if (browseChainInfo.chainId === connectedChainInfo?.chainId) {
+  const { state, browseChainInfo, connectedChainInfo } = useWallet();
+
+  if (state === 'init' || browseChainInfo.chainId === connectedChainInfo?.chainId) {
     return null;
   }
 
