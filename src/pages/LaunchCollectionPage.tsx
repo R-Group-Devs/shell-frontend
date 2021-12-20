@@ -119,7 +119,7 @@ export const LaunchCollectionPage: FunctionComponent = () => {
               </Content>
               <Content>
                 <div>
-                  <Button disabled>Browse engines...</Button> <Dimmed>(comming soon)</Dimmed>
+                  <Button disabled>Browse engines... (comming soon)</Button>
                 </div>
               </Content>
             </TwoPanel>
