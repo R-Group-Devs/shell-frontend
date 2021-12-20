@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from 'react';
-import { constants } from 'ethers';
+import React, { FunctionComponent, useState } from 'react';
+import { constants, utils } from 'ethers';
 import { useForm } from 'react-hook-form';
 import { Button } from '../components/Button';
 import { ButtonGroup } from '../components/ButtonGroup';
@@ -26,11 +26,11 @@ interface FormData {
 export const LaunchCollectionPage: FunctionComponent = () => {
   const { browseChainInfo, account } = useWallet();
   const theme = useTheme<ThemeConfig>();
-  const { register, setValue, watch, handleSubmit, formState, trigger } = useForm<FormData>();
+  const { register, setValue, watch, handleSubmit, formState, trigger, getValues } = useForm<FormData>();
 
-  const submit = handleSubmit(() => {});
-
-  console.log(formState.errors);
+  const submit = handleSubmit(() => {
+    console.log(getValues());
+  });
 
   return (
     <PageSection>
@@ -84,11 +84,18 @@ export const LaunchCollectionPage: FunctionComponent = () => {
             <Content gap={4}>
               <div>
                 <strong>Engine address</strong>
-                <Input placeholder="0x1234...1234" {...register('engine', { required: true })} />
+                <Input
+                  placeholder="0x1234...1234"
+                  {...register('engine', {
+                    required: true,
+                    validate: async (value) => {
+                      if (!utils.isAddress(value)) {
+                        return 'Invalid address';
+                      }
+                    },
+                  })}
+                />
                 <InputError error={formState.errors.engine} />
-              </div>
-              <div>
-                <Button>Browse engines</Button>
               </div>
             </Content>
             <Content>
@@ -103,7 +110,18 @@ export const LaunchCollectionPage: FunctionComponent = () => {
             <Content gap={4}>
               <div>
                 <strong>Owner address</strong>
-                <Input placeholder="0x1234...1234" {...register('owner', { required: true })} />
+                <Input
+                  placeholder="0x1234...1234"
+                  {...register('owner', {
+                    required: true,
+
+                    validate: async (value) => {
+                      if (!utils.isAddress(value)) {
+                        return 'Invalid address';
+                      }
+                    },
+                  })}
+                />
                 <InputError error={formState.errors.owner} />
               </div>
               <div style={{ display: 'flex', gap: theme.spacing(4) }}>

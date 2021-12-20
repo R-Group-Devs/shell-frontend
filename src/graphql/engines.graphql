@@ -17,3 +17,34 @@ query engines(
     ... EngineInfo
   }
 }
+
+query browseEngines {
+  new: engines(
+    orderBy: releasedAtTimestamp
+    orderDirection: desc
+    first: 10)
+  {
+    ...EngineInfo
+  }
+  topInstalls: engines(
+    orderBy: collectionCount
+    orderDirection: desc
+    first:10)
+  {
+    ...EngineInfo
+  }
+  recentInstalls: engines(
+    orderBy: lastInstalledAtTimestamp
+    orderDirection: desc
+    first: 10)
+  {
+    ...EngineInfo
+  }
+  mostNfts: engines(
+    orderBy: mintedNftsCount
+    orderDirection: desc
+    first: 10)
+  {
+    ...EngineInfo
+  }
+}
