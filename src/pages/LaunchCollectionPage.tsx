@@ -73,7 +73,7 @@ export const LaunchCollectionPage: FunctionComponent = () => {
                     trigger('symbol');
                   }}
                 >
-                  Randon name
+                  Random name
                 </Button>
               </div>
             </Content>
