@@ -61,6 +61,7 @@ export const NetworkPage: FunctionComponent = () => {
                 value={formatDate(factoryQuery.data?.factory?.createdAtTimestamp)}
               />
               <KeyValueEntry label="Total collections:" value={factoryQuery.data?.factory?.collectionCount} />
+              <KeyValueEntry label="Total NFTs:" value={factoryQuery.data?.factory?.nftCount} />
               <KeyValueEntry label="Latest block:" value={latest.blockchain.data} />
               <KeyValueEntry label="Latest indexed block:" value={latest.indexer.data} />
               <KeyValueEntry
