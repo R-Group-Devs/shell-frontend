@@ -49,7 +49,7 @@ export const Input: FunctionComponent<Props> = React.forwardRef((props, ref) => 
   }
 
   return (
-    <input autocomplete="new-password" {...attrs} className={className} ref={ref}>
+    <input autoComplete="new-password" {...attrs} className={className} ref={ref}>
       {props.children}
     </input>
   );
