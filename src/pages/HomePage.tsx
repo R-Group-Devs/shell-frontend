@@ -40,14 +40,6 @@ export const HomePage: FunctionComponent = () => {
             <TwoPanel gapOnCollapse>
               <Content>
                 <p>
-                  <Shell /> is a trustless NFT operating system.
-                </p>
-                <p style={{ textAlign: 'center', marginBottom: '22px' }}>
-                  <Button navTo="/launch">Launch a collection</Button>
-                </p>
-              </Content>
-              <Content>
-                <p>
                   Launch custom business logic in a public application market of NFT <strong>engines</strong>.{' '}
                 </p>
                 <p>Build interoperable and open products that anybody can iterate on permissionlessly.</p>
@@ -55,6 +47,14 @@ export const HomePage: FunctionComponent = () => {
                 <p>Deploy a creator-owned collection as part of a digitally-cordinated community.</p>
                 <p>Explore emergent application layers.</p> */}
                 <p>Fork anything.</p>
+              </Content>
+              <Content>
+                <p style={{ textAlign: 'center', marginTop: '22px' }}>
+                  <Shell /> is a trustless NFT operating system.
+                </p>
+                <p style={{ textAlign: 'center', marginBottom: '22px' }}>
+                  <Button navTo="/launch">Launch a collection</Button>
+                </p>
               </Content>
             </TwoPanel>
             <PageSection>
