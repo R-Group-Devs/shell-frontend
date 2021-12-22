@@ -48,9 +48,9 @@ export const HomePage: FunctionComponent = () => {
               </Content>
               <Content>
                 <p>
-                  Launch custom business logic in a permissionless application market of NFT <strong>engines</strong>.{' '}
+                  Launch custom business logic in a public application market of NFT <strong>engines</strong>.{' '}
                 </p>
-                <p>Build interoperable and open products that anybody can iterate on.</p>
+                <p>Build interoperable and open products that anybody can iterate on permissionlessly.</p>
                 {/* <p></p>
                 <p>Deploy a creator-owned collection as part of a digitally-cordinated community.</p>
                 <p>Explore emergent application layers.</p> */}
