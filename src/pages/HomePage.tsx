@@ -70,7 +70,9 @@ export const HomePage: FunctionComponent = () => {
                   <Shell /> is a public, token-based operating system.
                 </p>
                 <p style={{ textAlign: 'center', marginBottom: '22px' }}>
-                  <Button navTo="/launch">Launch a collection</Button>
+                  <Button navTo="/launch">
+                    Launch a <Shell /> collection
+                  </Button>
                 </p>
               </Content>
             </TwoPanel>
