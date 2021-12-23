@@ -54,7 +54,7 @@ export const CollectionDetailPage: FunctionComponent = () => {
             <div>
               <KeyValueList>
                 <KeyValueEntry label="Network:" value={chainInfo.name} />
-                <KeyValueEntry label="Contract:" value={collection.implementation.name} />
+                <KeyValueEntry label="Implementation:" value={collection.implementation.name} />
                 <KeyValueEntry label="Engine:">
                   <AddressPrefix address={collection.engine.address}>
                     <Link to={`/engines/${chainInfo.slug}/${collection.engine.address}`}>{collection.engine.name}</Link>

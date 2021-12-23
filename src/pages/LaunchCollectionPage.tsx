@@ -92,7 +92,7 @@ export const LaunchCollectionPage: FunctionComponent = () => {
             <p style={{ maxWidth: '800px', lineHeight: '1.8' }}>
               <p>
                 Every collection is running an <strong>engine</strong> which controls NFT appearance, royalties,
-                minting, and any custom mechanisms. Collection owners can install a different engine at any time.
+                minting, and advanced interactions. Collection owners can install a different engine at any time.
               </p>
             </p>
           </div>
