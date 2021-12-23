@@ -21,8 +21,11 @@ export const HomePage: FunctionComponent = () => {
   return (
     <PageSection>
       <Content>
-        <h1 style={{ maxWidth: '800px' }}>
-          On-chain NFT application development framework for <Whomst />
+        <h1 style={{ maxWidth: '500px' }}>
+          On-chain <br />
+          NFT
+          <br /> application development framework
+          <br /> for <Whomst />
         </h1>
         {taps < 5 ? (
           <>
@@ -50,7 +53,7 @@ export const HomePage: FunctionComponent = () => {
               </Content>
               <Content>
                 <p style={{ textAlign: 'center', marginTop: '22px' }}>
-                  <Shell /> is a trustless NFT operating system.
+                  <Shell /> is a public, token-based operating system.
                 </p>
                 <p style={{ textAlign: 'center', marginBottom: '22px' }}>
                   <Button navTo="/launch">Launch a collection</Button>

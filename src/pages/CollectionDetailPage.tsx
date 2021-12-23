@@ -54,7 +54,7 @@ export const CollectionDetailPage: FunctionComponent = () => {
             <div>
               <KeyValueList>
                 <KeyValueEntry label="Network:" value={chainInfo.name} />
-                <KeyValueEntry label="Implementation:" value={collection.implementation.name} />
+                <KeyValueEntry label="Token model:" value={collection.implementation.name} />
                 <KeyValueEntry label="Engine:">
                   <AddressPrefix address={collection.engine.address}>
                     <Link to={`/engines/${chainInfo.slug}/${collection.engine.address}`}>{collection.engine.name}</Link>
@@ -83,13 +83,13 @@ export const CollectionDetailPage: FunctionComponent = () => {
               </KeyValueList>
             </div>
           </TwoPanel>
-          <h3>NFTs</h3>
+          <h3>Holders</h3>
           <Table>
             <thead>
               <tr>
+                <td>Owner</td>
                 <td>Token</td>
                 <td>Engine</td>
-                <td>Owner</td>
                 <td>Minted</td>
               </tr>
             </thead>
@@ -97,13 +97,13 @@ export const CollectionDetailPage: FunctionComponent = () => {
               {detailsQuery.data.collection.nfts.map((nft) => (
                 <tr key={nft.id}>
                   <td>
+                    <Address address={nft.owner.address} />
+                  </td>
+                  <td>
                     <AddressPrefix address={nft.collection.address}>{nft.collection.name}</AddressPrefix> #{nft.tokenId}
                   </td>
                   <td>
                     <AddressPrefix address={nft.mintedByEngine.address}>{nft.mintedByEngine.name}</AddressPrefix>
-                  </td>
-                  <td>
-                    <Address address={nft.owner.address} />
                   </td>
                   <td>{timestampRelative(nft.createdAtTimestamp)}</td>
                 </tr>
