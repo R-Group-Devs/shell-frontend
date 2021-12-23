@@ -21,12 +21,25 @@ export const HomePage: FunctionComponent = () => {
   return (
     <PageSection>
       <Content>
-        <h1 style={{ maxWidth: '500px' }}>
-          On-chain <br />
-          NFT
-          <br /> application development framework
-          <br /> for <Whomst />
-        </h1>
+        <TwoPanel alignItems="center">
+          <Content>
+            <h1 style={{ maxWidth: '500px' }}>
+              On-chain <br />
+              NFT
+              <br /> application development framework
+              <br /> for <Whomst />
+            </h1>
+          </Content>
+          <Content>
+            <p style={{ textAlign: 'center' }}>
+              <img
+                style={{ maxWidth: '300px', display: 'inline' }}
+                src="https://ipfs.hypervibes.xyz/ipfs/QmcnWsZVxNiozUjYc1qtJTRsseES4523FRzSS8PXRhWdJZ"
+              />
+            </p>
+          </Content>
+        </TwoPanel>
+
         {taps < 5 ? (
           <>
             <p>
@@ -49,7 +62,8 @@ export const HomePage: FunctionComponent = () => {
                 {/* <p></p>
                 <p>Deploy a creator-owned collection as part of a digitally-cordinated community.</p>
                 <p>Explore emergent application layers.</p> */}
-                <p>Fork anything.</p>
+                {/* <p>100% trustless and free forever.</p> */}
+                <p style={{ textAlign: 'center' }}>Fork anything.</p>
               </Content>
               <Content>
                 <p style={{ textAlign: 'center', marginTop: '22px' }}>
