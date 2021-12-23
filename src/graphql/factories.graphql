@@ -1,6 +1,7 @@
 query getFactory($address: ID!) {
   factory(id: $address) {
     id
+    implementationCount
     collectionCount
     nftCount
     createdAtTimestamp

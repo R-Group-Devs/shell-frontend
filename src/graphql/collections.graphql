@@ -7,6 +7,7 @@ fragment CollectionInfo on Collection {
     createdAtTimestamp
     lastUpdatedAtTimestamp
     lastActivityAtTimestamp
+    implementation { id name address }
     factory { id address collectionCount }
     engine { id address name }
     creator { id address }
