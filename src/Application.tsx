@@ -11,6 +11,7 @@ import { NftsPage } from './pages/NftsPage';
 import { ProtocolPage } from './pages/ProtocolPage';
 import { ConnectionPage } from './pages/ConnectionPage';
 import { splash } from './splash';
+import { LaunchLandingPage } from './pages/LaunchLandingPage';
 
 splash();
 
@@ -51,6 +52,9 @@ export const Application: FunctionComponent = () => {
             <NetworkPage />
           </Route>
           <Route exact path="/launch">
+            <LaunchLandingPage />
+          </Route>
+          <Route exact path="/launch/erc721">
             <LaunchCollectionPage />
           </Route>
         </Switch>

@@ -21,6 +21,11 @@ const useStyles = makeStyles<ThemeConfig, Props>((theme) => {
       '@media(min-width: 800px)': {
         fontSize: theme.spacing(4),
       },
+      '& h4': {
+        color: theme.palette.accent.main,
+        fontSize: theme.spacing(4.5),
+        lineHeight: '1.25',
+      },
       display: 'grid',
       '& strong': {
         fontWeight: 'bold',
