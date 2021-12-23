@@ -21,7 +21,7 @@ export const HomePage: FunctionComponent = () => {
   return (
     <PageSection>
       <Content>
-        <TwoPanel alignItems="center">
+        <TwoPanel>
           <Content>
             <h1 style={{ maxWidth: '500px' }}>
               On-chain <br />
@@ -33,7 +33,7 @@ export const HomePage: FunctionComponent = () => {
           <Content>
             <p style={{ textAlign: 'center' }}>
               <img
-                style={{ maxWidth: '300px', display: 'inline' }}
+                style={{ maxWidth: '300px', display: 'inline', marginTop: '16px' }}
                 src="https://ipfs.hypervibes.xyz/ipfs/QmcnWsZVxNiozUjYc1qtJTRsseES4523FRzSS8PXRhWdJZ"
               />
             </p>
@@ -56,7 +56,7 @@ export const HomePage: FunctionComponent = () => {
             <TwoPanel gapOnCollapse>
               <Content>
                 <p>
-                  Launch custom business logic in a public application market of NFT <strong>engines</strong>.{' '}
+                  Ship custom business logic in a public application market of NFT <strong>engines</strong>.{' '}
                 </p>
                 <p>Build interoperable and open products that anybody can iterate on permissionlessly.</p>
                 {/* <p></p>
@@ -78,7 +78,7 @@ export const HomePage: FunctionComponent = () => {
             </TwoPanel>
             <PageSection>
               <Content>
-                <p style={{ textAlign: 'center', margin: '60px 0' }}>
+                <p style={{ textAlign: 'center', margin: '60px 0', fontStyle: 'italic' }}>
                   Upcoming public NFT infrastructure
                   <br />
                   from <strong>R Group</strong> @ <a href="https://t.co/k8lIDvcPT9">Rarible DAO</a>.
