@@ -15,6 +15,13 @@ export const createCollection = async (
 ): Promise<ContractTransaction> => {
   const info = getChainInfo(await signer.getChainId());
   const factory = new Contract(info.factoryAddress, IShellFactory.abi, signer);
-  const trx = await factory.createCollection(name, symbol, engine, owner);
+  const trx = await factory.createCollection(
+    name,
+    symbol,
+    // TODO: dropdown UI for this
+    'shell-erc721-v1',
+    engine,
+    owner
+  );
   return trx;
 };
