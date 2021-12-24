@@ -21,7 +21,7 @@ export const LaunchLandingPage: FunctionComponent = () => {
       <PageSection>
         <TwoPanel gapOnCollapse>
           <Content>
-            <h4>New ERC-721 Collection</h4>
+            <h4>ERC-721 Collection</h4>
             <p>Each token is owned by a single address and has its own on-chain identity and history.</p>
             <p>One token, one owner. This tracks changes in ownership over time.</p>
             <ButtonGroup>
@@ -31,7 +31,7 @@ export const LaunchLandingPage: FunctionComponent = () => {
             </ButtonGroup>
           </Content>
           <Content>
-            <h4>New ERC-1155 Collection</h4>
+            <h4>ERC-1155 Collection</h4>
             <p>Each token can be held by many addresses, all with a certain balance.</p>
             <p>One token, many owners. This tracks changes in amounts over time.</p>
             <ButtonGroup>
