@@ -14,7 +14,7 @@ export const networks: ChainInfo[] = [
     chainId: 4,
     name: 'Rinkeby Testnet',
     slug: 'rinkeby',
-    factoryAddress: '0x6D063A9493A3aEc8dbaed987ba9c97fc70EC6c64',
+    factoryAddress: '0x7AEcfeE32126e9e2B66093AA8c3019B5cAE1A594',
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-rinkeby',
     rpcEndpoint: process.env['RINKEBY_URL'] ?? '',
     blockchainExplorer: 'https://rinkeby.etherscan.io',

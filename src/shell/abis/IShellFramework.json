@@ -140,6 +140,25 @@
       "inputs": [
         {
           "indexed": false,
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "contract IEngine",
+          "name": "engine",
+          "type": "address"
+        }
+      ],
+      "name": "TokenEngineInstalled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
           "internalType": "enum PublishChannel",
           "name": "location",
           "type": "uint8"
@@ -301,6 +320,24 @@
       "type": "function"
     },
     {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IEngine",
+          "name": "engine",
+          "type": "address"
+        }
+      ],
+      "name": "installTokenEngine",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "inputs": [],
       "name": "installedEngine",
       "outputs": [
@@ -328,6 +365,19 @@
     },
     {
       "inputs": [],
+      "name": "nextTokenId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "owner",
       "outputs": [
         {
@@ -347,6 +397,52 @@
           "type": "uint8"
         },
         {
+          "internalType": "string",
+          "name": "topic",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "publishCollectionInt",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum PublishChannel",
+          "name": "channel",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "topic",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "value",
+          "type": "string"
+        }
+      ],
+      "name": "publishCollectionString",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum PublishChannel",
+          "name": "channel",
+          "type": "uint8"
+        },
+        {
           "internalType": "uint256",
           "name": "tokenId",
           "type": "uint256"
@@ -362,30 +458,7 @@
           "type": "uint256"
         }
       ],
-      "name": "publishInt",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "enum PublishChannel",
-          "name": "channel",
-          "type": "uint8"
-        },
-        {
-          "internalType": "string",
-          "name": "topic",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "value",
-          "type": "uint256"
-        }
-      ],
-      "name": "publishInt",
+      "name": "publishTokenInt",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -413,30 +486,7 @@
           "type": "string"
         }
       ],
-      "name": "publishString",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "enum PublishChannel",
-          "name": "channel",
-          "type": "uint8"
-        },
-        {
-          "internalType": "string",
-          "name": "topic",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "value",
-          "type": "string"
-        }
-      ],
-      "name": "publishString",
+      "name": "publishTokenString",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -449,17 +499,12 @@
           "type": "uint8"
         },
         {
-          "internalType": "uint256",
-          "name": "tokenId",
-          "type": "uint256"
-        },
-        {
           "internalType": "string",
           "name": "key",
           "type": "string"
         }
       ],
-      "name": "readInt",
+      "name": "readCollectionInt",
       "outputs": [
         {
           "internalType": "uint256",
@@ -483,31 +528,7 @@
           "type": "string"
         }
       ],
-      "name": "readInt",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "enum StorageLocation",
-          "name": "location",
-          "type": "uint8"
-        },
-        {
-          "internalType": "string",
-          "name": "key",
-          "type": "string"
-        }
-      ],
-      "name": "readString",
+      "name": "readCollectionString",
       "outputs": [
         {
           "internalType": "string",
@@ -536,7 +557,36 @@
           "type": "string"
         }
       ],
-      "name": "readString",
+      "name": "readTokenInt",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum StorageLocation",
+          "name": "location",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "key",
+          "type": "string"
+        }
+      ],
+      "name": "readTokenString",
       "outputs": [
         {
           "internalType": "string",
@@ -646,7 +696,30 @@
           "type": "uint256"
         }
       ],
-      "name": "writeInt",
+      "name": "writeCollectionInt",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum StorageLocation",
+          "name": "location",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "key",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "value",
+          "type": "string"
+        }
+      ],
+      "name": "writeCollectionString",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -674,30 +747,7 @@
           "type": "uint256"
         }
       ],
-      "name": "writeInt",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "enum StorageLocation",
-          "name": "location",
-          "type": "uint8"
-        },
-        {
-          "internalType": "string",
-          "name": "key",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "value",
-          "type": "string"
-        }
-      ],
-      "name": "writeString",
+      "name": "writeTokenInt",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -725,7 +775,7 @@
           "type": "string"
         }
       ],
-      "name": "writeString",
+      "name": "writeTokenString",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
