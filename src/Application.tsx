@@ -54,7 +54,7 @@ export const Application: FunctionComponent = () => {
           <Route exact path="/launch">
             <LaunchLandingPage />
           </Route>
-          <Route exact path="/launch/erc721">
+          <Route exact path="/launch/:tokenModel">
             <LaunchCollectionPage />
           </Route>
         </Switch>

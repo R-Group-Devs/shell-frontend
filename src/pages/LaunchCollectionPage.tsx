@@ -12,11 +12,11 @@ import { Shell } from '../components/Shell';
 import { TwoPanel } from '../components/TwoPanel';
 import { useWallet } from '../hooks/wallet';
 import { randomNameAndSymbol } from '../lib/string';
-import { useTheme } from '@material-ui/styles';
-import { ThemeConfig } from '../Theme';
 import { InputError } from '../components/InputError';
 import { isValidEngine } from '../shell/engine';
 import { createCollection } from '../shell/factory';
+import { useParams } from 'react-router-dom';
+import _ from 'lodash';
 
 interface FormData {
   name: string;
@@ -24,13 +24,19 @@ interface FormData {
   engine: string;
 }
 
+interface Params {
+  tokenModel: string;
+}
+
 export const LaunchCollectionPage: FunctionComponent = () => {
   const { browseChainInfo, account, library, registerTransaction } = useWallet();
   const { register, setValue, handleSubmit, formState, trigger, getValues } = useForm<FormData>();
+  const { tokenModel } = useParams<Params>();
 
   const submit = handleSubmit(async () => {
     const trx = await createCollection(library.getSigner(), {
       ...getValues(),
+      tokenModel,
       owner: account,
     });
     registerTransaction(trx);
@@ -122,6 +128,13 @@ export const LaunchCollectionPage: FunctionComponent = () => {
                   <Button disabled>Browse engines... (comming soon)</Button>
                 </div>
               </Content>
+            </TwoPanel>
+            <TwoPanel>
+              <div>
+                <strong>Token model</strong>
+                <br />
+                {tokenModel}
+              </div>
             </TwoPanel>
           </div>
           <Content>
