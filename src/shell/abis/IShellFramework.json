@@ -281,6 +281,98 @@
     {
       "inputs": [
         {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "storeEngine",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "storeMintedTo",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "storeTimestamp",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "storeBlockNumber",
+                  "type": "bool"
+                },
+                {
+                  "components": [
+                    {
+                      "internalType": "string",
+                      "name": "key",
+                      "type": "string"
+                    },
+                    {
+                      "internalType": "string",
+                      "name": "value",
+                      "type": "string"
+                    }
+                  ],
+                  "internalType": "struct StringStorage[]",
+                  "name": "stringData",
+                  "type": "tuple[]"
+                },
+                {
+                  "components": [
+                    {
+                      "internalType": "string",
+                      "name": "key",
+                      "type": "string"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "value",
+                      "type": "uint256"
+                    }
+                  ],
+                  "internalType": "struct IntStorage[]",
+                  "name": "intData",
+                  "type": "tuple[]"
+                }
+              ],
+              "internalType": "struct MintOptions",
+              "name": "options",
+              "type": "tuple"
+            }
+          ],
+          "internalType": "struct MintEntry[]",
+          "name": "entries",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "batchMint",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "string",
           "name": "name",
           "type": "string"
@@ -348,6 +440,98 @@
         }
       ],
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "storeEngine",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "storeMintedTo",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "storeTimestamp",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "storeBlockNumber",
+                  "type": "bool"
+                },
+                {
+                  "components": [
+                    {
+                      "internalType": "string",
+                      "name": "key",
+                      "type": "string"
+                    },
+                    {
+                      "internalType": "string",
+                      "name": "value",
+                      "type": "string"
+                    }
+                  ],
+                  "internalType": "struct StringStorage[]",
+                  "name": "stringData",
+                  "type": "tuple[]"
+                },
+                {
+                  "components": [
+                    {
+                      "internalType": "string",
+                      "name": "key",
+                      "type": "string"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "value",
+                      "type": "uint256"
+                    }
+                  ],
+                  "internalType": "struct IntStorage[]",
+                  "name": "intData",
+                  "type": "tuple[]"
+                }
+              ],
+              "internalType": "struct MintOptions",
+              "name": "options",
+              "type": "tuple"
+            }
+          ],
+          "internalType": "struct MintEntry",
+          "name": "entry",
+          "type": "tuple"
+        }
+      ],
+      "name": "mint",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
