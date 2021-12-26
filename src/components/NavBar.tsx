@@ -74,6 +74,11 @@ export const NavBar: FunctionComponent = () => {
             <div>{navItem('Collections', '/collections')}</div>
             <div>{navItem('NFTs', '/nfts')}</div>
             <div>{navItem('Engines', '/engines')}</div>
+            <div>
+              <a target="_blank" href="https://heyshellxyz.notion.site">
+                Notion
+              </a>
+            </div>
             <div style={{ flexGrow: 1 }}></div>
             <div className={classes.small}>
               {transactions.length > 0 && (
