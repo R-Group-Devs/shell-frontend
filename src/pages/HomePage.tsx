@@ -24,8 +24,7 @@ export const HomePage: FunctionComponent = () => {
         <TwoPanel>
           <Content>
             <h1 style={{ maxWidth: '500px' }}>
-              On-chain <br />
-              NFT
+              On-chain NFT
               <br /> application development framework
               <br /> for <Whomst />
             </h1>
@@ -33,7 +32,7 @@ export const HomePage: FunctionComponent = () => {
           <Content>
             <p style={{ textAlign: 'center' }}>
               <img
-                style={{ maxWidth: '300px', display: 'inline', marginTop: '16px' }}
+                style={{ maxWidth: '300px', display: 'inline' }}
                 src="https://ipfs.hypervibes.xyz/ipfs/QmcnWsZVxNiozUjYc1qtJTRsseES4523FRzSS8PXRhWdJZ"
               />
             </p>
@@ -44,7 +43,7 @@ export const HomePage: FunctionComponent = () => {
           <>
             <p>
               Upcoming public NFT infrastructure from <strong>R Group</strong> @{' '}
-              <a href="https://t.co/k8lIDvcPT9">Rarible DAO</a>.
+              <a href="https://t.co/k8lIDvcPT9">Rarible DAO</a>
             </p>
             <p>
               What excites you about <Shell /> ?
@@ -55,19 +54,19 @@ export const HomePage: FunctionComponent = () => {
           <>
             <TwoPanel gapOnCollapse>
               <Content>
+                <p>Launch interoperable, open NFT projects that anybody can iterate on permissionlessly</p>
                 <p>
-                  Ship custom business logic in a public application market of NFT <strong>engines</strong>.{' '}
+                  Ship custom business logic in a public application market of NFT <strong>engines</strong>{' '}
                 </p>
-                <p>Build interoperable and open products that anybody can iterate on permissionlessly.</p>
+                <p style={{ textAlign: 'center' }}>Fork anything</p>
                 {/* <p></p>
                 <p>Deploy a creator-owned collection as part of a digitally-cordinated community.</p>
                 <p>Explore emergent application layers.</p> */}
                 {/* <p>100% trustless and free forever.</p> */}
-                <p style={{ textAlign: 'center' }}>Fork anything.</p>
               </Content>
               <Content>
                 <p style={{ textAlign: 'center', marginTop: '22px' }}>
-                  <Shell /> is a public, token-based operating system.
+                  <Shell /> is a free token-based operating system
                 </p>
                 <p style={{ textAlign: 'center', marginBottom: '22px' }}>
                   <Button navTo="/launch">
