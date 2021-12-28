@@ -2,7 +2,8 @@ fragment EngineInfo on Engine {
   id
   name
   address
-  totalInstallCount
+  totalCollectionInstallCount
+  totalNftInstallCount
   createdNftsCount
   createdAtTimestamp
   lastInstalledAtTimestamp
@@ -27,7 +28,7 @@ query browseEngines {
     ...EngineInfo
   }
   topInstalls: engines(
-    orderBy: totalInstallCount
+    orderBy: totalCollectionInstallCount
     orderDirection: desc
     first:10)
   {
