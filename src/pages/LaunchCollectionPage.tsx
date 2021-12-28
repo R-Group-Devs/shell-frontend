@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useState } from 'react';
-import { constants, utils } from 'ethers';
+import React, { FunctionComponent } from 'react';
+import { utils } from 'ethers';
 import { useForm } from 'react-hook-form';
 import { Button } from '../components/Button';
 import { ButtonGroup } from '../components/ButtonGroup';
@@ -125,7 +125,7 @@ export const LaunchCollectionPage: FunctionComponent = () => {
               </Content>
               <Content>
                 <div>
-                  <Button disabled>Browse engines... (comming soon)</Button>
+                  <Button disabled>Browse engines... (coming soon)</Button>
                 </div>
               </Content>
             </TwoPanel>

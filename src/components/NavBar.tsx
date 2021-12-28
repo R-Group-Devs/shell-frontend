@@ -76,7 +76,7 @@ export const NavBar: FunctionComponent = () => {
             <div>{navItem('Engines', '/engines')}</div>
             <div>
               <a target="_blank" href="https://heyshellxyz.notion.site">
-                Notion
+                Docs
               </a>
             </div>
             <div style={{ flexGrow: 1 }}></div>

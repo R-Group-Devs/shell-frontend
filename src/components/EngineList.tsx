@@ -26,8 +26,7 @@ export const EngineList: FunctionComponent = () => {
           <td>Engine</td>
           <td>Installs</td>
           <td>Minted</td>
-          <td>Released</td>
-          <td>Updated</td>
+          <td>Created</td>
           <td>Last Install</td>
         </tr>
       </thead>
@@ -37,10 +36,9 @@ export const EngineList: FunctionComponent = () => {
             <td>
               <AddressPrefix address={engine.address}>{engine.name}</AddressPrefix>
             </td>
-            <td>{engine.collectionCount}</td>
-            <td>{engine.mintedNftsCount}</td>
-            <td>{timestampRelative(engine.releasedAtTimestamp)}</td>
-            <td>{timestampRelative(engine.lastUpdatedAtTimestamp)}</td>
+            <td>{engine.totalInstallCount}</td>
+            <td>{engine.createdNftsCount}</td>
+            <td>{timestampRelative(engine.createdAtTimestamp)}</td>
             <td>{timestampRelative(engine.lastInstalledAtTimestamp)}</td>
           </tr>
         ))}

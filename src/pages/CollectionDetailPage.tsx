@@ -5,6 +5,7 @@ import { Address } from '../components/Address';
 import { AddressPrefix } from '../components/AddressPrefix';
 import { AddressViewable } from '../components/AddressViewable';
 import { Content } from '../components/Content';
+import { Dimmed } from '../components/Dimmed';
 import { KeyValueEntry, KeyValueList } from '../components/KeyValueList';
 import { Loading } from '../components/Loading';
 import { PageSection } from '../components/PageSection';
@@ -88,24 +89,34 @@ export const CollectionDetailPage: FunctionComponent = () => {
             <thead>
               <tr>
                 <td>Owner</td>
+                <td>Owned</td>
                 <td>Token</td>
                 <td>Engine</td>
-                <td>Minted</td>
+                <td>Last Activity</td>
               </tr>
             </thead>
             <tbody>
-              {detailsQuery.data.collection.nfts.map((nft) => (
-                <tr key={nft.id}>
+              {detailsQuery.data.collection.nftOwners.map((nftOwner) => (
+                <tr key={nftOwner.id}>
                   <td>
-                    <Address address={nft.owner.address} />
+                    <Address address={nftOwner.owner.address} />
                   </td>
                   <td>
-                    <AddressPrefix address={nft.collection.address}>{nft.collection.name}</AddressPrefix> #{nft.tokenId}
+                    {nftOwner.balance}
+                    <Dimmed>/{nftOwner.nft.totalSupply}</Dimmed>
                   </td>
                   <td>
-                    <AddressPrefix address={nft.mintedByEngine.address}>{nft.mintedByEngine.name}</AddressPrefix>
+                    <AddressPrefix address={nftOwner.nft.collection.address}>
+                      {nftOwner.nft.collection.name}
+                    </AddressPrefix>{' '}
+                    #{nftOwner.nft.tokenId}
                   </td>
-                  <td>{timestampRelative(nft.createdAtTimestamp)}</td>
+                  <td>
+                    <AddressPrefix address={nftOwner.nft.createdByEngine.address}>
+                      {nftOwner.nft.createdByEngine.name}
+                    </AddressPrefix>
+                  </td>
+                  <td>{timestampRelative(nftOwner.lastActivityAtTimestamp)}</td>
                 </tr>
               ))}
             </tbody>

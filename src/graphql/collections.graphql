@@ -8,7 +8,7 @@ fragment CollectionInfo on Collection {
     lastUpdatedAtTimestamp
     lastActivityAtTimestamp
     implementation { id name address }
-    factory { id address collectionCount }
+    factory { id address }
     engine { id address name }
     creator { id address }
     owner { id address }
@@ -27,23 +27,13 @@ query collectionDetail($address: ID!) {
   collection(id: $address) {
     ... CollectionInfo
 
-    creator {
+    nftOwners(orderBy: lastActivityAtTimestamp orderDirection: desc) {
       id
-      address
-      createdCollections(orderBy: createdAtTimestamp orderDirection: desc first: 5) {
-        ... CollectionInfo
-      }
-    }
-
-    engine {
-      ... EngineInfo
-      collections(orderBy: createdAtTimestamp orderDirection: desc first: 5) {
-        ... CollectionInfo
-      }
-    }
-
-    nfts(orderBy: createdAtTimestamp orderDirection: desc) {
-      ... NFTInfo
+      nft { ... NFTInfo }
+      owner { id address }
+      balance
+      createdAtTimestamp
+      lastActivityAtTimestamp
     }
 
   }

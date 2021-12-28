@@ -3,7 +3,6 @@ import { useQuery } from 'react-query';
 import { useWallet } from '../hooks/wallet';
 import { timestampRelative } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
-import { Address } from './Address';
 import { AddressPrefix } from './AddressPrefix';
 import { Loading } from './Loading';
 import { Table } from './Table';
@@ -26,7 +25,7 @@ export const NftList: FunctionComponent = () => {
         <tr>
           <td>Token</td>
           <td>Engine</td>
-          <td>Owner</td>
+          <td>Supply</td>
           <td>Minted</td>
         </tr>
       </thead>
@@ -37,11 +36,9 @@ export const NftList: FunctionComponent = () => {
               <AddressPrefix address={nft.collection.address}>{nft.collection.name}</AddressPrefix> #{nft.tokenId}
             </td>
             <td>
-              <AddressPrefix address={nft.mintedByEngine.address}>{nft.mintedByEngine.name}</AddressPrefix>
+              <AddressPrefix address={nft.createdByEngine.address}>{nft.createdByEngine.name}</AddressPrefix>
             </td>
-            <td>
-              <Address address={nft.owner.address} />
-            </td>
+            <td>{nft.totalSupply}</td>
             <td>{timestampRelative(nft.createdAtTimestamp)}</td>
           </tr>
         ))}

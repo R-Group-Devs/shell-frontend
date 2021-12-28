@@ -1,14 +1,18 @@
 fragment NFTInfo on NFT {
   id
   tokenId
+  totalSupply
   createdAtTimestamp
-  lastActivityAtTimestamp
+  # lastActivityAtTimestamp
 
-  collection { id address name symbol nftCount }
-  owner { id address }
-  mintedBy { id address }
-  mintedTo { id address }
-  mintedByEngine { id name address }
+  collection { id address name symbol }
+  createdByEngine { id name address }
+
+  owners(orderBy: createdAtTimestamp orderDirection: asc) {
+    id
+    owner { id address }
+    balance
+  }
 }
 
 query nfts(
