@@ -62,11 +62,11 @@ export const CollectionList: FunctionComponent = () => {
                 <AddressPrefix address={c.address}>{c.name}</AddressPrefix>
               </td>
               <td>
-                <AddressPrefix address={c.engine.address}>{c.engine.name}</AddressPrefix>
+                <AddressPrefix address={c.canonicalEngine.address}>{c.canonicalEngine.name}</AddressPrefix>
               </td>
               <td style={{ textAlign: 'center' }}>{c.nftCount}</td>
               <td>
-                <Address address={c.owner.address} />
+                <Address address={c.canonicalOwner.address} />
               </td>
               <td>{timestampRelative(c.lastActivityAtTimestamp)}</td>
             </tr>

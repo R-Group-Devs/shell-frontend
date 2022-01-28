@@ -57,8 +57,10 @@ export const CollectionDetailPage: FunctionComponent = () => {
                 <KeyValueEntry label="Network:" value={chainInfo.name} />
                 <KeyValueEntry label="Token model:" value={collection.implementation.name} />
                 <KeyValueEntry label="Engine:">
-                  <AddressPrefix address={collection.engine.address}>
-                    <Link to={`/engines/${chainInfo.slug}/${collection.engine.address}`}>{collection.engine.name}</Link>
+                  <AddressPrefix address={collection.canonicalEngine.address}>
+                    <Link to={`/engines/${chainInfo.slug}/${collection.canonicalEngine.address}`}>
+                      {collection.canonicalEngine.name}
+                    </Link>
                   </AddressPrefix>
                 </KeyValueEntry>
                 <KeyValueEntry
@@ -67,7 +69,7 @@ export const CollectionDetailPage: FunctionComponent = () => {
                 />
                 <KeyValueEntry
                   label="Owner:"
-                  value={<AddressViewable address={collection.owner.address} chainId={chainInfo.chainId} />}
+                  value={<AddressViewable address={collection.canonicalOwner.address} chainId={chainInfo.chainId} />}
                 />
               </KeyValueList>
             </div>
