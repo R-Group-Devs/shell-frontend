@@ -3,7 +3,7 @@ fragment NFTInfo on NFT {
   tokenId
   totalSupply
   createdAtTimestamp
-  # lastActivityAtTimestamp
+  lastActivityAtTimestamp
 
   collection { id address name symbol }
   createdByEngine { id name address }

@@ -2,50 +2,14 @@ fragment EngineInfo on Engine {
   id
   name
   address
-  totalCollectionInstallCount
-  totalNftInstallCount
-  createdNftsCount
   createdAtTimestamp
-  lastInstalledAtTimestamp
 }
 
 query engines(
-  # $orderBy: Engine_orderBy = lastUpdatedAtTimestamp,
-  $orderBy: Engine_orderBy = lastInstalledAtTimestamp,
+  $orderBy: Engine_orderBy = createdAtTimestamp,
   $orderDirection: OrderDirection = desc)
 {
   engines(orderBy: $orderBy, orderDirection: $orderDirection) {
     ... EngineInfo
-  }
-}
-
-query browseEngines {
-  new: engines(
-    orderBy: createdAtTimestamp
-    orderDirection: desc
-    first: 10)
-  {
-    ...EngineInfo
-  }
-  topInstalls: engines(
-    orderBy: totalCollectionInstallCount
-    orderDirection: desc
-    first:10)
-  {
-    ...EngineInfo
-  }
-  recentInstalls: engines(
-    orderBy: lastInstalledAtTimestamp
-    orderDirection: desc
-    first: 10)
-  {
-    ...EngineInfo
-  }
-  mostNfts: engines(
-    orderBy: createdNftsCount
-    orderDirection: desc
-    first: 10)
-  {
-    ...EngineInfo
   }
 }

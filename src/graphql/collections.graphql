@@ -5,13 +5,12 @@ fragment CollectionInfo on Collection {
     address
     nftCount
     createdAtTimestamp
-    lastUpdatedAtTimestamp
     lastActivityAtTimestamp
     implementation { id name address }
     factory { id address }
-    engine { id address name }
+    canonicalEngine { id address name }
+    canonicalOwner { id address }
     creator { id address }
-    owner { id address }
 }
 
 query collections(
