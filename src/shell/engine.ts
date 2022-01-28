@@ -6,7 +6,7 @@ export const isValidEngine = async (chainId: number, address: string): Promise<b
   const rpc = getRpc(chainId);
   const engine = new Contract(address, IEngine.abi, rpc);
   try {
-    const resp = await engine.supportsInterface('0x805590d2');
+    const resp = await engine.supportsInterface('0x0b1d171c');
     return resp;
   } catch (err) {
     return false;
