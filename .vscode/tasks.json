@@ -4,7 +4,7 @@
     {
       "label": "🐚 run heyshell.xyz locally",
       "type": "shell",
-      "command": "yarn dev",
+      "command": "yarn start",
       "problemMatcher": [],
     },
     {
