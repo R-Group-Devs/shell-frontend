@@ -4,28 +4,72 @@
   "sourceName": "contracts/IShellFramework.sol",
   "abi": [
     {
+      "inputs": [],
+      "name": "InvalidEngine",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "SenderCannotFork",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "SenderNotEngine",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "SenderNotForkOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "WriteNotAllowed",
+      "type": "error"
+    },
+    {
       "anonymous": false,
       "inputs": [
         {
           "indexed": false,
-          "internalType": "enum PublishChannel",
-          "name": "location",
-          "type": "uint8"
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
         },
         {
           "indexed": false,
-          "internalType": "string",
-          "name": "key",
-          "type": "string"
+          "internalType": "contract IEngine",
+          "name": "engine",
+          "type": "address"
         },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "ForkCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "value",
+          "name": "forkId",
           "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "contract IEngine",
+          "name": "engine",
+          "type": "address"
         }
       ],
-      "name": "CollectionIntPublished",
+      "name": "ForkEngineUpdated",
       "type": "event"
     },
     {
@@ -39,6 +83,12 @@
         },
         {
           "indexed": false,
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
           "internalType": "string",
           "name": "key",
           "type": "string"
@@ -50,7 +100,7 @@
           "type": "uint256"
         }
       ],
-      "name": "CollectionIntUpdated",
+      "name": "ForkIntUpdated",
       "type": "event"
     },
     {
@@ -58,24 +108,18 @@
       "inputs": [
         {
           "indexed": false,
-          "internalType": "enum PublishChannel",
-          "name": "location",
-          "type": "uint8"
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
         },
         {
           "indexed": false,
-          "internalType": "string",
-          "name": "key",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "value",
-          "type": "string"
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
         }
       ],
-      "name": "CollectionStringPublished",
+      "name": "ForkOwnerUpdated",
       "type": "event"
     },
     {
@@ -89,6 +133,12 @@
         },
         {
           "indexed": false,
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
           "internalType": "string",
           "name": "key",
           "type": "string"
@@ -100,39 +150,7 @@
           "type": "string"
         }
       ],
-      "name": "CollectionStringUpdated",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "contract IEngine",
-          "name": "engine",
-          "type": "address"
-        }
-      ],
-      "name": "EngineInstalled",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "previousOwner",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "newOwner",
-          "type": "address"
-        }
-      ],
-      "name": "OwnershipTransferred",
+      "name": "ForkStringUpdated",
       "type": "event"
     },
     {
@@ -146,43 +164,12 @@
         },
         {
           "indexed": false,
-          "internalType": "contract IEngine",
-          "name": "engine",
-          "type": "address"
-        }
-      ],
-      "name": "TokenEngineInstalled",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "enum PublishChannel",
-          "name": "location",
-          "type": "uint8"
-        },
-        {
-          "indexed": false,
           "internalType": "uint256",
-          "name": "tokenId",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "key",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "value",
+          "name": "forkId",
           "type": "uint256"
         }
       ],
-      "name": "TokenIntPublished",
+      "name": "TokenForkUpdated",
       "type": "event"
     },
     {
@@ -214,37 +201,6 @@
         }
       ],
       "name": "TokenIntUpdated",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "enum PublishChannel",
-          "name": "location",
-          "type": "uint8"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "tokenId",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "key",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "value",
-          "type": "string"
-        }
-      ],
-      "name": "TokenStringPublished",
       "type": "event"
     },
     {
@@ -373,6 +329,147 @@
     {
       "inputs": [
         {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "canSenderForkToken",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IEngine",
+          "name": "engine",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "tokenIds",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "createFork",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getFork",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "contract IEngine",
+              "name": "engine",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct Fork",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getForkEngine",
+      "outputs": [
+        {
+          "internalType": "contract IEngine",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getTokenEngine",
+      "outputs": [
+        {
+          "internalType": "contract IEngine",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getTokenForkId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "string",
           "name": "name",
           "type": "string"
@@ -396,50 +493,6 @@
       "name": "initialize",
       "outputs": [],
       "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "contract IEngine",
-          "name": "engine",
-          "type": "address"
-        }
-      ],
-      "name": "installEngine",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "tokenId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "contract IEngine",
-          "name": "engine",
-          "type": "address"
-        }
-      ],
-      "name": "installTokenEngine",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "installedEngine",
-      "outputs": [
-        {
-          "internalType": "contract IEngine",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -549,6 +602,19 @@
     },
     {
       "inputs": [],
+      "name": "nextForkId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "nextTokenId",
       "outputs": [
         {
@@ -576,111 +642,14 @@
     {
       "inputs": [
         {
-          "internalType": "enum PublishChannel",
-          "name": "channel",
-          "type": "uint8"
-        },
-        {
-          "internalType": "string",
-          "name": "topic",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "value",
-          "type": "uint256"
-        }
-      ],
-      "name": "publishCollectionInt",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "enum PublishChannel",
-          "name": "channel",
-          "type": "uint8"
-        },
-        {
-          "internalType": "string",
-          "name": "topic",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "value",
-          "type": "string"
-        }
-      ],
-      "name": "publishCollectionString",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "enum PublishChannel",
-          "name": "channel",
-          "type": "uint8"
-        },
-        {
-          "internalType": "uint256",
-          "name": "tokenId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "topic",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "value",
-          "type": "uint256"
-        }
-      ],
-      "name": "publishTokenInt",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "enum PublishChannel",
-          "name": "channel",
-          "type": "uint8"
-        },
-        {
-          "internalType": "uint256",
-          "name": "tokenId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "topic",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "value",
-          "type": "string"
-        }
-      ],
-      "name": "publishTokenString",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
           "internalType": "enum StorageLocation",
           "name": "location",
           "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
         },
         {
           "internalType": "string",
@@ -688,7 +657,7 @@
           "type": "string"
         }
       ],
-      "name": "readCollectionInt",
+      "name": "readForkInt",
       "outputs": [
         {
           "internalType": "uint256",
@@ -707,12 +676,17 @@
           "type": "uint8"
         },
         {
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
+        },
+        {
           "internalType": "string",
           "name": "key",
           "type": "string"
         }
       ],
-      "name": "readCollectionString",
+      "name": "readForkString",
       "outputs": [
         {
           "internalType": "string",
@@ -782,13 +756,6 @@
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "renounceOwnership",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "internalType": "uint256",
@@ -815,6 +782,78 @@
         }
       ],
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IEngine",
+          "name": "engine",
+          "type": "address"
+        }
+      ],
+      "name": "setForkEngine",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "setForkOwner",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
+        }
+      ],
+      "name": "setTokenFork",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "tokenIds",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
+        }
+      ],
+      "name": "setTokenForks",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -852,22 +891,14 @@
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "newOwner",
-          "type": "address"
-        }
-      ],
-      "name": "transferOwnership",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
           "internalType": "enum StorageLocation",
           "name": "location",
           "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
         },
         {
           "internalType": "string",
@@ -880,7 +911,7 @@
           "type": "uint256"
         }
       ],
-      "name": "writeCollectionInt",
+      "name": "writeForkInt",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -893,6 +924,11 @@
           "type": "uint8"
         },
         {
+          "internalType": "uint256",
+          "name": "forkId",
+          "type": "uint256"
+        },
+        {
           "internalType": "string",
           "name": "key",
           "type": "string"
@@ -903,7 +939,7 @@
           "type": "string"
         }
       ],
-      "name": "writeCollectionString",
+      "name": "writeForkString",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

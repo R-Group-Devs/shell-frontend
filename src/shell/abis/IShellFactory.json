@@ -4,6 +4,21 @@
   "sourceName": "contracts/IShellFactory.sol",
   "abi": [
     {
+      "inputs": [],
+      "name": "ImplementationExists",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ImplementationNotFound",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidImplementation",
+      "type": "error"
+    },
+    {
       "anonymous": false,
       "inputs": [
         {

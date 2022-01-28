@@ -6,41 +6,18 @@
     {
       "inputs": [
         {
-          "internalType": "contract IShellFramework",
-          "name": "collection",
-          "type": "address"
-        }
-      ],
-      "name": "afterInstallEngine",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "contract IShellFramework",
-          "name": "collection",
-          "type": "address"
-        },
-        {
           "internalType": "uint256",
-          "name": "tokenId",
+          "name": "forkId",
           "type": "uint256"
         }
       ],
-      "name": "afterInstallEngine",
+      "name": "afterEngineSet",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [
-        {
-          "internalType": "contract IShellFramework",
-          "name": "collection",
-          "type": "address"
-        },
         {
           "internalType": "address",
           "name": "operator",
@@ -57,32 +34,19 @@
           "type": "address"
         },
         {
-          "internalType": "uint256[]",
-          "name": "tokenIds",
-          "type": "uint256[]"
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
         },
         {
-          "internalType": "uint256[]",
-          "name": "amounts",
-          "type": "uint256[]"
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
         }
       ],
       "name": "beforeTokenTransfer",
       "outputs": [],
       "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getEngineName",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "pure",
       "type": "function"
     },
     {
@@ -141,6 +105,19 @@
         }
       ],
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "pure",
       "type": "function"
     },
     {
