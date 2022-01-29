@@ -75,7 +75,7 @@ export const NavBar: FunctionComponent = () => {
             <div>{navItem('NFTs', '/nfts')}</div>
             <div>{navItem('Engines', '/engines')}</div>
             <div>
-              <a target="_blank" href="https://heyshellxyz.notion.site">
+              <a target="_blank" href="https://r-group.notion.site/shell-92250d54b9e14058bd393081a6eff690">
                 Docs
               </a>
             </div>
