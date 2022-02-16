@@ -30,7 +30,7 @@ export const LaunchLandingPage: FunctionComponent = () => {
           <Content>
             <div>
               <h4>ERC-721 Collection</h4>
-              <Dimmed>token model: {erc721Model}</Dimmed>
+              <Dimmed>{erc721Model}</Dimmed>
             </div>
             <p>One token, one owner.</p>
             <p>Each token is owned by a single address and has its own on-chain identity and history.</p>
@@ -44,7 +44,7 @@ export const LaunchLandingPage: FunctionComponent = () => {
           <Content>
             <div>
               <h4>ERC-1155 Collection</h4>
-              <Dimmed>token model: {erc1155Model}</Dimmed>
+              <Dimmed>{erc1155Model}</Dimmed>
             </div>
             <p>One token, many owners.</p>
             <p>Each token can be held by many addresses, all with a certain balance.</p>

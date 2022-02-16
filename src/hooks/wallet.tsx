@@ -4,10 +4,9 @@ import { InjectedConnector } from '@web3-react/injected-connector';
 import { ContractTransaction } from 'ethers';
 import { isWalletPresent } from '../lib/web3';
 import { getChainInfo, getChainInfoOrNull } from '../shell/networks';
+import { getLastNetwork } from '../lib/storage';
 
 const connector = new InjectedConnector({});
-
-const defaultNetwork = 1;
 
 type WalletState = 'init' | 'disconnected' | 'connected' | 'ready';
 
@@ -15,7 +14,7 @@ type WalletState = 'init' | 'disconnected' | 'connected' | 'ready';
 export const useWalletImplementation = () => {
   const { activate, active, error, chainId, account, library } = useWeb3React();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [browseChainId] = useState(defaultNetwork);
+  const [browseChainId] = useState(getLastNetwork());
   const [transactions, setTransactions] = useState<ContractTransaction[]>([]);
   const callbacks = useRef<Array<() => unknown>>([]);
 

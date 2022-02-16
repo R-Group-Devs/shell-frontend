@@ -39,53 +39,54 @@ export const HomePage: FunctionComponent = () => {
           </Content>
         </TwoPanel>
 
-        {taps < 5 ? (
+        {/* {taps < 5 ? (
           <>
             <p>
-              Upcoming public NFT infrastructure from <strong>R Group</strong> @{' '}
-              <a href="https://t.co/k8lIDvcPT9">Rarible DAO</a>
+              Experimental public NFT infrastructure
+              <br />
+              from 🦖 <a href="http://playgrounds.wtf/">Playgrounds</a>.
             </p>
             <p>
               What excites you about <Shell /> ?
             </p>
             <Bangers />
           </>
-        ) : (
-          <>
-            <TwoPanel gapOnCollapse>
-              <Content>
-                <p>Launch interoperable, open NFT projects that anybody can iterate on permissionlessly</p>
-                <p>
-                  Ship custom business logic in a public application market of NFT <strong>engines</strong>{' '}
-                </p>
-                <p style={{ textAlign: 'center' }}>Fork anything</p>
-                {/* <p></p>
+        ) : ( */}
+        <>
+          <TwoPanel gapOnCollapse>
+            <Content>
+              <p>Launch interoperable, open NFT projects that anybody can iterate on permissionlessly</p>
+              <p>
+                Ship custom business logic in a public application market of NFT <strong>engines</strong>{' '}
+              </p>
+              <p style={{ textAlign: 'center' }}>Fork anything</p>
+              {/* <p></p>
                 <p>Deploy a creator-owned collection as part of a digitally-cordinated community.</p>
                 <p>Explore emergent application layers.</p> */}
-                {/* <p>100% trustless and free forever.</p> */}
-              </Content>
-              <Content>
-                <p style={{ textAlign: 'center', marginTop: '22px' }}>
-                  <Shell /> is a free token-based operating system
-                </p>
-                <p style={{ textAlign: 'center', marginBottom: '22px' }}>
-                  <Button navTo="/launch">
-                    Launch a <Shell /> collection
-                  </Button>
-                </p>
-              </Content>
-            </TwoPanel>
-            <PageSection>
-              <Content>
-                <p style={{ textAlign: 'center', margin: '60px 0', fontStyle: 'italic' }}>
-                  Upcoming public NFT infrastructure
-                  <br />
-                  from <strong>R Group</strong> @ <a href="https://t.co/k8lIDvcPT9">Rarible DAO</a>.
-                </p>
-              </Content>
-            </PageSection>
-          </>
-        )}
+              {/* <p>100% trustless and free forever.</p> */}
+            </Content>
+            <Content>
+              <p style={{ textAlign: 'center', marginTop: '22px' }}>
+                <Shell /> is an open product framework for NFTs
+              </p>
+              <p style={{ textAlign: 'center', marginBottom: '22px' }}>
+                <Button navTo="/launch">
+                  Launch a <Shell /> collection
+                </Button>
+              </p>
+            </Content>
+          </TwoPanel>
+          <PageSection>
+            <Content>
+              <p style={{ textAlign: 'center', margin: '60px 0', fontStyle: 'italic' }}>
+                Experimental public NFT infrastructure
+                <br />
+                from 🦖 <a href="http://playgrounds.wtf/">Playgrounds</a>.
+              </p>
+            </Content>
+          </PageSection>
+        </>
+        {/* )} */}
       </Content>
     </PageSection>
   );

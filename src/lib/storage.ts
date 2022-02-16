@@ -11,3 +11,7 @@ export const incrementTaps = (): number => {
   localStorage.setItem('shell taps', JSON.stringify(next));
   return next;
 };
+
+export const getLastNetwork = (): number => JSON.parse(localStorage.getItem('network') ?? '1');
+
+export const saveLastNetwork = (chainId: number) => localStorage.setItem('network', JSON.stringify(chainId));
