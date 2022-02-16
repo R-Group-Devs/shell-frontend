@@ -7,6 +7,7 @@ fragment NFTInfo on NFT {
 
   collection { id address name symbol }
   createdByEngine { id name address }
+  fork { id forkId engine { id name address } }
 
   owners(orderBy: createdAtTimestamp orderDirection: asc) {
     id

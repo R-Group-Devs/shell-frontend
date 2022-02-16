@@ -11,6 +11,16 @@ interface ChainInfo {
 
 export const networks: ChainInfo[] = [
   {
+    chainId: 1,
+    name: 'ETH Mainnet',
+    slug: 'eth',
+    factoryAddress: '0x03741151f5E6CF9736455C0CBCD512bfA8529C93',
+    subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-mainnet',
+    rpcEndpoint: process.env['ETH_URL'] ?? '',
+    blockchainExplorer: 'https://etherscan.io',
+    blockTime: 15,
+  },
+  {
     chainId: 4,
     name: 'Rinkeby Testnet',
     slug: 'rinkeby',

@@ -7,7 +7,7 @@ import { getChainInfo, getChainInfoOrNull } from '../shell/networks';
 
 const connector = new InjectedConnector({});
 
-const defaultNetwork = 4;
+const defaultNetwork = 1;
 
 type WalletState = 'init' | 'disconnected' | 'connected' | 'ready';
 
