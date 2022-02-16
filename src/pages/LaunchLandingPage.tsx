@@ -8,8 +8,8 @@ import { Shell } from '../components/Shell';
 import { TwoPanel } from '../components/TwoPanel';
 import { useWallet } from '../hooks/wallet';
 
-const erc721Model = 'shell-erc721-v1';
-const erc1155Model = 'shell-erc1155-v1';
+const erc721Model = 'erc721-prototype';
+const erc1155Model = 'erc1155-prototype';
 
 export const LaunchLandingPage: FunctionComponent = () => {
   const { browseChainInfo } = useWallet();
@@ -50,7 +50,7 @@ export const LaunchLandingPage: FunctionComponent = () => {
             <p>Each token can be held by many addresses, all with a certain balance.</p>
             <p>This tracks changes in amounts over time.</p>
             <ButtonGroup>
-              <Button navTo={`/launch/${erc1155Model}`}>
+              <Button navTo={`/launch/${erc1155Model}`} disabled>
                 Launch <Shell /> ERC-1155
               </Button>
             </ButtonGroup>
