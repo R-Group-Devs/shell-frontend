@@ -4,7 +4,7 @@ import { InjectedConnector } from '@web3-react/injected-connector';
 import { ContractTransaction } from 'ethers';
 import { isWalletPresent } from '../lib/web3';
 import { getChainInfo, getChainInfoOrNull } from '../shell/networks';
-import { getLastNetwork } from '../lib/storage';
+import { getLastNetwork, saveLastNetwork } from '../lib/storage';
 
 const connector = new InjectedConnector({});
 
@@ -14,7 +14,7 @@ type WalletState = 'init' | 'disconnected' | 'connected' | 'ready';
 export const useWalletImplementation = () => {
   const { activate, active, error, chainId, account, library } = useWeb3React();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [browseChainId] = useState(getLastNetwork());
+  const [browseChainId, setBrowseChainId] = useState(getLastNetwork());
   const [transactions, setTransactions] = useState<ContractTransaction[]>([]);
   const callbacks = useRef<Array<() => unknown>>([]);
 
@@ -43,6 +43,11 @@ export const useWalletImplementation = () => {
     callbacks.current.forEach((cb) => cb());
   };
 
+  const changeBrowseChainId = (chain: number) => {
+    setBrowseChainId(chain);
+    saveLastNetwork(chain);
+  };
+
   useEffect(() => {
     attemptReconnect();
   }, []);
@@ -65,6 +70,7 @@ export const useWalletImplementation = () => {
     connectedChainInfo: getChainInfoOrNull(chainId),
     error,
     connect,
+    changeBrowseChainId,
     walletPresent: isWalletPresent(),
     registerTransaction,
     transactions,

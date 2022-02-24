@@ -16,14 +16,23 @@ import { getGraphClient } from '../shell/graph';
 import { networks } from '../shell/networks';
 
 export const NetworkPage: FunctionComponent = () => {
-  const { browseChainInfo } = useWallet();
+  const { browseChainInfo, changeBrowseChainId } = useWallet();
   const { chainId, blockTime, factoryAddress } = browseChainInfo;
   const latest = useLatestBlockNumber();
   const [chains, setChains] = useState(
     networks.map((n) => {
-      return { value: `${n.chainId}`, display: n.name, selected: true };
+      return { value: `${n.chainId}`, display: n.name, selected: n.chainId === chainId };
     })
   );
+
+  const selectChain = (value: string) => {
+    setChains(
+      chains.map((c) => {
+        return { ...c, selected: c.value === value };
+      })
+    );
+    changeBrowseChainId(Number(value));
+  };
 
   const factoryQuery = useQuery(['factory detail', chainId, factoryAddress], async () => {
     const client = getGraphClient(chainId);
@@ -51,7 +60,7 @@ export const NetworkPage: FunctionComponent = () => {
               <p>
                 Select a network to explore <Shell />:
               </p>
-              <MultiSelect items={chains} onSelect={() => null} />
+              <MultiSelect items={chains} onSelect={({ value }) => selectChain(value)} />
             </Content>
             <KeyValueList>
               <KeyValueEntry label="Chain ID:" value={chainId} />
