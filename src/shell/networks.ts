@@ -12,7 +12,7 @@ interface ChainInfo {
 export const networks: ChainInfo[] = [
   {
     chainId: 1,
-    name: 'Etheruem',
+    name: 'Ethereum',
     slug: 'eth',
     factoryAddress: '0x57fbf9e899e17e23d46425e33ee191c8fad27c28',
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-mainnet',
