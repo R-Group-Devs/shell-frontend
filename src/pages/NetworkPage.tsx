@@ -66,6 +66,10 @@ export const NetworkPage: FunctionComponent = () => {
               <KeyValueEntry label="Chain ID:" value={chainId} />
               <KeyValueEntry label="Factory:" value={<AddressViewable address={factoryAddress} chainId={chainId} />} />
               <KeyValueEntry
+                label="Owner:"
+                value={<AddressViewable address={factoryQuery.data?.factory?.owner.address} chainId={chainId} />}
+              />
+              <KeyValueEntry
                 label="Factory deployed:"
                 value={formatDate(factoryQuery.data?.factory?.createdAtTimestamp)}
               />
