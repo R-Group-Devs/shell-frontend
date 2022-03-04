@@ -29,20 +29,18 @@ interface Props {
 export const MultiSelect: FunctionComponent<Props> = ({ items, onSelect }) => {
   const classes = useStyles();
   return (
-    <TwoPanel>
-      <div>
-        <ul>
-          {items.map((item) => (
-            <li className={classes.item} key={item.value} onClick={() => onSelect(item)}>
-              [
-              <span style={{ visibility: item.selected ? 'visible' : 'hidden', position: 'relative', left: '2px' }}>
-                🐚
-              </span>
-              ] <span style={{ fontStyle: 'italic', fontWeight: 'bold' }}>{item.display}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </TwoPanel>
+    <div>
+      <ul>
+        {items.map((item) => (
+          <li className={classes.item} key={item.value} onClick={() => onSelect(item)}>
+            [
+            <span style={{ visibility: item.selected ? 'visible' : 'hidden', position: 'relative', left: '2px' }}>
+              🐚
+            </span>
+            ] <span style={{ fontStyle: 'italic', fontWeight: 'bold' }}>{item.display}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
