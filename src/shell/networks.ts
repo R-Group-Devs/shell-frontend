@@ -40,6 +40,16 @@ export const networks: ChainInfo[] = [
     blockchainExplorer: 'https://goerli.etherscan.io',
     blockTime: 15,
   },
+  {
+    chainId: 80001,
+    name: 'Mumbai Testnet',
+    slug: 'mumbai',
+    factoryAddress: '0x76e9f19D76Ae534cFb754AFE9D9CC52395E5fFaF',
+    subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-mumbai',
+    rpcEndpoint: process.env['MUMBAI_URL'] ?? '',
+    blockchainExplorer: 'https://mumbai.polygonscan.com',
+    blockTime: 7.6,
+  },
 ];
 
 export const getChainInfoOrNull = (chainId: number): ChainInfo | null => {
