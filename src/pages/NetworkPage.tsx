@@ -75,7 +75,7 @@ export const NetworkPage: FunctionComponent = () => {
               />
               <KeyValueEntry label="Token models:" value={factoryQuery.data?.factory?.implementationCount} />
               <KeyValueEntry label="Collections:" value={factoryQuery.data?.factory?.collectionCount} />
-              <KeyValueEntry label="NFTs:" value={factoryQuery.data?.factory?.nftCount} />
+              <KeyValueEntry label="NFTs:" value={factoryQuery.data?.factory?.nftCount.toLocaleString()} />
               <KeyValueEntry label="Latest block:" value={latest.blockchain.data} />
               <KeyValueEntry label="Latest indexed block:" value={latest.indexer.data} />
               <KeyValueEntry

@@ -94,7 +94,7 @@ export const CollectionDetailPage: FunctionComponent = () => {
                 />
                 <KeyValueEntry label="Created:" value={formatDate(collection.createdAtTimestamp)} />
                 <KeyValueEntry label="Last activity:" value={timestampRelative(collection.lastActivityAtTimestamp)} />
-                <KeyValueEntry label="Total NFTs" value={collection.nftCount} />
+                <KeyValueEntry label="Total NFTs" value={collection.nftCount.toLocaleString()} />
               </KeyValueList>
             </div>
           </TwoPanel>

@@ -67,7 +67,7 @@ export const CollectionList: FunctionComponent = () => {
               <td>
                 <AddressPrefix address={c.canonicalEngine.address}>{c.canonicalEngine.name}</AddressPrefix>
               </td>
-              <td style={{ textAlign: 'center' }}>{c.nftCount}</td>
+              <td style={{ textAlign: 'center' }}>{c.nftCount.toLocaleString()}</td>
               <td>{timestampRelative(c.lastActivityAtTimestamp)}</td>
             </tr>
           ))}

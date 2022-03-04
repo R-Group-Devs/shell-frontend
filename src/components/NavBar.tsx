@@ -65,7 +65,7 @@ export const NavBar: FunctionComponent = () => {
   return (
     <div className={classes.section}>
       <div className={classes.container}>
-        <div style={{ cursor: 'help', userSelect: 'none' }} className={classes.shell} onClick={tap}>
+        <div style={{ userSelect: 'none' }} className={classes.shell} onClick={tap}>
           🐚 <span style={{ opacity: isFetching ? 0.5 : 0.1 }}>*</span>
         </div>
         {taps >= 0 && (
