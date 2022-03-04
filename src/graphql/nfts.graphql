@@ -13,7 +13,18 @@ fragment NFTInfo on NFT {
     id
     owner { id address }
     balance
+    createdAtTimestamp
+    lastActivityAtTimestamp
   }
+}
+
+fragment NFTOwnerInfo on NFTOwner {
+  id
+  nft { ... NFTInfo }
+  owner { id address }
+  balance
+  createdAtTimestamp
+  lastActivityAtTimestamp
 }
 
 query nfts(

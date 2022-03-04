@@ -6,10 +6,12 @@ import { AddressPrefix } from '../components/AddressPrefix';
 import { AddressViewable } from '../components/AddressViewable';
 import { Content } from '../components/Content';
 import { Dimmed } from '../components/Dimmed';
+import { HoldersTable } from '../components/HoldersTable';
 import { KeyValueEntry, KeyValueList } from '../components/KeyValueList';
 import { Loading } from '../components/Loading';
 import { PageSection } from '../components/PageSection';
 import { Table } from '../components/Table';
+import { Tabs } from '../components/Tabs';
 import { TwoPanel } from '../components/TwoPanel';
 import { useWallet } from '../hooks/wallet';
 import { formatDate, timestampRelative } from '../lib/string';
@@ -98,44 +100,25 @@ export const CollectionDetailPage: FunctionComponent = () => {
               </KeyValueList>
             </div>
           </TwoPanel>
-          <h3>Holders</h3>
-          <Table>
-            <thead>
-              <tr>
-                <td>Owner</td>
-                <td>Owned</td>
-                <td>Token</td>
-                <td>Engine</td>
-                <td>Last Activity</td>
-              </tr>
-            </thead>
-            <tbody>
-              {detailsQuery.data.collection.nftOwners.map((nftOwner) => (
-                <tr key={nftOwner.id}>
-                  <td>
-                    <Address address={nftOwner.owner.address} />
-                  </td>
-                  <td>
-                    {nftOwner.balance}
-                    <Dimmed>/{nftOwner.nft.totalSupply}</Dimmed>
-                  </td>
-                  <td>
-                    <AddressPrefix address={nftOwner.nft.collection.address}>
-                      {nftOwner.nft.collection.name}
-                    </AddressPrefix>{' '}
-                    #{nftOwner.nft.tokenId}
-                  </td>
-                  <td>
-                    <AddressPrefix address={nftOwner.nft.createdByEngine.address}>
-                      {nftOwner.nft.createdByEngine.name}
-                    </AddressPrefix>
-                  </td>
-                  <td>{timestampRelative(nftOwner.lastActivityAtTimestamp)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
         </Content>
+      </PageSection>
+      <PageSection>
+        <Tabs
+          tabs={[
+            {
+              label: <>Holders</>,
+              content: <HoldersTable owners={detailsQuery.data.collection.nftOwners} />,
+            },
+            {
+              label: <>NFTs</>,
+              content: <></>,
+            },
+            {
+              label: <>Forks</>,
+              content: <></>,
+            },
+          ]}
+        />
       </PageSection>
     </>
   );

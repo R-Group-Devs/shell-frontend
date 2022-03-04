@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 import React, { FunctionComponent, ReactChild } from 'react';
 import { ThemeConfig } from '../Theme';
-import { TwoPanel } from './TwoPanel';
 
 const useStyles = makeStyles<ThemeConfig>((theme) => {
   return {
@@ -37,7 +36,7 @@ export const MultiSelect: FunctionComponent<Props> = ({ items, onSelect }) => {
             <span style={{ visibility: item.selected ? 'visible' : 'hidden', position: 'relative', left: '2px' }}>
               🐚
             </span>
-            ] <span style={{ fontStyle: 'italic', fontWeight: 'bold' }}>{item.display}</span>
+            ] <span style={{ fontWeight: 'bold' }}>{item.display}</span>
           </li>
         ))}
       </ul>
