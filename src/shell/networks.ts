@@ -21,6 +21,16 @@ export const networks: ChainInfo[] = [
     blockTime: 15,
   },
   {
+    chainId: 137,
+    name: 'Polygon',
+    slug: 'polygon',
+    factoryAddress: '0x03741151f5E6CF9736455C0CBCD512bfA8529C93',
+    subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-matic',
+    rpcEndpoint: process.env['POLYGON_URL'] ?? '',
+    blockchainExplorer: 'https://polygonscan.com',
+    blockTime: 2.2,
+  },
+  {
     chainId: 4,
     name: 'Rinkeby Testnet',
     slug: 'rinkeby',
@@ -40,6 +50,7 @@ export const networks: ChainInfo[] = [
     blockchainExplorer: 'https://goerli.etherscan.io',
     blockTime: 15,
   },
+
   {
     chainId: 80001,
     name: 'Mumbai Testnet',
