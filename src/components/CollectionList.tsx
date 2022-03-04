@@ -48,10 +48,10 @@ export const CollectionList: FunctionComponent = () => {
       <Table>
         <thead>
           <tr>
+            <td>Owner</td>
             <td>Collection</td>
             <td>Engine</td>
             <td style={{ textAlign: 'center' }}>NFTs</td>
-            <td>Owner</td>
             <td>Last Activity</td>
           </tr>
         </thead>
@@ -59,15 +59,15 @@ export const CollectionList: FunctionComponent = () => {
           {data.collections.map((c) => (
             <tr key={c.id} onClick={() => history.push(`/collections/${browseChainInfo.slug}/${c.address}`)}>
               <td>
+                <Address address={c.canonicalOwner.address} />
+              </td>
+              <td>
                 <AddressPrefix address={c.address}>{c.name}</AddressPrefix>
               </td>
               <td>
                 <AddressPrefix address={c.canonicalEngine.address}>{c.canonicalEngine.name}</AddressPrefix>
               </td>
               <td style={{ textAlign: 'center' }}>{c.nftCount}</td>
-              <td>
-                <Address address={c.canonicalOwner.address} />
-              </td>
               <td>{timestampRelative(c.lastActivityAtTimestamp)}</td>
             </tr>
           ))}

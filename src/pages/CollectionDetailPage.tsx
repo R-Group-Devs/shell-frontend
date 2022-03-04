@@ -11,6 +11,7 @@ import { Loading } from '../components/Loading';
 import { PageSection } from '../components/PageSection';
 import { Table } from '../components/Table';
 import { TwoPanel } from '../components/TwoPanel';
+import { useWallet } from '../hooks/wallet';
 import { formatDate, timestampRelative } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
 import { getChainInfoBySlug } from '../shell/networks';
@@ -22,6 +23,7 @@ interface Params {
 
 export const CollectionDetailPage: FunctionComponent = () => {
   const { network, address } = useParams<Params>();
+  const { browseChainInfo } = useWallet();
   const chainInfo = getChainInfoBySlug(network);
 
   const detailsQuery = useQuery(['collection details', network, address], async () => {
@@ -40,6 +42,8 @@ export const CollectionDetailPage: FunctionComponent = () => {
     return <p style={{ textAlign: 'center' }}>Unable to load collection</p>;
   }
 
+  const mismatch = browseChainInfo.chainId !== chainInfo.chainId;
+
   return (
     <>
       <PageSection>
@@ -54,7 +58,15 @@ export const CollectionDetailPage: FunctionComponent = () => {
           <TwoPanel template="1fr 1fr">
             <div>
               <KeyValueList>
-                <KeyValueEntry label="Network:" value={chainInfo.name} />
+                <KeyValueEntry
+                  label="Network:"
+                  value={
+                    <>
+                      {mismatch && <>⚠️ </>}
+                      {chainInfo.name}
+                    </>
+                  }
+                />
                 <KeyValueEntry label="Token model:" value={collection.implementation.name} />
                 <KeyValueEntry label="Engine:">
                   <AddressPrefix address={collection.canonicalEngine.address}>

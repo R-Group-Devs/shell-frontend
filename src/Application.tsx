@@ -36,14 +36,14 @@ export const Application: FunctionComponent = () => {
           <Route exact path="/collections/:network/:address">
             <CollectionDetailPage />
           </Route>
-          <Route exact path="/engines">
-            <EnginesPage />
+          <Route exact path="/forks/:network/:collectionAddress/:forkId">
+            <p>fork detail</p>
           </Route>
-          <Route exact path="/nfts">
-            <NftsPage />
+          <Route exact path="/nfts/:network/:collectionAddress/:tokenId">
+            <p>nft detail</p>
           </Route>
-          <Route exact path="/protocol">
-            <ProtocolPage />
+          <Route exact path="/engines/:network/:address">
+            <p>engine detail</p>
           </Route>
           <Route exact path="/connection">
             <ConnectionPage />

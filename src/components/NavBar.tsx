@@ -72,8 +72,6 @@ export const NavBar: FunctionComponent = () => {
           <>
             <div>{navItem('Home', '/')}</div>
             <div>{navItem('Collections', '/collections')}</div>
-            <div>{navItem('NFTs', '/nfts')}</div>
-            <div>{navItem('Engines', '/engines')}</div>
             <div>
               <a target="_blank" href="https://docs.heyshell.xyz">
                 Docs
