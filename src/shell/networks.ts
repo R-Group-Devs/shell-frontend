@@ -30,6 +30,16 @@ export const networks: ChainInfo[] = [
     blockchainExplorer: 'https://rinkeby.etherscan.io',
     blockTime: 15,
   },
+  {
+    chainId: 5,
+    name: 'Goerli Testnet',
+    slug: 'goerli',
+    factoryAddress: '0x0Ff2BC06b7faF18f1AD0C3086DDb26738A532351',
+    subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-goerli',
+    rpcEndpoint: process.env['GOERLI_URL'] ?? '',
+    blockchainExplorer: 'https://goerli.etherscan.io',
+    blockTime: 15,
+  },
 ];
 
 export const getChainInfoOrNull = (chainId: number): ChainInfo | null => {
