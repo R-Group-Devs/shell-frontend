@@ -10,6 +10,9 @@ import { getGraphClient } from '../shell/graph';
 import { Loading } from './Loading';
 import { None } from './None';
 import { EngineLabel } from './EngineLabel';
+import { useWallet } from '../hooks/wallet';
+import { useHistory } from 'react-router-dom';
+import { getChainInfo } from '../shell/networks';
 
 interface Props {
   chainId: number;
@@ -17,6 +20,8 @@ interface Props {
 }
 
 export const HoldersTable: FunctionComponent<Props> = ({ chainId, collectionAddress }) => {
+  const viewChain = getChainInfo(chainId);
+  const history = useHistory();
   const holdersQuery = useQuery(['collection holders', chainId, collectionAddress], async () => {
     const client = getGraphClient(chainId);
     const resp = await client.collectionHolders({ address: collectionAddress });
@@ -44,7 +49,10 @@ export const HoldersTable: FunctionComponent<Props> = ({ chainId, collectionAddr
       </thead>
       <tbody>
         {holdersQuery.data.collection.nftOwners.map((nftOwner) => (
-          <tr key={nftOwner.id}>
+          <tr
+            key={nftOwner.id}
+            onClick={() => history.push(`/nfts/${viewChain.slug}/${collectionAddress}/${nftOwner.nft.tokenId}`)}
+          >
             <td>
               <Address address={nftOwner.owner.address} />
             </td>

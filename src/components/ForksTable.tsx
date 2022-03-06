@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
+import { useHistory } from 'react-router-dom';
 import { timestampRelative } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
+import { getChainInfo } from '../shell/networks';
 import { Address } from './Address';
 import { AddressPrefix } from './AddressPrefix';
 import { Dimmed } from './Dimmed';
@@ -16,6 +18,8 @@ interface Props {
 }
 
 export const ForksTable: FunctionComponent<Props> = ({ chainId, collectionAddress }) => {
+  const viewChain = getChainInfo(chainId);
+  const history = useHistory();
   const nftQuery = useQuery(['collection forks', chainId, collectionAddress], async () => {
     const client = getGraphClient(chainId);
     const resp = await client.collectionForks({ address: collectionAddress });
@@ -43,7 +47,10 @@ export const ForksTable: FunctionComponent<Props> = ({ chainId, collectionAddres
       </thead>
       <tbody>
         {nftQuery.data.collection.forks.map((fork) => (
-          <tr key={fork.id}>
+          <tr
+            key={fork.id}
+            onClick={() => history.push(`/forks/${viewChain.slug}/${collectionAddress}/${fork.forkId}`)}
+          >
             <td>{fork.forkId === '0' ? 'Root Fork *' : `Fork ${fork.forkId}`}</td>
             <td>
               <AddressPrefix address={fork.engine.address}>{fork.engine.name}</AddressPrefix>

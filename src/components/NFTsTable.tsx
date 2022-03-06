@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
+import { useHistory } from 'react-router-dom';
 import { timestampRelative } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
-import { AddressPrefix } from './AddressPrefix';
+import { getChainInfo } from '../shell/networks';
 import { EngineLabel } from './EngineLabel';
 import { Loading } from './Loading';
 import { None } from './None';
@@ -14,6 +15,8 @@ interface Props {
 }
 
 export const NFTsTable: FunctionComponent<Props> = ({ chainId, collectionAddress }) => {
+  const viewChain = getChainInfo(chainId);
+  const history = useHistory();
   const nftQuery = useQuery(['collection nfts', chainId, collectionAddress], async () => {
     const client = getGraphClient(chainId);
     const resp = await client.collectionNfts({ address: collectionAddress });
@@ -42,7 +45,7 @@ export const NFTsTable: FunctionComponent<Props> = ({ chainId, collectionAddress
       </thead>
       <tbody>
         {nftQuery.data.collection.nfts.map((nft) => (
-          <tr key={nft.id}>
+          <tr key={nft.id} onClick={() => history.push(`/nfts/${viewChain.slug}/${collectionAddress}/${nft.tokenId}`)}>
             <td>{nft.totalSupply}</td>
             <td>
               {nft.collection.name} #{nft.tokenId}
