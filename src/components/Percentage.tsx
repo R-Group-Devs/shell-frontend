@@ -5,8 +5,8 @@ interface Props {
 }
 
 export const Percentage: FunctionComponent<Props> = ({ amount }) => {
-  if (amount === undefined) {
-    return <>-</>;
+  if (!Number.isFinite(amount)) {
+    return <>N/A</>;
   }
 
   const p = amount * 100;

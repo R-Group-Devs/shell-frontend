@@ -49,11 +49,15 @@ export const ForksTable: FunctionComponent<Props> = ({ chainId, collectionAddres
               <AddressPrefix address={fork.engine.address}>{fork.engine.name}</AddressPrefix>
             </td>
             <td>
-              {fork.nftCount}{' '}
-              <Dimmed>
-                (<Percentage amount={fork.nftCount / nftQuery.data.collection.nftCount} />
-                %)
-              </Dimmed>
+              <>
+                {fork.nftCount}{' '}
+                {fork.nftCount > 0 && (
+                  <Dimmed>
+                    (<Percentage amount={fork.nftCount / nftQuery.data.collection.nftCount} />
+                    %)
+                  </Dimmed>
+                )}
+              </>
             </td>
             <td>
               <Address address={fork.owner.address} />
