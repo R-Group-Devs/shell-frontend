@@ -1,24 +1,34 @@
 import React, { FunctionComponent } from 'react';
+import { useQuery } from 'react-query';
+
 import { timestampRelative } from '../lib/string';
 import { Address } from './Address';
 import { AddressPrefix } from './AddressPrefix';
 import { Dimmed } from './Dimmed';
 import { Table } from './Table';
-import { NftOwnerInfoFragment } from '../shell/graph-generated';
+import { getGraphClient } from '../shell/graph';
+import { Loading } from './Loading';
+import { None } from './None';
+import { EngineLabel } from './EngineLabel';
 
 interface Props {
-  owners?: NftOwnerInfoFragment[];
+  chainId: number;
+  collectionAddress: string;
 }
 
-export const HoldersTable: FunctionComponent<Props> = ({ owners }) => {
-  if (!owners) return null;
+export const HoldersTable: FunctionComponent<Props> = ({ chainId, collectionAddress }) => {
+  const holdersQuery = useQuery(['collection holders', chainId, collectionAddress], async () => {
+    const client = getGraphClient(chainId);
+    const resp = await client.collectionHolders({ address: collectionAddress });
+    return resp.data;
+  });
 
-  if (owners.length === 0) {
-    return (
-      <p style={{ textAlign: 'center' }}>
-        <Dimmed>(none)</Dimmed>
-      </p>
-    );
+  if (holdersQuery.isLoading || !holdersQuery.data) {
+    return <Loading message="Fetching holders..." />;
+  }
+
+  if (holdersQuery.data.collection.nftOwners.length === 0) {
+    return <None />;
   }
 
   return (
@@ -28,12 +38,12 @@ export const HoldersTable: FunctionComponent<Props> = ({ owners }) => {
           <td>Owner</td>
           <td>Owned</td>
           <td>Token</td>
-          <td>Engine</td>
+          <td>Current Engine</td>
           <td>Last Activity</td>
         </tr>
       </thead>
       <tbody>
-        {owners.map((nftOwner) => (
+        {holdersQuery.data.collection.nftOwners.map((nftOwner) => (
           <tr key={nftOwner.id}>
             <td>
               <Address address={nftOwner.owner.address} />
@@ -46,9 +56,7 @@ export const HoldersTable: FunctionComponent<Props> = ({ owners }) => {
               {nftOwner.nft.collection.name} #{nftOwner.nft.tokenId}
             </td>
             <td>
-              <AddressPrefix address={nftOwner.nft.createdByEngine.address}>
-                {nftOwner.nft.createdByEngine.name}
-              </AddressPrefix>
+              <EngineLabel forkId={nftOwner.nft.fork.forkId} engine={nftOwner.nft.fork.engine} />
             </td>
             <td>{timestampRelative(nftOwner.lastActivityAtTimestamp)}</td>
           </tr>

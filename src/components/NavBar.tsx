@@ -53,8 +53,8 @@ export const NavBar: FunctionComponent = () => {
   const latest = useLatestBlockNumber();
 
   let behind = 0;
-  if (latest.blockchain.data && latest.indexer.data) {
-    behind = ((latest.blockchain.data ?? 0) - (latest.indexer.data ?? 0)) * browseChainInfo.blockTime;
+  if (latest) {
+    behind = (latest.currentBlock - latest.lastIndexedBlock) * browseChainInfo.blockTime;
   }
 
   const tap = () => {

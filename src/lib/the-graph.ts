@@ -5,7 +5,7 @@ export const getHostedGraphServiceClient = memoize(
   () => new GraphQLClient('https://api.thegraph.com/index-node/graphql')
 );
 
-export const getLatestIndexedBlock = async (subgraphName: string): Promise<number> => {
+export const getIndexerInfo = async (subgraphName: string) => {
   const client = getHostedGraphServiceClient();
   const resp = await client.request(
     gql`
@@ -13,7 +13,13 @@ export const getLatestIndexedBlock = async (subgraphName: string): Promise<numbe
         indexingStatusForCurrentVersion(subgraphName: $subgraphName) {
           chains {
             latestBlock {
-              hash
+              number
+            }
+          }
+        }
+        indexingStatusForPendingVersion(subgraphName: $subgraphName) {
+          chains {
+            latestBlock {
               number
             }
           }
@@ -23,5 +29,6 @@ export const getLatestIndexedBlock = async (subgraphName: string): Promise<numbe
     { subgraphName }
   );
   const latestBlock = Number(resp.indexingStatusForCurrentVersion.chains[0].latestBlock.number);
-  return latestBlock;
+  const pendingUpdate = resp.indexingStatusForPendingVersion !== null;
+  return { latestBlock, pendingUpdate };
 };

@@ -1,7 +1,9 @@
 import { useQuery } from 'react-query';
 import { getRpc } from '../lib/web3';
-import { getLatestIndexedBlock } from '../lib/the-graph';
+import { getIndexerInfo } from '../lib/the-graph';
 import { useWallet } from './wallet';
+
+const refetchInterval = 10 * 1000;
 
 export const useLatestBlockNumber = () => {
   const { browseChainInfo } = useWallet();
@@ -9,11 +11,17 @@ export const useLatestBlockNumber = () => {
   const rpc = getRpc(chainId);
   const subgraphName = subgraphEndpoint.replace('https://api.thegraph.com/subgraphs/name/', '');
 
-  const indexer = useQuery(['last indexed block', chainId], () => getLatestIndexedBlock(subgraphName), {
-    refetchInterval: 2500,
-  });
+  const indexerInfo = useQuery(['indexer info', chainId], () => getIndexerInfo(subgraphName), { refetchInterval });
 
-  const blockchain = useQuery(['latest block', chainId], () => rpc.getBlockNumber(), { refetchInterval: 2500 });
+  const blockchainInfo = useQuery(['latest block', chainId], () => rpc.getBlockNumber(), { refetchInterval });
 
-  return { indexer, blockchain };
+  if (!indexerInfo.data || !blockchainInfo.data) {
+    return undefined;
+  }
+
+  return {
+    currentBlock: blockchainInfo.data,
+    lastIndexedBlock: indexerInfo.data.latestBlock,
+    pendingSubgraphUpdate: indexerInfo.data.pendingUpdate,
+  };
 };

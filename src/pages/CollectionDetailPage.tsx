@@ -1,20 +1,19 @@
 import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
-import { Address } from '../components/Address';
 import { AddressPrefix } from '../components/AddressPrefix';
 import { AddressViewable } from '../components/AddressViewable';
 import { Content } from '../components/Content';
-import { Dimmed } from '../components/Dimmed';
+import { ForksTable } from '../components/ForksTable';
 import { HoldersTable } from '../components/HoldersTable';
 import { KeyValueEntry, KeyValueList } from '../components/KeyValueList';
 import { Loading } from '../components/Loading';
+import { NFTsTable } from '../components/NFTsTable';
 import { PageSection } from '../components/PageSection';
-import { Table } from '../components/Table';
 import { Tabs } from '../components/Tabs';
 import { TwoPanel } from '../components/TwoPanel';
 import { useWallet } from '../hooks/wallet';
-import { formatDate, timestampRelative } from '../lib/string';
+import { formatDate } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
 import { getChainInfoBySlug } from '../shell/networks';
 
@@ -51,7 +50,9 @@ export const CollectionDetailPage: FunctionComponent = () => {
       <PageSection>
         <Content>
           <h2>
-            <AddressPrefix address={collection.address}>{collection.name}</AddressPrefix>
+            <AddressPrefix address={collection.address}>
+              {collection.name} ({collection.symbol})
+            </AddressPrefix>
           </h2>
         </Content>
       </PageSection>
@@ -77,26 +78,19 @@ export const CollectionDetailPage: FunctionComponent = () => {
                     </Link>
                   </AddressPrefix>
                 </KeyValueEntry>
-                <KeyValueEntry
-                  label="Address:"
-                  value={<AddressViewable address={collection.address} chainId={chainInfo.chainId} isToken />}
-                />
-                <KeyValueEntry
-                  label="Owner:"
-                  value={<AddressViewable address={collection.canonicalOwner.address} chainId={chainInfo.chainId} />}
-                />
               </KeyValueList>
             </div>
             <div>
               <KeyValueList>
-                <KeyValueEntry label="Symbol:" value={collection.symbol} />
+                <KeyValueEntry
+                  label="Owner:"
+                  value={<AddressViewable address={collection.canonicalOwner.address} chainId={chainInfo.chainId} />}
+                />
                 <KeyValueEntry
                   label="Creator:"
                   value={<AddressViewable address={collection.creator.address} chainId={chainInfo.chainId} />}
                 />
                 <KeyValueEntry label="Created:" value={formatDate(collection.createdAtTimestamp)} />
-                <KeyValueEntry label="Last activity:" value={timestampRelative(collection.lastActivityAtTimestamp)} />
-                <KeyValueEntry label="Total NFTs" value={collection.nftCount.toLocaleString()} />
               </KeyValueList>
             </div>
           </TwoPanel>
@@ -107,15 +101,15 @@ export const CollectionDetailPage: FunctionComponent = () => {
           tabs={[
             {
               label: <>Holders</>,
-              content: <HoldersTable owners={detailsQuery.data.collection.nftOwners} />,
+              content: <HoldersTable chainId={chainInfo.chainId} collectionAddress={address} />,
             },
             {
-              label: <>NFTs</>,
-              content: <></>,
+              label: <>NFTs ({collection.nftCount.toLocaleString()})</>,
+              content: <NFTsTable chainId={chainInfo.chainId} collectionAddress={address} />,
             },
             {
-              label: <>Forks</>,
-              content: <></>,
+              label: <>Forks ({collection.forkCount})</>,
+              content: <ForksTable chainId={chainInfo.chainId} collectionAddress={address} />,
             },
           ]}
         />

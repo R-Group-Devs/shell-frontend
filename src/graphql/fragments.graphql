@@ -1,0 +1,63 @@
+fragment CollectionInfo on Collection {
+  id
+  name
+  symbol
+  address
+  nftCount
+  forkCount
+  createdAtTimestamp
+  lastActivityAtTimestamp
+  implementation { id name address }
+  factory { id address }
+  canonicalEngine { id address name }
+  canonicalOwner { id address }
+  creator { id address }
+}
+
+fragment NFTInfo on NFT {
+  id
+  tokenId
+  totalSupply
+  createdAtTimestamp
+  lastActivityAtTimestamp
+
+  collection { id address name symbol }
+  createdByEngine { id name address }
+  fork { id forkId engine { id name address } }
+
+  owners(orderBy: createdAtTimestamp orderDirection: asc) {
+    id
+    owner { id address }
+    balance
+    createdAtTimestamp
+    lastActivityAtTimestamp
+  }
+}
+
+fragment NFTOwnerInfo on NFTOwner {
+  id
+  nft { ... NFTInfo }
+  owner { id address }
+  balance
+  createdAtTimestamp
+  lastActivityAtTimestamp
+}
+
+fragment ForkInfo on Fork {
+  id
+  forkId
+  owner { id address }
+  engine { id address name }
+  collection { id address name symbol }
+  nftCount
+  createdAtTimestamp
+  storage {
+    id
+    location
+    storageType
+    key
+    stringValue
+    intValue
+    updatedAtTimestamp
+  }
+}

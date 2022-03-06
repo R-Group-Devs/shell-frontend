@@ -44,8 +44,8 @@ export const NetworkPage: FunctionComponent = () => {
   const hostedPlayground = `https://thegraph.com/hosted-service/subgraph/${subgraphName}`;
 
   let behind = 0;
-  if (latest.blockchain.data && latest.indexer.data) {
-    behind = ((latest.blockchain.data ?? 0) - (latest.indexer.data ?? 0)) * blockTime;
+  if (latest) {
+    behind = (latest.currentBlock - latest.lastIndexedBlock) * blockTime;
   }
 
   return (
@@ -76,8 +76,12 @@ export const NetworkPage: FunctionComponent = () => {
               <KeyValueEntry label="Token models:" value={factoryQuery.data?.factory?.implementationCount} />
               <KeyValueEntry label="Collections:" value={factoryQuery.data?.factory?.collectionCount} />
               <KeyValueEntry label="NFTs:" value={factoryQuery.data?.factory?.nftCount.toLocaleString()} />
-              <KeyValueEntry label="Latest block:" value={latest.blockchain.data} />
-              <KeyValueEntry label="Latest indexed block:" value={latest.indexer.data} />
+              <KeyValueEntry label="Latest block:" value={latest?.currentBlock} />
+              <KeyValueEntry label="Latest indexed block:" value={latest?.lastIndexedBlock} />
+              <KeyValueEntry
+                label="Subgraph status:"
+                value={latest?.pendingSubgraphUpdate ? 'Update pending' : 'Synced'}
+              />
               <KeyValueEntry
                 label="Subgraph"
                 value={

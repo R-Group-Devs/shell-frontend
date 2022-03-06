@@ -13,11 +13,12 @@ const useStyles = makeStyles((theme: ThemeConfig) => {
   return {
     header: {
       display: 'flex',
+      fontSize: theme.spacing(3.5),
       gap: theme.spacing(4),
       borderBottom: `solid 1px ${theme.palette.background.light}`,
       '& div': {
         cursor: 'pointer',
-        padding: `${theme.spacing(2)} ${theme.spacing(8)} ${theme.spacing(2)} ${theme.spacing(2)}`,
+        padding: `${theme.spacing(2)} ${theme.spacing(8)} ${theme.spacing(2)} ${theme.spacing(8)}`,
       },
       marginBottom: theme.spacing(4),
     },

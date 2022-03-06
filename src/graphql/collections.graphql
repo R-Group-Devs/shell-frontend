@@ -1,18 +1,3 @@
-fragment CollectionInfo on Collection {
-    id
-    name
-    symbol
-    address
-    nftCount
-    createdAtTimestamp
-    lastActivityAtTimestamp
-    implementation { id name address }
-    factory { id address }
-    canonicalEngine { id address name }
-    canonicalOwner { id address }
-    creator { id address }
-}
-
 query collections(
   $orderBy: Collection_orderBy = lastActivityAtTimestamp,
   $orderDirection: OrderDirection = desc)
@@ -25,15 +10,36 @@ query collections(
 query collectionDetail($address: ID!) {
   collection(id: $address) {
     ... CollectionInfo
+  }
+}
 
+query collectionHolders($address: ID!) {
+  collection(id: $address) {
+    id
     nftOwners(orderBy: lastActivityAtTimestamp orderDirection: desc) {
-      id
-      nft { ... NFTInfo }
-      owner { id address }
-      balance
-      createdAtTimestamp
-      lastActivityAtTimestamp
+      ... NFTOwnerInfo
     }
+  }
+}
 
+query collectionNfts($address: ID!) {
+  collection(id: $address) {
+    id
+    forks (where: { forkId: 0}) {
+      ... ForkInfo
+    }
+    nfts (orderBy: tokenId orderDirection: asc) {
+      ... NFTInfo
+    }
+  }
+}
+
+query collectionForks($address: ID!) {
+  collection(id: $address) {
+    id
+    nftCount
+    forks(orderBy: nftCount orderDirection: desc) {
+      ... ForkInfo
+    }
   }
 }
