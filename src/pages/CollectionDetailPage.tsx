@@ -25,10 +25,10 @@ interface Params {
 export const CollectionDetailPage: FunctionComponent = () => {
   const { network, address } = useParams<Params>();
   const { browseChainInfo } = useWallet();
-  const chainInfo = getChainInfoBySlug(network);
+  const viewChainInfo = getChainInfoBySlug(network);
 
   const detailsQuery = useQuery(['collection details', network, address], async () => {
-    const client = getGraphClient(chainInfo.chainId);
+    const client = getGraphClient(viewChainInfo.chainId);
     const resp = await client.collectionDetail({ address });
     return resp.data;
   });
@@ -43,7 +43,7 @@ export const CollectionDetailPage: FunctionComponent = () => {
     return <p style={{ textAlign: 'center' }}>Unable to load collection</p>;
   }
 
-  const mismatch = browseChainInfo.chainId !== chainInfo.chainId;
+  const mismatch = browseChainInfo.chainId !== viewChainInfo.chainId;
 
   return (
     <>
@@ -66,14 +66,14 @@ export const CollectionDetailPage: FunctionComponent = () => {
                   value={
                     <>
                       {mismatch && <>⚠️ </>}
-                      {chainInfo.name}
+                      {viewChainInfo.name}
                     </>
                   }
                 />
                 <KeyValueEntry label="Token model:" value={collection.implementation.name} />
-                <KeyValueEntry label="Engine:">
+                <KeyValueEntry label="Root fork:">
                   <AddressPrefix address={collection.canonicalEngine.address}>
-                    <Link to={`/engines/${chainInfo.slug}/${collection.canonicalEngine.address}`}>
+                    <Link to={`/forks/${viewChainInfo.slug}/${collection.address}/0`}>
                       {collection.canonicalEngine.name}
                     </Link>
                   </AddressPrefix>
@@ -84,11 +84,13 @@ export const CollectionDetailPage: FunctionComponent = () => {
               <KeyValueList>
                 <KeyValueEntry
                   label="Owner:"
-                  value={<AddressViewable address={collection.canonicalOwner.address} chainId={chainInfo.chainId} />}
+                  value={
+                    <AddressViewable address={collection.canonicalOwner.address} chainId={viewChainInfo.chainId} />
+                  }
                 />
                 <KeyValueEntry
                   label="Creator:"
-                  value={<AddressViewable address={collection.creator.address} chainId={chainInfo.chainId} />}
+                  value={<AddressViewable address={collection.creator.address} chainId={viewChainInfo.chainId} />}
                 />
                 <KeyValueEntry label="Created:" value={formatDate(collection.createdAtTimestamp)} />
               </KeyValueList>
@@ -101,15 +103,15 @@ export const CollectionDetailPage: FunctionComponent = () => {
           tabs={[
             {
               label: <>Holders</>,
-              content: <HoldersTable chainId={chainInfo.chainId} collectionAddress={address} />,
+              content: <HoldersTable chainId={viewChainInfo.chainId} collectionAddress={address} />,
             },
             {
               label: <>NFTs ({collection.nftCount.toLocaleString()})</>,
-              content: <NFTsTable chainId={chainInfo.chainId} collectionAddress={address} />,
+              content: <NFTsTable chainId={viewChainInfo.chainId} collectionAddress={address} />,
             },
             {
               label: <>Forks ({collection.forkCount})</>,
-              content: <ForksTable chainId={chainInfo.chainId} collectionAddress={address} />,
+              content: <ForksTable chainId={viewChainInfo.chainId} collectionAddress={address} />,
             },
           ]}
         />

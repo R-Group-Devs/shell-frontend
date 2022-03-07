@@ -46,6 +46,7 @@ fragment NFTOwnerInfo on NFTOwner {
 fragment ForkInfo on Fork {
   id
   forkId
+  creator { id address }
   owner { id address }
   engine { id address name }
   collection { id address name symbol }

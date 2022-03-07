@@ -1,0 +1,14 @@
+query forkDetail($id: ID!) {
+  fork(id: $id) {
+    ... ForkInfo
+  }
+}
+
+query forkNfts($id: ID!) {
+  fork(id: $id) {
+    id
+    nfts (orderBy: tokenId orderDirection: asc) {
+      ... NFTInfo
+    }
+  }
+}

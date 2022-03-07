@@ -9,6 +9,7 @@ import { NetworkPage } from './pages/NetworkPage';
 import { ConnectionPage } from './pages/ConnectionPage';
 import { splash } from './splash';
 import { LaunchLandingPage } from './pages/LaunchLandingPage';
+import { ForkDetail } from './pages/ForkDetailPage';
 
 splash();
 
@@ -34,7 +35,7 @@ export const Application: FunctionComponent = () => {
             <CollectionDetailPage />
           </Route>
           <Route exact path="/forks/:network/:collectionAddress/:forkId">
-            <p>fork detail</p>
+            <ForkDetail />
           </Route>
           <Route exact path="/nfts/:network/:collectionAddress/:tokenId">
             <p>nft detail</p>

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import { useWallet } from '../hooks/wallet';
 import { timestampRelative } from '../lib/string';
-import { getCollections } from '../shell/graph';
+import { getGraphClient } from '../shell/graph';
 import { Address } from './Address';
 import { AddressPrefix } from './AddressPrefix';
 import { Loading } from './Loading';
@@ -25,9 +25,11 @@ export const CollectionList: FunctionComponent = () => {
   const { browseChainInfo } = useWallet();
   const history = useHistory();
   const classes = useStyles();
-  const { data, isLoading } = useQuery(['CollectionList', browseChainInfo.chainId], () =>
-    getCollections({ chainId: browseChainInfo.chainId })
-  );
+  const { data, isLoading } = useQuery(['collection list', browseChainInfo.chainId], async () => {
+    const client = getGraphClient(browseChainInfo.chainId);
+    const resp = await client.collections();
+    return resp.data;
+  });
 
   if (isLoading) {
     return <Loading message="fetching collections..." />;

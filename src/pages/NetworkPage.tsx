@@ -80,7 +80,23 @@ export const NetworkPage: FunctionComponent = () => {
               <KeyValueEntry label="Latest indexed block:" value={latest?.lastIndexedBlock} />
               <KeyValueEntry
                 label="Subgraph status:"
-                value={latest?.pendingSubgraphUpdate ? '⚠️ Update pending' : 'Synced'}
+                value={
+                  latest?.pendingSubgraphUpdate ? (
+                    <>
+                      ⚠️ Update pending{' '}
+                      {latest.pendingSubgraphBlocksRemaining ? (
+                        <>
+                          <br />
+                          <Dimmed>({latest.pendingSubgraphBlocksRemaining.toLocaleString()} blocks remaining)</Dimmed>
+                        </>
+                      ) : (
+                        ''
+                      )}
+                    </>
+                  ) : (
+                    'Synced'
+                  )
+                }
               />
               <KeyValueEntry
                 label="Subgraph"

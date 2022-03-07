@@ -3,14 +3,12 @@ import { useQuery } from 'react-query';
 
 import { timestampRelative } from '../lib/string';
 import { Address } from './Address';
-import { AddressPrefix } from './AddressPrefix';
 import { Dimmed } from './Dimmed';
 import { Table } from './Table';
 import { getGraphClient } from '../shell/graph';
 import { Loading } from './Loading';
 import { None } from './None';
 import { EngineLabel } from './EngineLabel';
-import { useWallet } from '../hooks/wallet';
 import { useHistory } from 'react-router-dom';
 import { getChainInfo } from '../shell/networks';
 

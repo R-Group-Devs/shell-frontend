@@ -23,5 +23,8 @@ export const useLatestBlockNumber = () => {
     currentBlock: blockchainInfo.data,
     lastIndexedBlock: indexerInfo.data.latestBlock,
     pendingSubgraphUpdate: indexerInfo.data.pendingUpdate,
+    pendingSubgraphBlocksRemaining: indexerInfo.data.pendingUpdate
+      ? blockchainInfo.data - indexerInfo.data.latestPendingUpdateBlock
+      : 0,
   };
 };

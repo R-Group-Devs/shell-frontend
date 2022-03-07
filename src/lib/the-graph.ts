@@ -30,5 +30,8 @@ export const getIndexerInfo = async (subgraphName: string) => {
   );
   const latestBlock = Number(resp.indexingStatusForCurrentVersion.chains[0].latestBlock.number);
   const pendingUpdate = resp.indexingStatusForPendingVersion !== null;
-  return { latestBlock, pendingUpdate };
+  const latestPendingUpdateBlock = pendingUpdate
+    ? resp.indexingStatusForPendingVersion.chains[0].latestBlock.number
+    : null;
+  return { latestBlock, pendingUpdate, latestPendingUpdateBlock };
 };
