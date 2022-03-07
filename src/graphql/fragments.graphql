@@ -38,6 +38,17 @@ fragment NFTInfo on NFT {
     createdAtTimestamp
     lastActivityAtTimestamp
   }
+
+  storage {
+    id
+    key
+    storageType
+    location
+    intValue
+    stringValue
+    createdAtTimestamp
+    updatedAtTimestamp
+  }
 }
 
 fragment NFTOwnerInfo on NFTOwner {
@@ -60,11 +71,12 @@ fragment ForkInfo on Fork {
   createdAtTimestamp
   storage {
     id
-    location
-    storageType
     key
-    stringValue
+    storageType
+    location
     intValue
+    stringValue
+    createdAtTimestamp
     updatedAtTimestamp
   }
 }

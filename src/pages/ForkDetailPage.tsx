@@ -4,17 +4,15 @@ import { Link, useParams } from 'react-router-dom';
 import { AddressPrefix } from '../components/AddressPrefix';
 import { AddressViewable } from '../components/AddressViewable';
 import { Content } from '../components/Content';
-import { Dimmed } from '../components/Dimmed';
 import { KeyValueList, KeyValueEntry } from '../components/KeyValueList';
 import { Loading } from '../components/Loading';
 import { NFTsTable } from '../components/NFTsTable';
-import { None } from '../components/None';
 import { PageSection } from '../components/PageSection';
-import { Table } from '../components/Table';
+import { StorageTable } from '../components/StorageTable';
 import { Tabs } from '../components/Tabs';
 import { TwoPanel } from '../components/TwoPanel';
 import { useWallet } from '../hooks/wallet';
-import { formatDate, timestampRelative } from '../lib/string';
+import { formatDate } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
 import { getChainInfoBySlug } from '../shell/networks';
 
@@ -48,9 +46,7 @@ export const ForkDetailPage: FunctionComponent = () => {
       <PageSection>
         <Content>
           <h2>
-            <AddressPrefix address={fork.collection.address}>
-              {forkId === '0' ? 'Root Fork' : `Fork ${forkId}`} - {fork.collection.name} ({fork.collection.symbol})
-            </AddressPrefix>
+            {forkId === '0' ? 'Root Fork' : `Fork ${forkId}`} - {fork.collection.name} ({fork.collection.symbol})
           </h2>
         </Content>
       </PageSection>
@@ -68,16 +64,16 @@ export const ForkDetailPage: FunctionComponent = () => {
                     </>
                   }
                 />
-                <KeyValueEntry label="Engine:">
-                  <AddressPrefix address={fork.engine.address}>
-                    <Link to={`/engines/${viewChainInfo.slug}/${fork.engine.address}`}>{fork.engine.name}</Link>
-                  </AddressPrefix>
-                </KeyValueEntry>
                 <KeyValueEntry label="Collection:">
                   <AddressPrefix address={fork.collection.address}>
                     <Link to={`/collections/${viewChainInfo.slug}/${fork.collection.address}`}>
                       {fork.collection.name}
                     </Link>
+                  </AddressPrefix>
+                </KeyValueEntry>
+                <KeyValueEntry label="Engine:">
+                  <AddressPrefix address={fork.engine.address}>
+                    <Link to={`/engines/${viewChainInfo.slug}/${fork.engine.address}`}>{fork.engine.name}</Link>
                   </AddressPrefix>
                 </KeyValueEntry>
               </KeyValueList>
@@ -107,31 +103,7 @@ export const ForkDetailPage: FunctionComponent = () => {
             },
             {
               label: <>Fork Storage ({fork.storage.length})</>,
-              content:
-                fork.storage.length == 0 ? (
-                  <None />
-                ) : (
-                  <Table disableClick>
-                    <thead>
-                      <td>Key</td>
-                      <td>Location</td>
-                      <td>Value</td>
-                      <td>Last Updated</td>
-                    </thead>
-                    <tbody>
-                      {fork.storage.map((storage) => (
-                        <tr>
-                          <td>
-                            <Dimmed>{storage.stringValue === null ? 'uint256' : 'string'}</Dimmed> {storage.key}
-                          </td>
-                          <td>{storage.location}</td>
-                          <td>{storage.intValue}</td>
-                          <td>{timestampRelative(storage.updatedAtTimestamp)}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                ),
+              content: <StorageTable storage={fork.storage} />,
             },
           ]}
         />
