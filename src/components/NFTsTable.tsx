@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { timestampRelative } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
+import { Nft_Filter } from '../shell/graph-generated';
 import { getChainInfo } from '../shell/networks';
 import { EngineLabel } from './EngineLabel';
 import { Loading } from './Loading';
@@ -11,15 +12,16 @@ import { Table } from './Table';
 
 interface Props {
   chainId: number;
-  collectionAddress: string;
+  filter?: Nft_Filter;
+  hideCurrentEngine?: boolean;
 }
 
-export const NFTsTable: FunctionComponent<Props> = ({ chainId, collectionAddress }) => {
+export const NFTsTable: FunctionComponent<Props> = ({ chainId, filter, hideCurrentEngine }) => {
   const viewChain = getChainInfo(chainId);
   const history = useHistory();
-  const nftQuery = useQuery(['collection nfts', chainId, collectionAddress], async () => {
+  const nftQuery = useQuery(['get nfts', chainId, filter], async () => {
     const client = getGraphClient(chainId);
-    const resp = await client.collectionNfts({ address: collectionAddress });
+    const resp = await client.getNfts({ filter });
     return resp.data;
   });
 
@@ -27,7 +29,7 @@ export const NFTsTable: FunctionComponent<Props> = ({ chainId, collectionAddress
     return <Loading message="Fetching NFTs..." />;
   }
 
-  if (nftQuery.data.collection.nfts.length === 0) {
+  if (nftQuery.data.nfts.length === 0) {
     return <None />;
   }
 
@@ -37,27 +39,29 @@ export const NFTsTable: FunctionComponent<Props> = ({ chainId, collectionAddress
         <tr>
           <td>Supply</td>
           <td>Token</td>
-          <td>Current Engine</td>
+          {!hideCurrentEngine && <td>Current Engine</td>}
           <td>Mint Engine</td>
           <td>Minted</td>
           <td>Last Activity</td>
         </tr>
       </thead>
       <tbody>
-        {nftQuery.data.collection.nfts.map((nft) => (
-          <tr key={nft.id} onClick={() => history.push(`/nfts/${viewChain.slug}/${collectionAddress}/${nft.tokenId}`)}>
+        {nftQuery.data.nfts.map((nft) => (
+          <tr
+            key={nft.id}
+            onClick={() => history.push(`/nfts/${viewChain.slug}/${nft.collection.address}/${nft.tokenId}`)}
+          >
             <td>{nft.totalSupply}</td>
             <td>
               {nft.collection.name} #{nft.tokenId}
             </td>
+            {!hideCurrentEngine && (
+              <td>
+                <EngineLabel forkId={nft.fork.forkId} engine={nft.fork.engine} />
+              </td>
+            )}
             <td>
-              <EngineLabel forkId={nft.fork.forkId} engine={nft.fork.engine} />
-            </td>
-            <td>
-              <EngineLabel
-                engine={nft.createdByEngine}
-                rootEngineAddress={nftQuery.data.collection.forks[0].engine.address}
-              />
+              <EngineLabel engine={nft.createdByEngine} rootEngineAddress={nft.collection.canonicalEngine.address} />
             </td>
             <td>{timestampRelative(nft.createdAtTimestamp)}</td>
             <td>{timestampRelative(nft.lastActivityAtTimestamp)}</td>

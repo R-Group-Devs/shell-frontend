@@ -107,7 +107,7 @@ export const CollectionDetailPage: FunctionComponent = () => {
             },
             {
               label: <>NFTs ({collection.nftCount.toLocaleString()})</>,
-              content: <NFTsTable chainId={viewChainInfo.chainId} collectionAddress={address} />,
+              content: <NFTsTable chainId={viewChainInfo.chainId} filter={{ collection: address }} />,
             },
             {
               label: <>Forks ({collection.forkCount})</>,

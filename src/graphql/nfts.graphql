@@ -1,0 +1,9 @@
+query getNfts(
+  $orderBy: NFT_orderBy = tokenId
+  $orderDirection: OrderDirection = asc
+  $filter: NFT_filter
+) {
+  nfts(orderBy: tokenId, orderDirection: asc, where: $filter) {
+    ...NFTInfo
+  }
+}

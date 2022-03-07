@@ -6,8 +6,10 @@ import { AddressViewable } from '../components/AddressViewable';
 import { Content } from '../components/Content';
 import { KeyValueList, KeyValueEntry } from '../components/KeyValueList';
 import { Loading } from '../components/Loading';
+import { NFTsTable } from '../components/NFTsTable';
 import { Page } from '../components/Page';
 import { PageSection } from '../components/PageSection';
+import { Tabs } from '../components/Tabs';
 import { TwoPanel } from '../components/TwoPanel';
 import { useWallet } from '../hooks/wallet';
 import { formatDate } from '../lib/string';
@@ -81,7 +83,7 @@ export const ForkDetail: FunctionComponent = () => {
             <div>
               <KeyValueList>
                 <KeyValueEntry
-                  label="Owner:"
+                  label="Admin:"
                   value={<AddressViewable address={fork.owner.address} chainId={viewChainInfo.chainId} />}
                 />
                 <KeyValueEntry
@@ -93,6 +95,20 @@ export const ForkDetail: FunctionComponent = () => {
             </div>
           </TwoPanel>
         </Content>
+      </PageSection>
+      <PageSection>
+        <Tabs
+          tabs={[
+            {
+              label: <>NFTs</>,
+              content: <NFTsTable chainId={viewChainInfo.chainId} filter={{ fork: fork.id }} hideCurrentEngine />,
+            },
+            {
+              label: <>Storage</>,
+              content: null,
+            },
+          ]}
+        />
       </PageSection>
     </>
   );

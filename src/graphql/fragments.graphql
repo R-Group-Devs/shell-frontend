@@ -21,7 +21,13 @@ fragment NFTInfo on NFT {
   createdAtTimestamp
   lastActivityAtTimestamp
 
-  collection { id address name symbol }
+  collection {
+    id
+    address
+    name
+    symbol
+    canonicalEngine { id address name }
+  }
   createdByEngine { id name address }
   fork { id forkId engine { id name address } }
 
