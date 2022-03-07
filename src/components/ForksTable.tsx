@@ -57,7 +57,7 @@ export const ForksTable: FunctionComponent<Props> = ({ chainId, collectionAddres
             </td>
             <td>
               <>
-                {fork.nftCount}{' '}
+                {fork.nftCount.toLocaleString()}{' '}
                 {fork.nftCount > 0 && (
                   <Dimmed>
                     (<Percentage amount={fork.nftCount / nftQuery.data.collection.nftCount} />

@@ -3,7 +3,11 @@ import React, { FunctionComponent } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { ThemeConfig } from '../Theme';
 
-const useStyles = makeStyles((theme: ThemeConfig) => {
+interface Props {
+  disableClick?: boolean;
+}
+
+const useStyles = makeStyles<ThemeConfig, Props>((theme) => {
   return {
     table: {
       borderCollapse: 'collapse',
@@ -23,8 +27,8 @@ const useStyles = makeStyles((theme: ThemeConfig) => {
       '& tbody td': {
         paddingRight: theme.spacing(2),
       },
-      '& tbody tr:hover': {
-        cursor: 'pointer',
+      '& tbody tr': {
+        cursor: (props) => (props.disableClick ? 'normal' : 'pointer'),
         '&:hover': {
           backgroundColor: theme.palette.accent.secondary,
           color: theme.palette.background.main,
@@ -35,7 +39,7 @@ const useStyles = makeStyles((theme: ThemeConfig) => {
   };
 });
 
-export const Table: FunctionComponent = ({ children }) => {
-  const classes = useStyles();
-  return <table className={classes.table}>{children}</table>;
+export const Table: FunctionComponent<Props> = (props) => {
+  const classes = useStyles(props);
+  return <table className={classes.table}>{props.children}</table>;
 };
