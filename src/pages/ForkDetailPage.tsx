@@ -9,7 +9,6 @@ import { KeyValueList, KeyValueEntry } from '../components/KeyValueList';
 import { Loading } from '../components/Loading';
 import { NFTsTable } from '../components/NFTsTable';
 import { None } from '../components/None';
-import { Page } from '../components/Page';
 import { PageSection } from '../components/PageSection';
 import { Table } from '../components/Table';
 import { Tabs } from '../components/Tabs';
@@ -25,7 +24,7 @@ interface Params {
   forkId: string;
 }
 
-export const ForkDetail: FunctionComponent = () => {
+export const ForkDetailPage: FunctionComponent = () => {
   const { network, collectionAddress, forkId } = useParams<Params>();
   const { browseChainInfo } = useWallet();
   const viewChainInfo = getChainInfoBySlug(network);

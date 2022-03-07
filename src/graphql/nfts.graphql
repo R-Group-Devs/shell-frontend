@@ -7,3 +7,22 @@ query getNfts(
     ...NFTInfo
   }
 }
+
+query getNftDetails($nftId: ID!) {
+  nft(id: $nftId) {
+    ... NFTInfo
+    fork {
+      ... ForkInfo
+    }
+    storage {
+      id
+      key
+      storageType
+      location
+      intValue
+      stringValue
+      createdAtTimestamp
+      updatedAtTimestamp
+    }
+  }
+}
