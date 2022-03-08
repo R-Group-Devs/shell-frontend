@@ -1,0 +1,14 @@
+query getEngine($engineId: ID!) {
+  engine(id: $engineId) {
+    ... EngineInfo
+    forks {
+      ... ForkInfo
+    }
+    collections {
+      ... CollectionInfo
+    }
+    mintedNfts {
+      ... NFTInfo
+    }
+  }
+}

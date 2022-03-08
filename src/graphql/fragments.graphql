@@ -80,3 +80,10 @@ fragment ForkInfo on Fork {
     updatedAtTimestamp
   }
 }
+
+fragment EngineInfo on Engine {
+  id
+  address
+  name
+  createdAtTimestamp
+}

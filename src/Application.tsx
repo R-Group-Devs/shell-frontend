@@ -11,6 +11,7 @@ import { splash } from './splash';
 import { LaunchLandingPage } from './pages/LaunchLandingPage';
 import { ForkDetailPage } from './pages/ForkDetailPage';
 import { NFTDetailPage } from './pages/NFTDetailPage';
+import { EngineDetailPage } from './pages/EngineDetailPage';
 
 splash();
 
@@ -42,7 +43,7 @@ export const Application: FunctionComponent = () => {
             <NFTDetailPage />
           </Route>
           <Route exact path="/engines/:network/:address">
-            <p>engine detail</p>
+            <EngineDetailPage />
           </Route>
           <Route exact path="/connection">
             <ConnectionPage />

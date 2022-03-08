@@ -28,7 +28,7 @@ export const StorageTable: FunctionComponent<Props> = ({ storage }) => {
               <Dimmed>{storage.stringValue === null ? 'uint256' : 'string'}</Dimmed> {storage.key}
             </td>
             <td>{storage.location}</td>
-            <td>{storage.intValue}</td>
+            <td>{storage.intValue ?? storage.stringValue}</td>
             <td>{timestampRelative(storage.updatedAtTimestamp)}</td>
           </tr>
         ))}

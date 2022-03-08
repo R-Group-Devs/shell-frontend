@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import { Address } from '../components/Address';
 import { AddressPrefix } from '../components/AddressPrefix';
 import { Content } from '../components/Content';
-import { Dimmed } from '../components/Dimmed';
 import { KeyValueList, KeyValueEntry } from '../components/KeyValueList';
 import { Loading } from '../components/Loading';
 import { None } from '../components/None';
@@ -94,7 +93,7 @@ export const NFTDetailPage: FunctionComponent = () => {
         <Tabs
           tabs={[
             {
-              label: <>Owners</>,
+              label: <>Owners ({nft.owners.length})</>,
               content:
                 nft.owners.length === 0 ? (
                   <None />
@@ -125,14 +124,10 @@ export const NFTDetailPage: FunctionComponent = () => {
             },
             {
               label: <>Metadata</>,
-              content: (
-                <p style={{ textAlign: 'center' }}>
-                  <Dimmed>(coming soon)</Dimmed>
-                </p>
-              ),
+              content: <None message="(coming soon)" />,
             },
             {
-              label: <>Storage</>,
+              label: <>Storage ({nft.storage.length})</>,
               content: <StorageTable storage={nft.storage} />,
             },
           ]}
