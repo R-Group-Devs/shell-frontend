@@ -41,7 +41,8 @@ export const ForksTable: FunctionComponent<Props> = ({ chainId, filter, orderBy,
       <thead>
         <tr>
           <td>Fork</td>
-          <td>Engine</td>
+          {filter?.engine && <td>Collection</td>}
+          {!filter?.engine && <td>Engine</td>}
           <td>NFT Count</td>
           <td>Owner</td>
           <td>Created</td>
@@ -54,7 +55,8 @@ export const ForksTable: FunctionComponent<Props> = ({ chainId, filter, orderBy,
             onClick={() => history.push(`/forks/${viewChain.slug}/${fork.collection.address}/${fork.forkId}`)}
           >
             <td>{fork.forkId === '0' ? <strong>Root Fork *</strong> : `Fork ${fork.forkId}`}</td>
-            <td>{fork.engine.name}</td>
+            {filter?.engine && <td>{fork.collection.name}</td>}
+            {!filter?.engine && <td>{fork.engine.name}</td>}
             <td>
               <>
                 {fork.nftCount.toLocaleString()}{' '}

@@ -95,9 +95,9 @@ export const NFTDetailPage: FunctionComponent = () => {
                   </Link>
                 </KeyValueEntry>
                 <KeyValueEntry label="Links:">
-                  {openseaUrl && (
-                    <a href={openseaUrl} target="_blank">
-                      OpenSea
+                  {looksrareUrl && (
+                    <a href={looksrareUrl} target="_blank">
+                      LooksRare
                     </a>
                   )}{' '}
                   {raribleUrl && (
@@ -105,9 +105,9 @@ export const NFTDetailPage: FunctionComponent = () => {
                       Rarible
                     </a>
                   )}{' '}
-                  {looksrareUrl && (
-                    <a href={looksrareUrl} target="_blank">
-                      LooksRare
+                  {openseaUrl && (
+                    <a href={openseaUrl} target="_blank">
+                      OpenSea
                     </a>
                   )}{' '}
                 </KeyValueEntry>

@@ -38,9 +38,10 @@ export const CollectionsTable: FunctionComponent<Props> = ({ chainId, filter }) 
       <thead>
         <tr>
           <td>Collection</td>
-          <td>Engine</td>
+          <td>{filter?.canonicalEngine ? 'Token model' : 'Engine'}</td>
+          <td>NFTs</td>
+          <td>Forks</td>
           <td>Owner</td>
-          <td style={{ textAlign: 'center' }}>NFTs</td>
           <td>Last Activity</td>
         </tr>
       </thead>
@@ -50,11 +51,12 @@ export const CollectionsTable: FunctionComponent<Props> = ({ chainId, filter }) 
             <td>
               <AddressPrefix address={c.address}>{c.name}</AddressPrefix>
             </td>
-            <td>{c.canonicalEngine.name}</td>
+            <td>{filter?.canonicalEngine ? c.implementation.name : c.canonicalEngine.name}</td>
+            <td>{c.nftCount.toLocaleString()}</td>
+            <td>{c.forkCount}</td>
             <td>
               <Address address={c.canonicalOwner.address} />
             </td>
-            <td style={{ textAlign: 'center' }}>{c.nftCount.toLocaleString()}</td>
             <td>{timestampRelative(c.lastActivityAtTimestamp)}</td>
           </tr>
         ))}

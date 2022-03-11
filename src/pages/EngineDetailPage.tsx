@@ -90,7 +90,7 @@ export const EngineDetailPage: FunctionComponent = () => {
             },
             {
               label: <>🌱 Forks ({engine.forkCount})</>,
-              content: <ForksTable chainId={viewChainInfo.chainId} />,
+              content: <ForksTable chainId={viewChainInfo.chainId} filter={{ engine: engine.id, forkId_gt: '0' }} />,
             },
             {
               label: <>🖼 Minted NFTs ({engine.mintedNftCount.toLocaleString()})</>,
