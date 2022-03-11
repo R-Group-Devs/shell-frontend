@@ -12,3 +12,13 @@ query forkNfts($id: ID!) {
     }
   }
 }
+
+query getForks(
+  $orderBy: Fork_orderBy = nftCount
+  $orderDirection: OrderDirection = desc
+  $filter: Fork_filter
+) {
+  forks(orderBy: $orderBy, orderDirection: $orderDirection, where: $filter) {
+    ... ForkInfo
+  }
+}

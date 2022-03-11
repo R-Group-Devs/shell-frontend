@@ -8,7 +8,6 @@ import { Table } from './Table';
 import { getGraphClient } from '../shell/graph';
 import { Loading } from './Loading';
 import { None } from './None';
-import { EngineLabel } from './EngineLabel';
 import { useHistory } from 'react-router-dom';
 import { getChainInfo } from '../shell/networks';
 

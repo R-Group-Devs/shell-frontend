@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { timestampRelative } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
-import { Nft_Filter } from '../shell/graph-generated';
+import { Nft_Filter, Nft_OrderBy, OrderDirection } from '../shell/graph-generated';
 import { getChainInfo } from '../shell/networks';
 import { Dimmed } from './Dimmed';
 import { Loading } from './Loading';
@@ -13,15 +13,25 @@ import { Table } from './Table';
 interface Props {
   chainId: number;
   filter?: Nft_Filter;
+  orderBy?: Nft_OrderBy;
+  orderDirection?: OrderDirection;
   showMintEngine?: boolean;
+  engineIdContext?: string;
 }
 
-export const NFTsTable: FunctionComponent<Props> = ({ chainId, filter, showMintEngine }) => {
+export const NFTsTable: FunctionComponent<Props> = ({
+  chainId,
+  filter,
+  showMintEngine,
+  engineIdContext,
+  orderBy,
+  orderDirection,
+}) => {
   const viewChain = getChainInfo(chainId);
   const history = useHistory();
-  const nftQuery = useQuery(['get nfts', chainId, filter], async () => {
+  const nftQuery = useQuery(['get nfts', chainId, filter, orderBy, orderDirection], async () => {
     const client = getGraphClient(chainId);
-    const resp = await client.getNfts({ filter });
+    const resp = await client.getNfts({ filter, orderBy, orderDirection });
     return resp.data;
   });
 
@@ -38,10 +48,11 @@ export const NFTsTable: FunctionComponent<Props> = ({ chainId, filter, showMintE
       <thead>
         <tr>
           <td>Token</td>
-          <td>{showMintEngine ? 'Mint engine' : 'Fork (engine)'}</td>
-          <td>Supply</td>
+          {engineIdContext && <td>Collection</td>}
+          <td>{showMintEngine ? 'Mint engine' : engineIdContext ? 'Current engine' : 'Fork (engine)'}</td>
+          <td style={{ textAlign: 'center' }}>Supply</td>
           <td>Minted</td>
-          <td>Last Activity</td>
+          {!engineIdContext && <td>Last Activity</td>}
         </tr>
       </thead>
       <tbody>
@@ -51,8 +62,9 @@ export const NFTsTable: FunctionComponent<Props> = ({ chainId, filter, showMintE
             onClick={() => history.push(`/nfts/${viewChain.slug}/${nft.collection.address}/${nft.tokenId}`)}
           >
             <td>
-              {nft.collection.name} #{nft.tokenId}
+              <Dimmed>#{nft.tokenId}</Dimmed> {nft.collection.name} #{nft.tokenId}
             </td>
+            {engineIdContext && <td>{nft.collection.name}</td>}
             <td>
               {showMintEngine ? (
                 <>
@@ -62,6 +74,12 @@ export const NFTsTable: FunctionComponent<Props> = ({ chainId, filter, showMintE
                     nft.createdByEngine.name
                   )}
                 </>
+              ) : engineIdContext ? (
+                nft.fork.engine.id === engineIdContext ? (
+                  <Dimmed>(this engine)</Dimmed>
+                ) : (
+                  nft.fork.engine.name
+                )
               ) : (
                 <>
                   {nft.fork.forkId === '0' ? (
@@ -74,9 +92,9 @@ export const NFTsTable: FunctionComponent<Props> = ({ chainId, filter, showMintE
                 </>
               )}
             </td>
-            <td>{nft.totalSupply}</td>
+            <td style={{ textAlign: 'center' }}>{nft.totalSupply}</td>
             <td>{timestampRelative(nft.createdAtTimestamp)}</td>
-            <td>{timestampRelative(nft.lastActivityAtTimestamp)}</td>
+            {!engineIdContext && <td>{timestampRelative(nft.lastActivityAtTimestamp)}</td>}
           </tr>
         ))}
       </tbody>

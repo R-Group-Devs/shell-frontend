@@ -1,8 +1,9 @@
 query collections(
+  $filter: Collection_filter
   $orderBy: Collection_orderBy = lastActivityAtTimestamp,
   $orderDirection: OrderDirection = desc)
 {
-  collections(orderBy: $orderBy, orderDirection: $orderDirection) {
+  collections(orderBy: $orderBy, orderDirection: $orderDirection where: $filter) {
     ... CollectionInfo
   }
 }

@@ -67,7 +67,7 @@ fragment ForkInfo on Fork {
   creator { id address }
   owner { id address }
   engine { id address name }
-  collection { id address name symbol }
+  collection { id address name symbol nftCount }
   nftCount
   createdAtTimestamp
   storage {
@@ -86,5 +86,8 @@ fragment EngineInfo on Engine {
   id
   address
   name
+  forkCount
+  mintedNftCount
+  collectionCount
   createdAtTimestamp
 }

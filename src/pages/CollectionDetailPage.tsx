@@ -141,7 +141,7 @@ export const CollectionDetailPage: FunctionComponent = () => {
             },
             {
               label: <>🌱 Forks ({collection.forkCount})</>,
-              content: <ForksTable chainId={viewChainInfo.chainId} collectionAddress={address} />,
+              content: <ForksTable chainId={viewChainInfo.chainId} filter={{ collection: collection.id }} />,
             },
           ]}
         />

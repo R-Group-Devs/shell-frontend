@@ -2,7 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { AddressPrefix } from '../components/AddressPrefix';
+import { CollectionsTable } from '../components/CollectionsTable';
 import { Content } from '../components/Content';
+import { ForksTable } from '../components/ForksTable';
 import { KeyValueEntry, KeyValueList } from '../components/KeyValueList';
 import { Loading } from '../components/Loading';
 import { NFTsTable } from '../components/NFTsTable';
@@ -11,7 +13,9 @@ import { Tabs } from '../components/Tabs';
 import { TwoPanel } from '../components/TwoPanel';
 import { useWallet } from '../hooks/wallet';
 import { formatDate } from '../lib/string';
+import { getExplorerContractUrl } from '../shell/external-urls';
 import { getGraphClient } from '../shell/graph';
+import { Nft_OrderBy, OrderDirection } from '../shell/graph-generated';
 import { getChainInfoBySlug } from '../shell/networks';
 
 interface Params {
@@ -37,12 +41,14 @@ export const EngineDetailPage: FunctionComponent = () => {
   const engine = detailsQuery.data.engine;
   const mismatch = browseChainInfo.chainId !== viewChainInfo.chainId;
 
+  const explorerUrl = getExplorerContractUrl(viewChainInfo.chainId, address);
+
   return (
     <>
       <PageSection>
         <Content>
           <h2>
-            <AddressPrefix address={engine.address}>{engine.name}</AddressPrefix>
+            ⚙️ <AddressPrefix address={engine.address}>{engine.name}</AddressPrefix>
           </h2>
         </Content>
       </PageSection>
@@ -65,6 +71,11 @@ export const EngineDetailPage: FunctionComponent = () => {
             <div>
               <KeyValueList>
                 <KeyValueEntry label="Created:" value={formatDate(engine.createdAtTimestamp)} />
+                <KeyValueEntry label="Links:">
+                  <a href={explorerUrl} target="_blank">
+                    Explorer
+                  </a>
+                </KeyValueEntry>
               </KeyValueList>
             </div>
           </TwoPanel>
@@ -74,16 +85,24 @@ export const EngineDetailPage: FunctionComponent = () => {
         <Tabs
           tabs={[
             {
-              label: <>Forks</>,
-              content: null,
+              label: <>📚 Collections ({engine.collectionCount})</>,
+              content: <CollectionsTable chainId={viewChainInfo.chainId} filter={{ canonicalEngine: engine.id }} />,
             },
             {
-              label: <>Collections</>,
-              content: null,
+              label: <>🌱 Forks ({engine.forkCount})</>,
+              content: <ForksTable chainId={viewChainInfo.chainId} />,
             },
             {
-              label: <>Minted NFTs</>,
-              content: <NFTsTable chainId={viewChainInfo.chainId} filter={{ createdByEngine: engine.id }} />,
+              label: <>🖼 Minted NFTs ({engine.mintedNftCount.toLocaleString()})</>,
+              content: (
+                <NFTsTable
+                  chainId={viewChainInfo.chainId}
+                  filter={{ createdByEngine: engine.id }}
+                  orderBy={Nft_OrderBy.LastActivityAtTimestamp}
+                  orderDirection={OrderDirection.Desc}
+                  engineIdContext={engine.id}
+                />
+              ),
             },
           ]}
         />

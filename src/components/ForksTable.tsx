@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { timestampRelative } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
+import { Fork_Filter, Fork_OrderBy, OrderDirection } from '../shell/graph-generated';
 import { getChainInfo } from '../shell/networks';
 import { Address } from './Address';
 import { Dimmed } from './Dimmed';
@@ -13,15 +14,17 @@ import { Table } from './Table';
 
 interface Props {
   chainId: number;
-  collectionAddress: string;
+  filter?: Fork_Filter;
+  orderBy?: Fork_OrderBy;
+  orderDirection?: OrderDirection;
 }
 
-export const ForksTable: FunctionComponent<Props> = ({ chainId, collectionAddress }) => {
+export const ForksTable: FunctionComponent<Props> = ({ chainId, filter, orderBy, orderDirection }) => {
   const viewChain = getChainInfo(chainId);
   const history = useHistory();
-  const nftQuery = useQuery(['collection forks', chainId, collectionAddress], async () => {
+  const nftQuery = useQuery(['get forks', chainId, filter, orderBy, orderDirection], async () => {
     const client = getGraphClient(chainId);
-    const resp = await client.collectionForks({ address: collectionAddress });
+    const resp = await client.getForks({ filter, orderBy, orderDirection });
     return resp.data;
   });
 
@@ -29,7 +32,7 @@ export const ForksTable: FunctionComponent<Props> = ({ chainId, collectionAddres
     return <Loading message="Fetching forks..." />;
   }
 
-  if (nftQuery.data.collection.forks.length === 0) {
+  if (nftQuery.data.forks.length === 0) {
     return <None />;
   }
 
@@ -45,10 +48,10 @@ export const ForksTable: FunctionComponent<Props> = ({ chainId, collectionAddres
         </tr>
       </thead>
       <tbody>
-        {nftQuery.data.collection.forks.map((fork) => (
+        {nftQuery.data.forks.map((fork) => (
           <tr
             key={fork.id}
-            onClick={() => history.push(`/forks/${viewChain.slug}/${collectionAddress}/${fork.forkId}`)}
+            onClick={() => history.push(`/forks/${viewChain.slug}/${fork.collection.address}/${fork.forkId}`)}
           >
             <td>{fork.forkId === '0' ? <strong>Root Fork *</strong> : `Fork ${fork.forkId}`}</td>
             <td>{fork.engine.name}</td>
@@ -57,7 +60,7 @@ export const ForksTable: FunctionComponent<Props> = ({ chainId, collectionAddres
                 {fork.nftCount.toLocaleString()}{' '}
                 {fork.nftCount > 0 && (
                   <Dimmed>
-                    (<Percentage amount={fork.nftCount / nftQuery.data.collection.nftCount} />
+                    (<Percentage amount={fork.nftCount / fork.collection.nftCount} />
                     %)
                   </Dimmed>
                 )}
