@@ -1,3 +1,5 @@
+import PQueue from 'p-queue';
+
 interface MetadataUrl {
   ipfsUri?: string;
   httpsUri: string;
@@ -19,9 +21,11 @@ export interface NFTMetadata {
     value: string;
   }>;
   external_url?: string;
-  source: 'inline-json' | 'url';
+  source: 'inline-json' | 'ipfs' | 'https';
   rawTokenUri: string;
 }
+
+const fetchQueue = new PQueue({ concurrency: 4 });
 
 /** handle all types of values for tokenURI() */
 export const resolveMetadataByTokenURI = async (uri: string): Promise<NFTMetadata> => {
@@ -43,7 +47,20 @@ export const resolveMetadataByTokenURI = async (uri: string): Promise<NFTMetadat
     };
   }
 
-  throw new Error();
+  // external
+  const { httpsUri, ipfsUri } = processUri(uri);
+  const resp = await fetchQueue.add(() => fetch(httpsUri));
+  const json = await resp.json();
+
+  return {
+    rawTokenUri: uri,
+    source: ipfsUri ? 'ipfs' : 'https',
+    name: json.name ?? '',
+    description: json.description ?? '',
+    image: processImage(json.image ?? ''),
+    attributes: json.attributes ?? [],
+    external_url: json.external_url ?? '',
+  };
 };
 
 /** given the `image` field in metadata, expand to a url or svg doc */
@@ -56,7 +73,21 @@ export const processImage = (uri: string): MetadataImage => {
 
 /** given a uri, expand with ipfs gateway if needed */
 export const processUri = (uri: string): MetadataUrl => {
+  const isHttps = /^https:\/\//.test(uri);
+  if (isHttps) {
+    return { httpsUri: uri };
+  }
+
+  // if it ends with anything that looks like /ipfs/WHATEVER, assume thats the
+  // hash
+  const match = uri.match(/ipfs\/(.*)$/);
+
+  if (!match) {
+    throw new Error(`invalid uri: ${uri}`);
+  }
+
   return {
-    httpsUri: uri,
+    ipfsUri: `ipfs://ipfs/${match[1]}`,
+    httpsUri: `https://ipfs.heyshell.xyz/ipfs/${match[1]}`,
   };
 };
