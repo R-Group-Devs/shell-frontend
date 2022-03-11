@@ -40,7 +40,7 @@ export const CollectionList: FunctionComponent = () => {
       <div className={classes.buttons}>
         <div style={{ flexGrow: 1 }}>
           <h2>
-            Collections <span style={{ opacity: 0.5, fontWeight: 100 }}>[{browseChainInfo.name}]</span>
+            📚 Collections <span style={{ opacity: 0.5, fontWeight: 100 }}>[{browseChainInfo.name}]</span>
           </h2>
         </div>
         <div>

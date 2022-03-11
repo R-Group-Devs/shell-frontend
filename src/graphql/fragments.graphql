@@ -27,6 +27,7 @@ fragment NFTInfo on NFT {
     name
     symbol
     canonicalEngine { id address name }
+    implementation { id name address }
   }
   createdByEngine { id name address }
   fork { id forkId engine { id name address } }

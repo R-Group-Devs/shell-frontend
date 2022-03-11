@@ -41,7 +41,7 @@ export const HoldersTable: FunctionComponent<Props> = ({ chainId, collectionAddr
           <td>Owner</td>
           <td>Owned</td>
           <td>Token</td>
-          <td>Current Engine</td>
+          <td>Fork (engine)</td>
           <td>Last Activity</td>
         </tr>
       </thead>
@@ -62,7 +62,13 @@ export const HoldersTable: FunctionComponent<Props> = ({ chainId, collectionAddr
               {nftOwner.nft.collection.name} #{nftOwner.nft.tokenId}
             </td>
             <td>
-              <EngineLabel forkId={nftOwner.nft.fork.forkId} engine={nftOwner.nft.fork.engine} />
+              {nftOwner.nft.fork.forkId === '0' ? (
+                <Dimmed>(same as root fork)</Dimmed>
+              ) : (
+                <>
+                  Fork {nftOwner.nft.fork.forkId} ({nftOwner.nft.fork.engine.name})
+                </>
+              )}
             </td>
             <td>{timestampRelative(nftOwner.lastActivityAtTimestamp)}</td>
           </tr>

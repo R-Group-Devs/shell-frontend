@@ -5,7 +5,6 @@ import { timestampRelative } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
 import { getChainInfo } from '../shell/networks';
 import { Address } from './Address';
-import { AddressPrefix } from './AddressPrefix';
 import { Dimmed } from './Dimmed';
 import { Loading } from './Loading';
 import { None } from './None';
@@ -51,10 +50,8 @@ export const ForksTable: FunctionComponent<Props> = ({ chainId, collectionAddres
             key={fork.id}
             onClick={() => history.push(`/forks/${viewChain.slug}/${collectionAddress}/${fork.forkId}`)}
           >
-            <td>{fork.forkId === '0' ? 'Root Fork *' : `Fork ${fork.forkId}`}</td>
-            <td>
-              <AddressPrefix address={fork.engine.address}>{fork.engine.name}</AddressPrefix>
-            </td>
+            <td>{fork.forkId === '0' ? <strong>Root Fork *</strong> : `Fork ${fork.forkId}`}</td>
+            <td>{fork.engine.name}</td>
             <td>
               <>
                 {fork.nftCount.toLocaleString()}{' '}

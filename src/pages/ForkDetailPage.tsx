@@ -46,7 +46,10 @@ export const ForkDetailPage: FunctionComponent = () => {
       <PageSection>
         <Content>
           <h2>
-            {forkId === '0' ? 'Root Fork' : `Fork ${forkId}`} - {fork.collection.name} ({fork.collection.symbol})
+            🌱{' '}
+            <AddressPrefix address={fork.collection.address}>
+              {forkId === '0' ? 'Root Fork' : `Fork ${forkId}`} - {fork.collection.name} ({fork.collection.symbol})
+            </AddressPrefix>
           </h2>
         </Content>
       </PageSection>
@@ -65,16 +68,13 @@ export const ForkDetailPage: FunctionComponent = () => {
                   }
                 />
                 <KeyValueEntry label="Collection:">
-                  <AddressPrefix address={fork.collection.address}>
-                    <Link to={`/collections/${viewChainInfo.slug}/${fork.collection.address}`}>
-                      {fork.collection.name}
-                    </Link>
-                  </AddressPrefix>
+                  📚{' '}
+                  <Link to={`/collections/${viewChainInfo.slug}/${fork.collection.address}`}>
+                    {fork.collection.name}
+                  </Link>
                 </KeyValueEntry>
                 <KeyValueEntry label="Engine:">
-                  <AddressPrefix address={fork.engine.address}>
-                    <Link to={`/engines/${viewChainInfo.slug}/${fork.engine.address}`}>{fork.engine.name}</Link>
-                  </AddressPrefix>
+                  ⚙️ <Link to={`/engines/${viewChainInfo.slug}/${fork.engine.address}`}>{fork.engine.name}</Link>
                 </KeyValueEntry>
               </KeyValueList>
             </div>
@@ -98,11 +98,11 @@ export const ForkDetailPage: FunctionComponent = () => {
         <Tabs
           tabs={[
             {
-              label: <>NFTs ({fork.nftCount.toLocaleString()})</>,
-              content: <NFTsTable chainId={viewChainInfo.chainId} filter={{ fork: fork.id }} hideCurrentEngine />,
+              label: <>🖼️ NFTs ({fork.nftCount.toLocaleString()})</>,
+              content: <NFTsTable chainId={viewChainInfo.chainId} filter={{ fork: fork.id }} showMintEngine />,
             },
             {
-              label: <>Fork Storage ({fork.storage.length})</>,
+              label: <>🪣 Fork Storage ({fork.storage.length})</>,
               content: <StorageTable storage={fork.storage} />,
             },
           ]}

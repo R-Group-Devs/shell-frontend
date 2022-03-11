@@ -1,7 +1,7 @@
 import { constants } from 'ethers';
 import React, { FunctionComponent } from 'react';
-import { exploreAddressLink, exploreTokenLink } from '../lib/web3';
 import { Address } from './Address';
+import { getExplorerCollectionUrl, getExplorerContractUrl } from '../shell/external-urls';
 
 interface Props {
   chainId: number;
@@ -12,9 +12,9 @@ interface Props {
 export const AddressViewable: FunctionComponent<Props> = ({ chainId, address, isToken }) => {
   let url: string;
   if (isToken) {
-    url = exploreTokenLink(chainId, address);
+    url = getExplorerCollectionUrl(chainId, address);
   } else {
-    url = exploreAddressLink(chainId, address);
+    url = getExplorerContractUrl(chainId, address);
   }
 
   return (

@@ -7,7 +7,8 @@ import { Dimmed } from '../components/Dimmed';
 import { PageSection } from '../components/PageSection';
 import { Shell } from '../components/Shell';
 import { useWallet } from '../hooks/wallet';
-import { exploreAddressLink, isWalletPresent } from '../lib/web3';
+import { isWalletPresent } from '../lib/web3';
+import { getExplorerContractUrl } from '../shell/external-urls';
 
 export const ConnectionPage: FunctionComponent = () => {
   const { state, browseChainInfo, connectedChainInfo, connect, chainId, account } = useWallet();
@@ -75,7 +76,7 @@ export const ConnectionPage: FunctionComponent = () => {
         </p>
         <p>Your address: {account}</p>
         <ButtonGroup>
-          <Button externalNavTo={exploreAddressLink(connectedChainInfo.chainId, account)}>
+          <Button externalNavTo={getExplorerContractUrl(connectedChainInfo.chainId, account)}>
             View on block explorer
           </Button>
         </ButtonGroup>

@@ -5,7 +5,7 @@ import { timestampRelative } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
 import { Nft_Filter } from '../shell/graph-generated';
 import { getChainInfo } from '../shell/networks';
-import { EngineLabel } from './EngineLabel';
+import { Dimmed } from './Dimmed';
 import { Loading } from './Loading';
 import { None } from './None';
 import { Table } from './Table';
@@ -13,10 +13,10 @@ import { Table } from './Table';
 interface Props {
   chainId: number;
   filter?: Nft_Filter;
-  hideCurrentEngine?: boolean;
+  showMintEngine?: boolean;
 }
 
-export const NFTsTable: FunctionComponent<Props> = ({ chainId, filter, hideCurrentEngine }) => {
+export const NFTsTable: FunctionComponent<Props> = ({ chainId, filter, showMintEngine }) => {
   const viewChain = getChainInfo(chainId);
   const history = useHistory();
   const nftQuery = useQuery(['get nfts', chainId, filter], async () => {
@@ -37,10 +37,9 @@ export const NFTsTable: FunctionComponent<Props> = ({ chainId, filter, hideCurre
     <Table>
       <thead>
         <tr>
-          <td>Supply</td>
           <td>Token</td>
-          {!hideCurrentEngine && <td>Current Engine</td>}
-          <td>Mint Engine</td>
+          <td>{showMintEngine ? 'Mint engine' : 'Fork (engine)'}</td>
+          <td>Supply</td>
           <td>Minted</td>
           <td>Last Activity</td>
         </tr>
@@ -51,18 +50,31 @@ export const NFTsTable: FunctionComponent<Props> = ({ chainId, filter, hideCurre
             key={nft.id}
             onClick={() => history.push(`/nfts/${viewChain.slug}/${nft.collection.address}/${nft.tokenId}`)}
           >
-            <td>{nft.totalSupply}</td>
             <td>
               {nft.collection.name} #{nft.tokenId}
             </td>
-            {!hideCurrentEngine && (
-              <td>
-                <EngineLabel forkId={nft.fork.forkId} engine={nft.fork.engine} />
-              </td>
-            )}
             <td>
-              <EngineLabel engine={nft.createdByEngine} rootEngineAddress={nft.collection.canonicalEngine.address} />
+              {showMintEngine ? (
+                <>
+                  {nft.fork.engine.id === nft.createdByEngine.id ? (
+                    <Dimmed>(same as fork)</Dimmed>
+                  ) : (
+                    nft.createdByEngine.name
+                  )}
+                </>
+              ) : (
+                <>
+                  {nft.fork.forkId === '0' ? (
+                    <Dimmed>(same as root fork)</Dimmed>
+                  ) : (
+                    <>
+                      Fork {nft.fork.forkId} ({nft.fork.engine.name})
+                    </>
+                  )}
+                </>
+              )}
             </td>
+            <td>{nft.totalSupply}</td>
             <td>{timestampRelative(nft.createdAtTimestamp)}</td>
             <td>{timestampRelative(nft.lastActivityAtTimestamp)}</td>
           </tr>

@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
 import { Address } from '../components/Address';
-import { AddressPrefix } from '../components/AddressPrefix';
 import { Content } from '../components/Content';
+import { Dimmed } from '../components/Dimmed';
 import { KeyValueList, KeyValueEntry } from '../components/KeyValueList';
 import { Loading } from '../components/Loading';
 import { None } from '../components/None';
@@ -14,6 +14,7 @@ import { Tabs } from '../components/Tabs';
 import { TwoPanel } from '../components/TwoPanel';
 import { useWallet } from '../hooks/wallet';
 import { timestampRelative } from '../lib/string';
+import { getLooksrareTokenUrl, getOpenseaTokenUrl, getRaribleTokenUrl } from '../shell/external-urls';
 import { getGraphClient } from '../shell/graph';
 import { getChainInfoBySlug } from '../shell/networks';
 
@@ -43,12 +44,16 @@ export const NFTDetailPage: FunctionComponent = () => {
   const nft = detailsQuery.data.nft;
   const mismatch = browseChainInfo.chainId !== viewChainInfo.chainId;
 
+  const openseaUrl = getOpenseaTokenUrl(viewChainInfo.chainId, collectionAddress, tokenId);
+  const raribleUrl = getRaribleTokenUrl(viewChainInfo.chainId, collectionAddress, tokenId);
+  const looksrareUrl = getLooksrareTokenUrl(viewChainInfo.chainId, collectionAddress, tokenId);
+
   return (
     <>
       <PageSection>
         <Content>
           <h2>
-            {nft.collection.name} #{nft.tokenId}
+            🖼️ <Dimmed>#{nft.tokenId}</Dimmed> {nft.collection.name} #{nft.tokenId}
           </h2>
         </Content>
       </PageSection>
@@ -67,22 +72,44 @@ export const NFTDetailPage: FunctionComponent = () => {
                     </>
                   }
                 />
+                <KeyValueEntry label="Token model:">{nft.collection.implementation.name}</KeyValueEntry>
                 <KeyValueEntry label="Collection:">
-                  <AddressPrefix address={nft.collection.address}>
-                    <Link to={`/collections/${viewChainInfo.slug}/${nft.collection.address}`}>
-                      {nft.collection.name}
-                    </Link>
-                  </AddressPrefix>
+                  📚{' '}
+                  <Link to={`/collections/${viewChainInfo.slug}/${nft.collection.address}`}>{nft.collection.name}</Link>
                 </KeyValueEntry>
-                <KeyValueEntry label="Engine:">
-                  <AddressPrefix address={nft.fork.engine.address}>
-                    <Link to={`/engines/${viewChainInfo.slug}/${nft.fork.engine.address}`}>{nft.fork.engine.name}</Link>
-                  </AddressPrefix>
+                <KeyValueEntry label="Mint engine:">
+                  ⚙️{' '}
+                  <Link to={`/engines/${viewChainInfo.slug}/${nft.createdByEngine.address}`}>
+                    {nft.createdByEngine.name}
+                  </Link>
                 </KeyValueEntry>
+                <KeyValueEntry label="Current engine:">
+                  ⚙️{' '}
+                  <Link to={`/engines/${viewChainInfo.slug}/${nft.fork.engine.address}`}>{nft.fork.engine.name}</Link>
+                </KeyValueEntry>
+
                 <KeyValueEntry label="Fork:">
+                  🌱{' '}
                   <Link to={`/forks/${viewChainInfo.slug}/${nft.collection.address}/${nft.fork.forkId}`}>
                     {nft.fork.forkId === '0' ? 'Root fork' : `Fork ${nft.fork.forkId}`}
                   </Link>
+                </KeyValueEntry>
+                <KeyValueEntry label="Links:">
+                  {openseaUrl && (
+                    <a href={openseaUrl} target="_blank">
+                      OpenSea
+                    </a>
+                  )}{' '}
+                  {raribleUrl && (
+                    <a href={raribleUrl} target="_blank">
+                      Rarible
+                    </a>
+                  )}{' '}
+                  {looksrareUrl && (
+                    <a href={looksrareUrl} target="_blank">
+                      LooksRare
+                    </a>
+                  )}{' '}
                 </KeyValueEntry>
               </KeyValueList>
             </div>
@@ -93,7 +120,7 @@ export const NFTDetailPage: FunctionComponent = () => {
         <Tabs
           tabs={[
             {
-              label: <>Owners ({nft.owners.length})</>,
+              label: <>👤 Owners ({nft.owners.length})</>,
               content:
                 nft.owners.length === 0 ? (
                   <None />
@@ -123,11 +150,11 @@ export const NFTDetailPage: FunctionComponent = () => {
                 ),
             },
             {
-              label: <>Metadata</>,
+              label: <>📂 Metadata</>,
               content: <None message="(coming soon)" />,
             },
             {
-              label: <>Storage ({nft.storage.length})</>,
+              label: <>🪣 Token Storage ({nft.storage.length})</>,
               content: <StorageTable storage={nft.storage} />,
             },
           ]}

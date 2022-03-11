@@ -53,7 +53,7 @@ export const NetworkPage: FunctionComponent = () => {
       <PageSection>
         <Content>
           <h2>
-            Network <Dimmed>[{browseChainInfo.name}]</Dimmed>
+            🌎 Network <Dimmed>[{browseChainInfo.name}]</Dimmed>
           </h2>
           <TwoPanel>
             <Content>

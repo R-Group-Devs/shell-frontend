@@ -6,6 +6,9 @@ interface ChainInfo {
   subgraphEndpoint: string;
   rpcEndpoint: string;
   blockchainExplorer: string;
+  raribleUrl?: string;
+  looksrareUrl?: string;
+  openseaUrl?: string;
   blockTime: number;
 }
 
@@ -18,6 +21,9 @@ export const networks: ChainInfo[] = [
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-mainnet',
     rpcEndpoint: process.env['ETH_URL'] ?? '',
     blockchainExplorer: 'https://etherscan.io',
+    openseaUrl: 'https://opensea.io/assets',
+    looksrareUrl: 'https://looksrare.org',
+    raribleUrl: 'https://rarible.com',
     blockTime: 15,
   },
   {
@@ -28,6 +34,7 @@ export const networks: ChainInfo[] = [
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-matic',
     rpcEndpoint: process.env['POLYGON_URL'] ?? '',
     blockchainExplorer: 'https://polygonscan.com',
+    openseaUrl: 'https://opensea.io/assets/matic',
     blockTime: 2.2,
   },
   {
@@ -38,6 +45,9 @@ export const networks: ChainInfo[] = [
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-rinkeby',
     rpcEndpoint: process.env['RINKEBY_URL'] ?? '',
     blockchainExplorer: 'https://rinkeby.etherscan.io',
+    looksrareUrl: 'https://rinkeby.looksrare.org',
+    raribleUrl: 'https://rinkeby.rarible.com',
+    openseaUrl: 'https://testnets.opensea.io/assets',
     blockTime: 15,
   },
   {
@@ -48,6 +58,7 @@ export const networks: ChainInfo[] = [
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-goerli',
     rpcEndpoint: process.env['GOERLI_URL'] ?? '',
     blockchainExplorer: 'https://goerli.etherscan.io',
+    openseaUrl: 'https://testnets.opensea.io/assets/goerli',
     blockTime: 15,
   },
 
@@ -59,6 +70,7 @@ export const networks: ChainInfo[] = [
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-mumbai',
     rpcEndpoint: process.env['MUMBAI_URL'] ?? '',
     blockchainExplorer: 'https://mumbai.polygonscan.com',
+    openseaUrl: 'https://testnets.opensea.io/assets/mumbai',
     blockTime: 7.6,
   },
 ];
