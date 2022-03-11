@@ -11,6 +11,7 @@ import { PageSection } from '../components/PageSection';
 import { StorageTable } from '../components/StorageTable';
 import { Table } from '../components/Table';
 import { Tabs } from '../components/Tabs';
+import { TokenName } from '../components/TokenName';
 import { TwoPanel } from '../components/TwoPanel';
 import { useWallet } from '../hooks/wallet';
 import { timestampRelative } from '../lib/string';
@@ -53,7 +54,8 @@ export const NFTDetailPage: FunctionComponent = () => {
       <PageSection>
         <Content>
           <h2>
-            🖼️ <Dimmed>#{nft.tokenId}</Dimmed> {nft.collection.name} #{nft.tokenId}
+            🖼️ <Dimmed>#{nft.tokenId}</Dimmed>{' '}
+            <TokenName collection={nft.collection} tokenId={nft.tokenId} chainId={viewChainInfo.chainId} />
           </h2>
         </Content>
       </PageSection>

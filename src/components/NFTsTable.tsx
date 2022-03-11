@@ -9,6 +9,7 @@ import { Dimmed } from './Dimmed';
 import { Loading } from './Loading';
 import { None } from './None';
 import { Table } from './Table';
+import { TokenName } from './TokenName';
 
 interface Props {
   chainId: number;
@@ -62,7 +63,8 @@ export const NFTsTable: FunctionComponent<Props> = ({
             onClick={() => history.push(`/nfts/${viewChain.slug}/${nft.collection.address}/${nft.tokenId}`)}
           >
             <td>
-              <Dimmed>#{nft.tokenId}</Dimmed> {nft.collection.name} #{nft.tokenId}
+              <Dimmed>#{nft.tokenId}</Dimmed>{' '}
+              <TokenName collection={nft.collection} tokenId={nft.tokenId} chainId={viewChain.chainId} />
             </td>
             {engineIdContext && <td>{nft.collection.name}</td>}
             <td>

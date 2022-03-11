@@ -10,6 +10,7 @@ import { Loading } from './Loading';
 import { None } from './None';
 import { useHistory } from 'react-router-dom';
 import { getChainInfo } from '../shell/networks';
+import { TokenName } from './TokenName';
 
 interface Props {
   chainId: number;
@@ -58,7 +59,8 @@ export const HoldersTable: FunctionComponent<Props> = ({ chainId, collectionAddr
               <Dimmed>/{nftOwner.nft.totalSupply}</Dimmed>
             </td>
             <td>
-              {nftOwner.nft.collection.name} #{nftOwner.nft.tokenId}
+              <Dimmed>#{nftOwner.nft.tokenId}</Dimmed>{' '}
+              <TokenName chainId={chainId} collection={nftOwner.nft.collection} tokenId={nftOwner.nft.tokenId} />
             </td>
             <td>
               {nftOwner.nft.fork.forkId === '0' ? (
