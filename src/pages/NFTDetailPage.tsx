@@ -123,14 +123,12 @@ export const NFTDetailPage: FunctionComponent = () => {
                       OpenSea
                     </a>
                   )}{' '}
-                </KeyValueEntry>
-                {metadataQuery.data?.external_url && (
-                  <KeyValueEntry label="External Link:">
+                  {metadataQuery.data?.external_url && (
                     <a href={metadataQuery.data?.external_url} target="_blank">
-                      view
+                      Website
                     </a>
-                  </KeyValueEntry>
-                )}
+                  )}
+                </KeyValueEntry>
               </KeyValueList>
             </div>
           </TwoPanel>

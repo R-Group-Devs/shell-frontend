@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import { timestampRelative } from '../lib/string';
+import { formatDate, timestampRelative } from '../lib/string';
 import { getGraphClient } from '../shell/graph';
 import { Collection_Filter } from '../shell/graph-generated';
 import { getChainInfo } from '../shell/networks';
@@ -41,7 +41,7 @@ export const CollectionsTable: FunctionComponent<Props> = ({ chainId, filter }) 
           <td>{filter?.canonicalEngine ? 'Token model' : 'Engine'}</td>
           <td>NFTs</td>
           <td>Forks</td>
-          <td>Owner</td>
+          <td>{filter?.canonicalOwner ? 'Created' : 'Owner'}</td>
           <td>Last Activity</td>
         </tr>
       </thead>
@@ -55,7 +55,11 @@ export const CollectionsTable: FunctionComponent<Props> = ({ chainId, filter }) 
             <td>{c.nftCount.toLocaleString()}</td>
             <td>{c.forkCount}</td>
             <td>
-              <Address address={c.canonicalOwner.address} />
+              {filter?.canonicalOwner ? (
+                <>{formatDate(c.createdAtTimestamp)}</>
+              ) : (
+                <Address address={c.canonicalOwner.address} />
+              )}
             </td>
             <td>{timestampRelative(c.lastActivityAtTimestamp)}</td>
           </tr>

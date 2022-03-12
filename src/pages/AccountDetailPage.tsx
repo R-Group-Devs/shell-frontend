@@ -2,10 +2,14 @@ import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { Address } from '../components/Address';
+import { CollectionsTable } from '../components/CollectionsTable';
 import { Content } from '../components/Content';
+import { ForksTable } from '../components/ForksTable';
+import { HoldersTable } from '../components/HoldersTable';
 import { KeyValueEntry, KeyValueList } from '../components/KeyValueList';
 import { Loading } from '../components/Loading';
 import { PageSection } from '../components/PageSection';
+import { Tabs } from '../components/Tabs';
 import { TwoPanel } from '../components/TwoPanel';
 import { useWallet } from '../hooks/wallet';
 import {
@@ -90,6 +94,31 @@ export const AccountDetailPage: FunctionComponent = () => {
             </div>
           </TwoPanel>
         </Content>
+      </PageSection>
+      <PageSection>
+        <Tabs
+          tabs={[
+            {
+              label: <>🖼️ Owned NFTs</>,
+              content: <HoldersTable chainId={viewChainInfo.chainId} filter={{ owner: address.toLowerCase() }} />,
+            },
+            {
+              label: <>📚️ Owned Collections</>,
+              content: (
+                <CollectionsTable chainId={viewChainInfo.chainId} filter={{ canonicalOwner: address.toLowerCase() }} />
+              ),
+            },
+            {
+              label: <>🌱 Owned Forks</>,
+              content: (
+                <ForksTable
+                  chainId={viewChainInfo.chainId}
+                  filter={{ owner: address.toLocaleLowerCase(), forkId_gt: '0' }}
+                />
+              ),
+            },
+          ]}
+        />
       </PageSection>
     </>
   );

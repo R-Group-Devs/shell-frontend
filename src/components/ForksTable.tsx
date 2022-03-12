@@ -6,6 +6,7 @@ import { getGraphClient } from '../shell/graph';
 import { Fork_Filter, Fork_OrderBy, OrderDirection } from '../shell/graph-generated';
 import { getChainInfo } from '../shell/networks';
 import { Address } from './Address';
+import { AddressPrefix } from './AddressPrefix';
 import { Dimmed } from './Dimmed';
 import { Loading } from './Loading';
 import { None } from './None';
@@ -40,11 +41,12 @@ export const ForksTable: FunctionComponent<Props> = ({ chainId, filter, orderBy,
     <Table>
       <thead>
         <tr>
+          {filter?.owner && <td>Collection</td>}
           <td>Fork</td>
           {filter?.engine && <td>Collection</td>}
           {!filter?.engine && <td>Engine</td>}
           <td>NFT Count</td>
-          <td>Owner</td>
+          {!filter?.owner && <td>Owner</td>}
           <td>Created</td>
         </tr>
       </thead>
@@ -54,6 +56,11 @@ export const ForksTable: FunctionComponent<Props> = ({ chainId, filter, orderBy,
             key={fork.id}
             onClick={() => history.push(`/forks/${viewChain.slug}/${fork.collection.address}/${fork.forkId}`)}
           >
+            {filter.owner && (
+              <td>
+                <AddressPrefix address={fork.collection.address}>{fork.collection.name}</AddressPrefix>
+              </td>
+            )}
             <td>{fork.forkId === '0' ? <strong>Root Fork *</strong> : `Fork ${fork.forkId}`}</td>
             {filter?.engine && <td>{fork.collection.name}</td>}
             {!filter?.engine && <td>{fork.engine.name}</td>}
@@ -68,9 +75,11 @@ export const ForksTable: FunctionComponent<Props> = ({ chainId, filter, orderBy,
                 )}
               </>
             </td>
-            <td>
-              <Address address={fork.owner.address} />
-            </td>
+            {!filter.owner && (
+              <td>
+                <Address address={fork.owner.address} />
+              </td>
+            )}
             <td>{timestampRelative(fork.createdAtTimestamp)}</td>
           </tr>
         ))}

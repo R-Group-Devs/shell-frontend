@@ -11,26 +11,27 @@ import { None } from './None';
 import { useHistory } from 'react-router-dom';
 import { getChainInfo } from '../shell/networks';
 import { TokenName } from './TokenName';
+import { NftOwner_Filter } from '../shell/graph-generated';
 
 interface Props {
   chainId: number;
-  collectionAddress: string;
+  filter?: NftOwner_Filter;
 }
 
-export const HoldersTable: FunctionComponent<Props> = ({ chainId, collectionAddress }) => {
+export const HoldersTable: FunctionComponent<Props> = ({ chainId, filter }) => {
   const viewChain = getChainInfo(chainId);
   const history = useHistory();
-  const holdersQuery = useQuery(['collection holders', chainId, collectionAddress], async () => {
+  const query = useQuery(['get nft owners', chainId, filter], async () => {
     const client = getGraphClient(chainId);
-    const resp = await client.collectionHolders({ address: collectionAddress });
+    const resp = await client.getNftOwners({ filter });
     return resp.data;
   });
 
-  if (holdersQuery.isLoading || !holdersQuery.data) {
+  if (query.isLoading || !query.data) {
     return <Loading message="Fetching holders..." />;
   }
 
-  if (holdersQuery.data.collection.nftOwners.length === 0) {
+  if (query.data.nftowners.length === 0) {
     return <None />;
   }
 
@@ -38,7 +39,7 @@ export const HoldersTable: FunctionComponent<Props> = ({ chainId, collectionAddr
     <Table>
       <thead>
         <tr>
-          <td>Owner</td>
+          {!filter.owner && <td>Owner</td>}
           <td>Owned</td>
           <td>Token</td>
           <td>Fork (engine)</td>
@@ -46,14 +47,18 @@ export const HoldersTable: FunctionComponent<Props> = ({ chainId, collectionAddr
         </tr>
       </thead>
       <tbody>
-        {holdersQuery.data.collection.nftOwners.map((nftOwner) => (
+        {query.data.nftowners.map((nftOwner) => (
           <tr
             key={nftOwner.id}
-            onClick={() => history.push(`/nfts/${viewChain.slug}/${collectionAddress}/${nftOwner.nft.tokenId}`)}
+            onClick={() =>
+              history.push(`/nfts/${viewChain.slug}/${nftOwner.nft.collection.address}/${nftOwner.nft.tokenId}`)
+            }
           >
-            <td>
-              <Address address={nftOwner.owner.address} />
-            </td>
+            {!filter.owner && (
+              <td>
+                <Address address={nftOwner.owner.address} />
+              </td>
+            )}
             <td>
               {nftOwner.balance}
               <Dimmed>/{nftOwner.nft.totalSupply}</Dimmed>

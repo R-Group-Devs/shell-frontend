@@ -8,6 +8,16 @@ query getNfts(
   }
 }
 
+query getNftOwners(
+  $orderBy: NFTOwner_orderBy = lastActivityAtTimestamp
+  $orderDirection: OrderDirection = desc
+  $filter: NFTOwner_filter
+) {
+  nftowners(orderBy: $orderBy, orderDirection: $orderDirection, where: $filter) {
+    ... NFTOwnerInfo
+  }
+}
+
 query getNftDetails($nftId: ID!) {
   nft(id: $nftId) {
     ... NFTInfo

@@ -131,7 +131,7 @@ export const CollectionDetailPage: FunctionComponent = () => {
           tabs={[
             {
               label: <>👤 Holders</>,
-              content: <HoldersTable chainId={viewChainInfo.chainId} collectionAddress={address} />,
+              content: <HoldersTable chainId={viewChainInfo.chainId} filter={{ collection: address.toLowerCase() }} />,
             },
             {
               label: <>️🖼️ NFTs ({collection.nftCount.toLocaleString()})</>,
