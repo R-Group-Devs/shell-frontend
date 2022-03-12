@@ -1,13 +1,14 @@
 import PQueue from 'p-queue';
 
-interface MetadataUrl {
+export interface MetadataUrl {
   ipfsUri?: string;
   httpsUri: string;
 }
 
-type MetadataImage =
+export type MetadataImage =
   | {
       type: 'inline-svg';
+      rawData: string;
       svgDocument: string;
     }
   | { type: 'url'; url: MetadataUrl };
@@ -71,6 +72,7 @@ export const processImage = (uri: string): MetadataImage => {
   if (prefix === 'data:image/svg+xml;base64') {
     return {
       type: 'inline-svg',
+      rawData: uri,
       svgDocument: atob(encoded),
     };
   }

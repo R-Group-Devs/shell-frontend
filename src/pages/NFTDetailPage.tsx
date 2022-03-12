@@ -12,6 +12,7 @@ import { PageSection } from '../components/PageSection';
 import { StorageTable } from '../components/StorageTable';
 import { Table } from '../components/Table';
 import { Tabs } from '../components/Tabs';
+import { TokenAsset } from '../components/TokenAsset';
 import { TokenName } from '../components/TokenName';
 import { TwoPanel } from '../components/TwoPanel';
 import { useTokenMetadata } from '../hooks/token-metadata';
@@ -65,7 +66,9 @@ export const NFTDetailPage: FunctionComponent = () => {
       <PageSection>
         <Content>
           <TwoPanel template="1fr 1fr">
-            <div>image</div>
+            <div>
+              <TokenAsset image={metadataQuery.data?.image} />
+            </div>
             <div>
               <KeyValueList>
                 <KeyValueEntry
