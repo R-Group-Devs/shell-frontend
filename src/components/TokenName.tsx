@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const TokenName: FunctionComponent<Props> = ({ chainId, collection, tokenId }) => {
-  const query = useTokenMetadata(chainId, collection, tokenId);
+  const query = useTokenMetadata(chainId, collection.address, tokenId);
 
   if (query.data) {
     return <>{query.data.name}</>;
