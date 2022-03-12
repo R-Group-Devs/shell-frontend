@@ -3,7 +3,6 @@ import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
 import { AccountLink } from '../components/AccountLink';
 import { AddressPrefix } from '../components/AddressPrefix';
-import { AddressViewable } from '../components/AddressViewable';
 import { Content } from '../components/Content';
 import { KeyValueList, KeyValueEntry } from '../components/KeyValueList';
 import { Loading } from '../components/Loading';

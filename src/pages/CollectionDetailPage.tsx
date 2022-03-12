@@ -3,7 +3,6 @@ import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
 import { AccountLink } from '../components/AccountLink';
 import { AddressPrefix } from '../components/AddressPrefix';
-import { AddressViewable } from '../components/AddressViewable';
 import { Content } from '../components/Content';
 import { ForksTable } from '../components/ForksTable';
 import { HoldersTable } from '../components/HoldersTable';
