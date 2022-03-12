@@ -32,7 +32,7 @@ export const KeyValueEntry: FunctionComponent<EntryProps> = ({ label, value, chi
       <td>
         <strong>{label}</strong>
       </td>
-      <td style={{ textAlign: 'right' }}>
+      <td style={{ textAlign: 'left' }}>
         {value}
         {children}
       </td>

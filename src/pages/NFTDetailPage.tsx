@@ -179,22 +179,13 @@ export const NFTDetailPage: FunctionComponent = () => {
                   </PageSection>
                   <PageSection>
                     <Content>
-                      <Table>
-                        <thead>
-                          <tr>
-                            <td>Attribute</td>
-                            <td>Value</td>
-                          </tr>
-                        </thead>
-                        <tbody>
+                      <div>
+                        <KeyValueList>
                           {metadataQuery.data?.attributes.map((attr) => (
-                            <tr>
-                              <td>{attr.trait_type}</td>
-                              <td>{attr.value}</td>
-                            </tr>
+                            <KeyValueEntry label={attr.trait_type}>{attr.value}</KeyValueEntry>
                           ))}
-                        </tbody>
-                      </Table>
+                        </KeyValueList>
+                      </div>
                     </Content>
                   </PageSection>
                 </>
