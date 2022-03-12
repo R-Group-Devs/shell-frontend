@@ -15,14 +15,12 @@ export interface TokenURIResponse {
 
 const ABI = ['function tokenURI(uint256 tokenId) public view returns (string memory)'];
 
+/** get tokenURI value for a bunch of NFTs */
 export const batchGetTokenURI = async (chainId: number, input: TokenURIRequest[]): Promise<TokenURIResponse[]> => {
   const info = getChainInfo(chainId);
   const provider = new MulticallProvider(new StaticJsonRpcProvider(info.rpcEndpoint), chainId);
-
   const calls = input.map((datum) => new MulticallContract(datum.contract, ABI).tokenURI(datum.tokenId));
-
   const response = await provider.all(calls);
-
   const projected = response.map((r, idx) => {
     return {
       ...input[idx],

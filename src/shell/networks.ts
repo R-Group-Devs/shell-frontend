@@ -1,3 +1,6 @@
+import { StaticJsonRpcProvider } from '@ethersproject/providers';
+import memoize from 'lodash/memoize';
+
 interface ChainInfo {
   chainId: number;
   name: string;
@@ -74,6 +77,11 @@ export const networks: ChainInfo[] = [
     blockTime: 7.6,
   },
 ];
+
+export const getRpc = memoize((chainId: number) => {
+  const info = getChainInfo(chainId);
+  return new StaticJsonRpcProvider(info.rpcEndpoint, info.chainId);
+});
 
 export const getChainInfoOrNull = (chainId: number): ChainInfo | null => {
   const info = networks.find((n) => n.chainId === chainId);

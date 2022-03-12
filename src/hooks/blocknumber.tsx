@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
-import { getRpc } from '../lib/web3';
 import { getIndexerInfo } from '../lib/the-graph';
+import { getRpc } from '../shell/networks';
 import { useWallet } from './wallet';
 
 const refetchInterval = 10 * 1000;

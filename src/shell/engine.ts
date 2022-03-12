@@ -1,6 +1,6 @@
 import { Contract } from 'ethers';
-import { getRpc } from '../lib/web3';
 import IEngine from './abis/IEngine.json';
+import { getRpc } from './networks';
 
 export const isValidEngine = async (chainId: number, address: string): Promise<boolean> => {
   const rpc = getRpc(chainId);

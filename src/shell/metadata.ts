@@ -83,21 +83,21 @@ export const processImage = (uri: string): MetadataImage => {
 
 /** given a uri, expand with ipfs gateway if needed */
 export const processUri = (uri: string): MetadataUrl => {
+  // if it ends with anything that looks like /ipfs/WHATEVER, assume thats the
+  // hash
+  const match = uri.match(/ipfs\/(.*)$/);
+  if (match) {
+    return {
+      ipfsUri: `ipfs://ipfs/${match[1]}`,
+      httpsUri: `https://ipfs.heyshell.xyz/ipfs/${match[1]}`,
+    };
+  }
+
+  // otherwise, is just straight up https
   const isHttps = /^https:\/\//.test(uri);
   if (isHttps) {
     return { httpsUri: uri };
   }
 
-  // if it ends with anything that looks like /ipfs/WHATEVER, assume thats the
-  // hash
-  const match = uri.match(/ipfs\/(.*)$/);
-
-  if (!match) {
-    throw new Error(`invalid uri: ${uri}`);
-  }
-
-  return {
-    ipfsUri: `ipfs://ipfs/${match[1]}`,
-    httpsUri: `https://ipfs.heyshell.xyz/ipfs/${match[1]}`,
-  };
+  throw new Error(`invalid uri: ${uri}`);
 };
