@@ -91,3 +91,9 @@ fragment EngineInfo on Engine {
   collectionCount
   createdAtTimestamp
 }
+
+fragment AccountInfo on Account {
+  id
+  address
+  createdAtTimestamp
+}

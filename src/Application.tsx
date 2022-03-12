@@ -12,6 +12,7 @@ import { LaunchLandingPage } from './pages/LaunchLandingPage';
 import { ForkDetailPage } from './pages/ForkDetailPage';
 import { NFTDetailPage } from './pages/NFTDetailPage';
 import { EngineDetailPage } from './pages/EngineDetailPage';
+import { AccountDetailPage } from './pages/AccountDetailPage';
 
 splash();
 
@@ -44,6 +45,9 @@ export const Application: FunctionComponent = () => {
           </Route>
           <Route exact path="/engines/:network/:address">
             <EngineDetailPage />
+          </Route>
+          <Route exact path="/accounts/:network/:address">
+            <AccountDetailPage />
           </Route>
           <Route exact path="/connection">
             <ConnectionPage />

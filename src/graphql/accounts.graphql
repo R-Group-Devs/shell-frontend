@@ -1,0 +1,5 @@
+query getAccount($accountId: ID!) {
+  account(id: $accountId) {
+    ... AccountInfo
+  }
+}

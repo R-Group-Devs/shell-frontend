@@ -1,6 +1,7 @@
 import { formatDistanceStrict } from 'date-fns';
 import React, { FunctionComponent, useState } from 'react';
 import { useQuery } from 'react-query';
+import { AccountLink } from '../components/AccountLink';
 import { AddressViewable } from '../components/AddressViewable';
 import { Content } from '../components/Content';
 import { Dimmed } from '../components/Dimmed';
@@ -67,7 +68,7 @@ export const NetworkPage: FunctionComponent = () => {
               <KeyValueEntry label="Factory:" value={<AddressViewable address={factoryAddress} chainId={chainId} />} />
               <KeyValueEntry
                 label="Owner:"
-                value={<AddressViewable address={factoryQuery.data?.factory?.owner.address} chainId={chainId} />}
+                value={<AccountLink address={factoryQuery.data?.factory?.owner.address} chainId={chainId} />}
               />
               <KeyValueEntry
                 label="Factory deployed:"

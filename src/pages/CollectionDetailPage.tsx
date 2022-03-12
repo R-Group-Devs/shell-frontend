@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
+import { AccountLink } from '../components/AccountLink';
 import { AddressPrefix } from '../components/AddressPrefix';
 import { AddressViewable } from '../components/AddressViewable';
 import { Content } from '../components/Content';
@@ -94,13 +95,11 @@ export const CollectionDetailPage: FunctionComponent = () => {
               <KeyValueList>
                 <KeyValueEntry
                   label="Owner:"
-                  value={
-                    <AddressViewable address={collection.canonicalOwner.address} chainId={viewChainInfo.chainId} />
-                  }
+                  value={<AccountLink chainId={viewChainInfo.chainId} address={collection.canonicalOwner.address} />}
                 />
                 <KeyValueEntry
                   label="Creator:"
-                  value={<AddressViewable address={collection.creator.address} chainId={viewChainInfo.chainId} />}
+                  value={<AccountLink address={collection.creator.address} chainId={viewChainInfo.chainId} />}
                 />
                 <KeyValueEntry label="Created:" value={formatDate(collection.createdAtTimestamp)} />
                 <KeyValueEntry
@@ -136,7 +135,7 @@ export const CollectionDetailPage: FunctionComponent = () => {
               content: <HoldersTable chainId={viewChainInfo.chainId} collectionAddress={address} />,
             },
             {
-              label: <>️️🖼️ NFTs ({collection.nftCount.toLocaleString()})</>,
+              label: <>️🖼️ NFTs ({collection.nftCount.toLocaleString()})</>,
               content: <NFTsTable chainId={viewChainInfo.chainId} filter={{ collection: address }} />,
             },
             {

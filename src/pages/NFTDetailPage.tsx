@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useQuery } from 'react-query';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { Address } from '../components/Address';
 import { Content } from '../components/Content';
 import { Dimmed } from '../components/Dimmed';
@@ -30,6 +30,7 @@ interface Params {
 export const NFTDetailPage: FunctionComponent = () => {
   const { network, collectionAddress, tokenId } = useParams<Params>();
   const { browseChainInfo } = useWallet();
+  const history = useHistory();
   const viewChainInfo = getChainInfoBySlug(network);
   const metadataQuery = useTokenMetadata(viewChainInfo.chainId, collectionAddress, tokenId);
 
@@ -155,7 +156,7 @@ export const NFTDetailPage: FunctionComponent = () => {
                     </thead>
                     <tbody>
                       {nft.owners.map((owner) => (
-                        <tr>
+                        <tr onClick={() => history.push(`/accounts/${viewChainInfo.slug}/${owner.owner.address}`)}>
                           <td>
                             <Address address={owner.owner.address} />
                           </td>

@@ -8,7 +8,7 @@ import { PageSection } from '../components/PageSection';
 import { Shell } from '../components/Shell';
 import { useWallet } from '../hooks/wallet';
 import { isWalletPresent } from '../lib/web3';
-import { getExplorerContractUrl } from '../shell/external-urls';
+import { getExplorerAddressUrl } from '../shell/external-urls';
 
 export const ConnectionPage: FunctionComponent = () => {
   const { state, browseChainInfo, connectedChainInfo, connect, chainId, account } = useWallet();
@@ -76,7 +76,7 @@ export const ConnectionPage: FunctionComponent = () => {
         </p>
         <p>Your address: {account}</p>
         <ButtonGroup>
-          <Button externalNavTo={getExplorerContractUrl(connectedChainInfo.chainId, account)}>
+          <Button externalNavTo={getExplorerAddressUrl(connectedChainInfo.chainId, account)}>
             View on block explorer
           </Button>
         </ButtonGroup>

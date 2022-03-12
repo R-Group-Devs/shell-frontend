@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
+import { AccountLink } from '../components/AccountLink';
 import { AddressPrefix } from '../components/AddressPrefix';
 import { AddressViewable } from '../components/AddressViewable';
 import { Content } from '../components/Content';
@@ -82,11 +83,11 @@ export const ForkDetailPage: FunctionComponent = () => {
               <KeyValueList>
                 <KeyValueEntry
                   label="Admin:"
-                  value={<AddressViewable address={fork.owner.address} chainId={viewChainInfo.chainId} />}
+                  value={<AccountLink address={fork.owner.address} chainId={viewChainInfo.chainId} />}
                 />
                 <KeyValueEntry
                   label="Creator:"
-                  value={<AddressViewable address={fork.creator.address} chainId={viewChainInfo.chainId} />}
+                  value={<AccountLink address={fork.creator.address} chainId={viewChainInfo.chainId} />}
                 />
                 <KeyValueEntry label="Created:" value={formatDate(fork.createdAtTimestamp)} />
               </KeyValueList>

@@ -13,7 +13,7 @@ import { Tabs } from '../components/Tabs';
 import { TwoPanel } from '../components/TwoPanel';
 import { useWallet } from '../hooks/wallet';
 import { formatDate } from '../lib/string';
-import { getExplorerContractUrl } from '../shell/external-urls';
+import { getExplorerAddressUrl } from '../shell/external-urls';
 import { getGraphClient } from '../shell/graph';
 import { Nft_OrderBy, OrderDirection } from '../shell/graph-generated';
 import { getChainInfoBySlug } from '../shell/networks';
@@ -41,7 +41,7 @@ export const EngineDetailPage: FunctionComponent = () => {
   const engine = detailsQuery.data.engine;
   const mismatch = browseChainInfo.chainId !== viewChainInfo.chainId;
 
-  const explorerUrl = getExplorerContractUrl(viewChainInfo.chainId, address);
+  const explorerUrl = getExplorerAddressUrl(viewChainInfo.chainId, address);
 
   return (
     <>

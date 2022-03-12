@@ -1,7 +1,7 @@
 import { constants } from 'ethers';
 import React, { FunctionComponent } from 'react';
 import { Address } from './Address';
-import { getExplorerCollectionUrl, getExplorerContractUrl } from '../shell/external-urls';
+import { getExplorerCollectionUrl, getExplorerAddressUrl } from '../shell/external-urls';
 
 interface Props {
   chainId: number;
@@ -14,7 +14,7 @@ export const AddressViewable: FunctionComponent<Props> = ({ chainId, address, is
   if (isToken) {
     url = getExplorerCollectionUrl(chainId, address);
   } else {
-    url = getExplorerContractUrl(chainId, address);
+    url = getExplorerAddressUrl(chainId, address);
   }
 
   return (
