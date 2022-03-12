@@ -13,6 +13,7 @@ import { Table } from '../components/Table';
 import { Tabs } from '../components/Tabs';
 import { TokenName } from '../components/TokenName';
 import { TwoPanel } from '../components/TwoPanel';
+import { useTokenMetadata } from '../hooks/token-metadata';
 import { useWallet } from '../hooks/wallet';
 import { timestampRelative } from '../lib/string';
 import { getLooksrareTokenUrl, getOpenseaTokenUrl, getRaribleTokenUrl } from '../shell/external-urls';
@@ -29,12 +30,12 @@ export const NFTDetailPage: FunctionComponent = () => {
   const { network, collectionAddress, tokenId } = useParams<Params>();
   const { browseChainInfo } = useWallet();
   const viewChainInfo = getChainInfoBySlug(network);
+  const metadataQuery = useTokenMetadata(viewChainInfo.chainId, collectionAddress, tokenId);
 
   const detailsQuery = useQuery(['nft details', network, collectionAddress, tokenId], async () => {
     const client = getGraphClient(viewChainInfo.chainId);
     const nftId = `${collectionAddress}-${tokenId}`;
     const resp = await client.getNftDetails({ nftId });
-    console.log(resp.data);
     return resp.data;
   });
 
@@ -75,6 +76,14 @@ export const NFTDetailPage: FunctionComponent = () => {
                   }
                 />
                 <KeyValueEntry label="Token model:">{nft.collection.implementation.name}</KeyValueEntry>
+                <KeyValueEntry label="Metadata:">{metadataQuery.data?.source}</KeyValueEntry>
+                <KeyValueEntry label="Asset:">
+                  {metadataQuery.data?.image.type === 'inline-svg'
+                    ? 'inline-svg'
+                    : metadataQuery.data?.image.url.ipfsUri
+                    ? 'ipfs'
+                    : 'https'}
+                </KeyValueEntry>
                 <KeyValueEntry label="Collection:">
                   📚{' '}
                   <Link to={`/collections/${viewChainInfo.slug}/${nft.collection.address}`}>{nft.collection.name}</Link>

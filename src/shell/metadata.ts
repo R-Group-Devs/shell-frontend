@@ -65,6 +65,16 @@ export const resolveMetadataByTokenURI = async (uri: string): Promise<NFTMetadat
 
 /** given the `image` field in metadata, expand to a url or svg doc */
 export const processImage = (uri: string): MetadataImage => {
+  const [prefix, encoded] = uri.split(',');
+
+  // inline
+  if (prefix === 'data:image/svg+xml;base64') {
+    return {
+      type: 'inline-svg',
+      svgDocument: atob(encoded),
+    };
+  }
+
   return {
     type: 'url',
     url: processUri(uri),
