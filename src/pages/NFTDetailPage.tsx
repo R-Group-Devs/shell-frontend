@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
 import { Address } from '../components/Address';
@@ -122,6 +123,13 @@ export const NFTDetailPage: FunctionComponent = () => {
                     </a>
                   )}{' '}
                 </KeyValueEntry>
+                {metadataQuery.data?.external_url && (
+                  <KeyValueEntry label="External Link:">
+                    <a href={metadataQuery.data?.external_url} target="_blank">
+                      view
+                    </a>
+                  </KeyValueEntry>
+                )}
               </KeyValueList>
             </div>
           </TwoPanel>
@@ -162,7 +170,35 @@ export const NFTDetailPage: FunctionComponent = () => {
             },
             {
               label: <>📂 Metadata</>,
-              content: <None message="(coming soon)" />,
+              content: (
+                <>
+                  <PageSection>
+                    <Content>
+                      <ReactMarkdown>{metadataQuery.data?.description}</ReactMarkdown>
+                    </Content>
+                  </PageSection>
+                  <PageSection>
+                    <Content>
+                      <Table>
+                        <thead>
+                          <tr>
+                            <td>Attribute</td>
+                            <td>Value</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {metadataQuery.data?.attributes.map((attr) => (
+                            <tr>
+                              <td>{attr.trait_type}</td>
+                              <td>{attr.value}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </Table>
+                    </Content>
+                  </PageSection>
+                </>
+              ),
             },
             {
               label: <>🪣 Token Storage ({nft.storage.length})</>,
