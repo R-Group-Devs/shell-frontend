@@ -2,8 +2,14 @@ query getNfts(
   $orderBy: NFT_orderBy = tokenId
   $orderDirection: OrderDirection = asc
   $filter: NFT_filter
+  $limit: Int! = 25
 ) {
-  nfts(orderBy: $orderBy, orderDirection: $orderDirection, where: $filter) {
+  nfts(
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    where: $filter
+    first: $limit
+  ) {
     ...NFTInfo
   }
 }
@@ -12,8 +18,16 @@ query getNftOwners(
   $orderBy: NFTOwner_orderBy = lastActivityAtTimestamp
   $orderDirection: OrderDirection = desc
   $filter: NFTOwner_filter
+  $limit: Int! = 25
+  $offset: Int! = 0
 ) {
-  nftowners(orderBy: $orderBy, orderDirection: $orderDirection, where: $filter) {
+  nftowners(
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    where: $filter
+    first: $limit
+    skip: $offset
+  ) {
     ... NFTOwnerInfo
   }
 }

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { timestampRelative } from '../lib/string';
@@ -30,6 +30,8 @@ export const NFTsTable: FunctionComponent<Props> = ({
 }) => {
   const viewChain = getChainInfo(chainId);
   const history = useHistory();
+  const [lastTokenId, setLastTokenId] = useState<string | undefined>(undefined);
+  const [page, setPage] = useState(1);
   const nftQuery = useQuery(['get nfts', chainId, filter, orderBy, orderDirection], async () => {
     const client = getGraphClient(chainId);
     const resp = await client.getNfts({ filter, orderBy, orderDirection });

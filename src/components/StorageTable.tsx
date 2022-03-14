@@ -14,7 +14,7 @@ export const StorageTable: FunctionComponent<Props> = ({ storage }) => {
     return <None />;
   }
   return (
-    <Table>
+    <Table disableClick>
       <thead>
         <td>Key</td>
         <td>Location</td>
