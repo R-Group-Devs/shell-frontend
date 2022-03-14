@@ -22,7 +22,7 @@ export const Footer: FunctionComponent = () => {
     <PageSection>
       <Content>
         <p className={classes.footer}>
-          <Dimmed>dreamt up &amp; built by </Dimmed> 🦖{' '}
+          <Dimmed>dreamt up &amp; built at </Dimmed> 🦖{' '}
           <a href="https://playgrounds.wtf" target="_blank">
             Playgrounds
           </a>
