@@ -21,7 +21,7 @@ interface Props {
   engineIdContext?: string;
 }
 
-const LIMIT = 25;
+const LIMIT = 20;
 
 export const NFTsTable: FunctionComponent<Props> = ({
   chainId,
@@ -36,7 +36,13 @@ export const NFTsTable: FunctionComponent<Props> = ({
   const [page, setPage] = useState(1);
   const nftQuery = useQuery(['get nfts', chainId, filter, orderBy, orderDirection, page], async () => {
     const client = getGraphClient(chainId);
-    const resp = await client.getNfts({ filter, orderBy, orderDirection, offset: (page - 1) * LIMIT });
+    const resp = await client.getNfts({
+      filter,
+      orderBy,
+      orderDirection,
+      offset: (page - 1) * LIMIT,
+      limit: LIMIT,
+    });
     return resp.data;
   });
 

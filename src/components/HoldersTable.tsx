@@ -19,7 +19,7 @@ interface Props {
   filter?: NftOwner_Filter;
 }
 
-const LIMIT = 25;
+const LIMIT = 20;
 
 export const HoldersTable: FunctionComponent<Props> = ({ chainId, filter }) => {
   const viewChain = getChainInfo(chainId);
