@@ -23,7 +23,7 @@ export const WalletButton: FunctionComponent = () => {
   const mismatch = browseChainInfo.chainId !== chainId;
 
   return (
-    <Button onClick={() => history.push('/connection')}>
+    <Button onClick={() => history.push(`/accounts/${browseChainInfo.slug}/${account.toLowerCase()}`)}>
       {mismatch && <>⚠️ </>}
       <Address address={account} />
     </Button>
