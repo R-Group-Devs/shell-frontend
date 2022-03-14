@@ -8,6 +8,7 @@ import { getChainInfo } from '../shell/networks';
 import { Dimmed } from './Dimmed';
 import { Loading } from './Loading';
 import { None } from './None';
+import { Pagination } from './Pagination';
 import { Table } from './Table';
 import { TokenName } from './TokenName';
 
@@ -20,6 +21,8 @@ interface Props {
   engineIdContext?: string;
 }
 
+const LIMIT = 25;
+
 export const NFTsTable: FunctionComponent<Props> = ({
   chainId,
   filter,
@@ -30,11 +33,10 @@ export const NFTsTable: FunctionComponent<Props> = ({
 }) => {
   const viewChain = getChainInfo(chainId);
   const history = useHistory();
-  const [lastTokenId, setLastTokenId] = useState<string | undefined>(undefined);
   const [page, setPage] = useState(1);
-  const nftQuery = useQuery(['get nfts', chainId, filter, orderBy, orderDirection], async () => {
+  const nftQuery = useQuery(['get nfts', chainId, filter, orderBy, orderDirection, page], async () => {
     const client = getGraphClient(chainId);
-    const resp = await client.getNfts({ filter, orderBy, orderDirection });
+    const resp = await client.getNfts({ filter, orderBy, orderDirection, offset: (page - 1) * LIMIT });
     return resp.data;
   });
 
@@ -46,62 +48,70 @@ export const NFTsTable: FunctionComponent<Props> = ({
     return <None />;
   }
 
+  // TODO: thegraph doesnt do well with large offests, deep pagination needs to use filters
+  const maxGraphPages = Math.floor(1000 / LIMIT);
+  const totalPages = nftQuery.data.nfts.length < LIMIT ? page : maxGraphPages;
+  const onPageChange = (n: number) => setPage(n);
+
   return (
-    <Table>
-      <thead>
-        <tr>
-          <td>Token</td>
-          {engineIdContext && <td>Collection</td>}
-          <td>{showMintEngine ? 'Mint engine' : engineIdContext ? 'Current engine' : 'Fork (engine)'}</td>
-          <td style={{ textAlign: 'center' }}>Supply</td>
-          <td>Minted</td>
-          {!engineIdContext && <td>Last Activity</td>}
-        </tr>
-      </thead>
-      <tbody>
-        {nftQuery.data.nfts.map((nft) => (
-          <tr
-            key={nft.id}
-            onClick={() => history.push(`/nfts/${viewChain.slug}/${nft.collection.address}/${nft.tokenId}`)}
-          >
-            <td>
-              <Dimmed>#{nft.tokenId}</Dimmed>{' '}
-              <TokenName collection={nft.collection} tokenId={nft.tokenId} chainId={viewChain.chainId} />
-            </td>
-            {engineIdContext && <td>{nft.collection.name}</td>}
-            <td>
-              {showMintEngine ? (
-                <>
-                  {nft.fork.engine.id === nft.createdByEngine.id ? (
-                    <Dimmed>(same as fork)</Dimmed>
-                  ) : (
-                    nft.createdByEngine.name
-                  )}
-                </>
-              ) : engineIdContext ? (
-                nft.fork.engine.id === engineIdContext ? (
-                  <Dimmed>(this engine)</Dimmed>
-                ) : (
-                  nft.fork.engine.name
-                )
-              ) : (
-                <>
-                  {nft.fork.forkId === '0' ? (
-                    <Dimmed>(same as root fork)</Dimmed>
-                  ) : (
-                    <>
-                      Fork {nft.fork.forkId} ({nft.fork.engine.name})
-                    </>
-                  )}
-                </>
-              )}
-            </td>
-            <td style={{ textAlign: 'center' }}>{nft.totalSupply}</td>
-            <td>{timestampRelative(nft.createdAtTimestamp)}</td>
-            {!engineIdContext && <td>{timestampRelative(nft.lastActivityAtTimestamp)}</td>}
+    <>
+      <Table>
+        <thead>
+          <tr>
+            <td>Token</td>
+            {engineIdContext && <td>Collection</td>}
+            <td>{showMintEngine ? 'Mint engine' : engineIdContext ? 'Current engine' : 'Fork (engine)'}</td>
+            <td style={{ textAlign: 'center' }}>Supply</td>
+            <td>Minted</td>
+            {!engineIdContext && <td>Last Activity</td>}
           </tr>
-        ))}
-      </tbody>
-    </Table>
+        </thead>
+        <tbody>
+          {nftQuery.data.nfts.map((nft) => (
+            <tr
+              key={nft.id}
+              onClick={() => history.push(`/nfts/${viewChain.slug}/${nft.collection.address}/${nft.tokenId}`)}
+            >
+              <td>
+                <Dimmed>#{nft.tokenId}</Dimmed>{' '}
+                <TokenName collection={nft.collection} tokenId={nft.tokenId} chainId={viewChain.chainId} />
+              </td>
+              {engineIdContext && <td>{nft.collection.name}</td>}
+              <td>
+                {showMintEngine ? (
+                  <>
+                    {nft.fork.engine.id === nft.createdByEngine.id ? (
+                      <Dimmed>(same as fork)</Dimmed>
+                    ) : (
+                      nft.createdByEngine.name
+                    )}
+                  </>
+                ) : engineIdContext ? (
+                  nft.fork.engine.id === engineIdContext ? (
+                    <Dimmed>(this engine)</Dimmed>
+                  ) : (
+                    nft.fork.engine.name
+                  )
+                ) : (
+                  <>
+                    {nft.fork.forkId === '0' ? (
+                      <Dimmed>(same as root fork)</Dimmed>
+                    ) : (
+                      <>
+                        Fork {nft.fork.forkId} ({nft.fork.engine.name})
+                      </>
+                    )}
+                  </>
+                )}
+              </td>
+              <td style={{ textAlign: 'center' }}>{nft.totalSupply}</td>
+              <td>{timestampRelative(nft.createdAtTimestamp)}</td>
+              {!engineIdContext && <td>{timestampRelative(nft.lastActivityAtTimestamp)}</td>}
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      <Pagination currentPage={page} totalPages={totalPages} onPageChange={onPageChange} />
+    </>
   );
 };

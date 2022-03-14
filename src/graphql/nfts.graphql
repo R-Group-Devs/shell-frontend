@@ -3,12 +3,14 @@ query getNfts(
   $orderDirection: OrderDirection = asc
   $filter: NFT_filter
   $limit: Int! = 25
+  $offset: Int! = 0
 ) {
   nfts(
     orderBy: $orderBy
     orderDirection: $orderDirection
     where: $filter
     first: $limit
+    skip: $offset
   ) {
     ...NFTInfo
   }

@@ -39,7 +39,9 @@ export const HoldersTable: FunctionComponent<Props> = ({ chainId, filter }) => {
     return <None />;
   }
 
-  const totalPages = query.data.nftowners.length < LIMIT ? page : undefined;
+  // TODO: thegraph doesnt do well with large offests, deep pagination needs to use filters
+  const maxGraphPages = Math.floor(1000 / LIMIT);
+  const totalPages = query.data.nftowners.length < LIMIT ? page : maxGraphPages;
   const onPageChange = (n: number) => setPage(n);
 
   return (
