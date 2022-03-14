@@ -33,7 +33,7 @@ export const HomePage: FunctionComponent = () => {
             <p style={{ textAlign: 'center' }}>
               <img
                 style={{ maxWidth: '300px', display: 'inline' }}
-                src="https://ipfs.hypervibes.xyz/ipfs/QmcnWsZVxNiozUjYc1qtJTRsseES4523FRzSS8PXRhWdJZ"
+                src="https://ipfs.heyshell.xyz/ipfs/QmcnWsZVxNiozUjYc1qtJTRsseES4523FRzSS8PXRhWdJZ"
               />
             </p>
           </Content>
@@ -78,11 +78,11 @@ export const HomePage: FunctionComponent = () => {
             </TwoPanel>
             <PageSection>
               <Content>
-                <p style={{ textAlign: 'center', margin: '60px 0', fontStyle: 'italic' }}>
+                {/* <p style={{ textAlign: 'center', margin: '60px 0', fontStyle: 'italic' }}>
                   Experimental public NFT infrastructure
                   <br />
                   from 🦖 <a href="http://playgrounds.wtf/">Playgrounds</a>.
-                </p>
+                </p> */}
               </Content>
             </PageSection>
           </>
