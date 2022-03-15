@@ -10,7 +10,8 @@ export const Percentage: FunctionComponent<Props> = ({ amount }) => {
   }
 
   const p = amount * 100;
-  const formatted = p < 0.01 ? '< 0.01' : p < 1 ? p.toFixed(2) : p < 10 ? p.toFixed(1) : p.toFixed(0);
+
+  const formatted = p > 99.99 ? '> 99.99' : p < 0.01 ? '< 0.01' : p < 1 ? p.toFixed(2) : p.toFixed(1);
 
   return <>{formatted}</>;
 };
